@@ -9,7 +9,8 @@
     "preview": "astro preview",
     "astro": "astro",
     "format": "prettier . --write",
-    "format:check": "prettier . --check"
+    "format:check": "prettier . --check",
+    "test:types": "tsc"
   },
   "dependencies": {
     "@astrojs/starlight": "0.35.2",
