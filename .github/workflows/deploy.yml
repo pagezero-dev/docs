@@ -103,6 +103,7 @@ jobs:
           command: versions upload --preview-alias ${{ env.BRANCH_NAME }}
 
       - name: 🔖 Bookmark
+        run: "echo 'Deployment URL: ${{ steps.deploy.outputs.deployment-url }}'"
         environment:
           name: ${{ github.ref == 'refs/heads/main' && 'production' || 'preview' }}
           url: ${{ steps.deploy.outputs.deployment-url }}
