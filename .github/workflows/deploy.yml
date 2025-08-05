@@ -87,20 +87,18 @@ jobs:
         run: npm run build
 
       - name: 🚀 Deploy Production
-        id: deploy-production
         if: github.ref == 'refs/heads/main'
+        id: deploy-production
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
-          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
 
       - name: 🚀 Deploy Preview
         if: github.ref != 'refs/heads/main'
-        uses: cloudflare/wrangler-action@v3
         id: deploy-preview
+        uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
-          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
           command: versions upload --preview-alias ${{ env.BRANCH_NAME }}
