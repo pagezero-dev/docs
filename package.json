@@ -12,6 +12,7 @@
     "start": "wrangler dev --port 3000",
     "format": "prettier . --write",
     "format:check": "prettier . --check",
+    "setup": "npm install && playwright install --with-deps chromium",
     "test:e2e": "playwright test --project=e2e",
     "test:e2e:ui": "playwright test --ui --project=e2e",
     "test:smoke": "playwright test --project=smoke"
