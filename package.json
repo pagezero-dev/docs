@@ -8,6 +8,7 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
+    "reset": "git clean -fdxq && npm ci",
     "format": "prettier . --write",
     "format:check": "prettier . --check",
     "test:types": "tsc"
