@@ -139,4 +139,4 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
-          command: versions upload --preview-alias ${{ env.BRANCH_NAME }}
+          command: versions upload
