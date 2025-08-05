@@ -9,7 +9,7 @@
     "preview": "astro preview",
     "astro": "astro",
     "check": "astro check",
-    "reset": "git clean -fdxq && npm ci",
+    "reset": "git clean -fdxq && npm i",
     "format": "prettier . --write",
     "format:check": "prettier . --check"
   },
