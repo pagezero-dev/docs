@@ -37,7 +37,6 @@ export default defineConfig({
           items: [
             { label: "Development Workflow", slug: "guides/development" },
             { label: "Deployment Setup", slug: "guides/deployment" },
-            { label: "Database Management", slug: "guides/database" },
             { label: "Testing", slug: "guides/testing" },
           ],
         },
