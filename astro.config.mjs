@@ -9,25 +9,48 @@ export default defineConfig({
   },
   integrations: [
     starlight({
-      title: "My Docs",
+      title: "PageZero Docs",
+      description:
+        "Documentation for PageZero - TypeScript starter for full-stack web development on Cloudflare",
+      logo: {
+        src: "./src/assets/logo.png",
+        replacesTitle: true,
+      },
       social: [
         {
           icon: "github",
           label: "GitHub",
-          href: "https://github.com/withastro/starlight",
+          href: "https://github.com/pagezero-dev/pagezero",
         },
       ],
       sidebar: [
         {
+          label: "Getting Started",
+          items: [
+            { label: "Introduction", slug: "introduction" },
+            { label: "Quick Start", slug: "getting-started/quick-start" },
+            { label: "Technology Stack", slug: "getting-started/tech-stack" },
+          ],
+        },
+        {
           label: "Guides",
           items: [
-            // Each item here is one entry in the navigation menu.
-            { label: "Example Guide", slug: "guides/example" },
+            { label: "Development Workflow", slug: "guides/development" },
+            { label: "Deployment Setup", slug: "guides/deployment" },
+            { label: "Testing", slug: "guides/testing" },
           ],
         },
         {
           label: "Reference",
-          autogenerate: { directory: "reference" },
+          items: [
+            { label: "Project Structure", slug: "reference/project-structure" },
+            { label: "NPM Scripts", slug: "reference/npm-scripts" },
+            {
+              label: "Environment Variables",
+              slug: "reference/environment-variables",
+            },
+            { label: "Configuration Files", slug: "reference/configuration" },
+          ],
         },
       ],
     }),
