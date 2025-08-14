@@ -30,6 +30,10 @@ export default defineConfig({
             { label: "Introduction", slug: "introduction" },
             { label: "Quick Start", slug: "getting-started/quick-start" },
             { label: "Technology Stack", slug: "getting-started/tech-stack" },
+            {
+              label: "Project Structure",
+              slug: "getting-started/project-structure",
+            },
           ],
         },
         {
@@ -51,6 +55,7 @@ export default defineConfig({
         },
         {
           label: "Components",
+          collapsed: true,
           items: [
             {
               label: "UI",
@@ -112,18 +117,6 @@ export default defineConfig({
             { label: "Development Workflow", slug: "guides/development" },
             { label: "Deployment Setup", slug: "guides/deployment" },
             { label: "Testing", slug: "guides/testing" },
-          ],
-        },
-        {
-          label: "Reference",
-          items: [
-            { label: "Project Structure", slug: "reference/project-structure" },
-            { label: "NPM Scripts", slug: "reference/npm-scripts" },
-            {
-              label: "Environment Variables",
-              slug: "reference/environment-variables",
-            },
-            { label: "Configuration Files", slug: "reference/configuration" },
           ],
         },
       ],
