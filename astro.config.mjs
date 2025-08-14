@@ -33,6 +33,80 @@ export default defineConfig({
           ],
         },
         {
+          label: "Modules",
+          items: [
+            { label: "Content", slug: "introduction" },
+            { label: "Core", slug: "introduction" },
+            { label: "Blog", slug: "introduction" },
+            { label: "Payments", slug: "introduction" },
+            { label: "User", slug: "introduction" },
+            { label: "Db", slug: "introduction" },
+            { label: "Generate", slug: "introduction" },
+            { label: "Types", slug: "introduction" },
+            { label: "UI", slug: "introduction" },
+            { label: "Crypto", slug: "introduction" },
+            { label: "Email", slug: "introduction" },
+            { label: "UI Lite", slug: "introduction" },
+          ],
+        },
+        {
+          label: "Components",
+          items: [
+            {
+              label: "UI",
+              items: [
+                { label: "Button", slug: "introduction" },
+                { label: "Badge", slug: "introduction" },
+                { label: "Card", slug: "introduction" },
+                { label: "Checkbox", slug: "introduction" },
+                { label: "Dialog", slug: "introduction" },
+                { label: "DropdownMenu", slug: "introduction" },
+                { label: "Label", slug: "introduction" },
+                { label: "RadioGroup", slug: "introduction" },
+                { label: "Tabs", slug: "introduction" },
+                { label: "Typography", slug: "introduction" },
+              ],
+            },
+            {
+              label: "UI Lite",
+              items: [
+                { label: "Dialog", slug: "introduction" },
+                { label: "Dropdown", slug: "introduction" },
+              ],
+            },
+            {
+              label: "User",
+              items: [
+                { label: "Sign-In", slug: "introduction" },
+                { label: "VerifyHuman", slug: "introduction" },
+              ],
+            },
+            {
+              label: "Blog",
+              items: [{ label: "PostSummary", slug: "introduction" }],
+            },
+            {
+              label: "Content",
+              items: [
+                { label: "FAQ", slug: "introduction" },
+                { label: "Features", slug: "introduction" },
+                { label: "Footer", slug: "introduction" },
+                { label: "Header", slug: "introduction" },
+                { label: "Hero", slug: "introduction" },
+                { label: "Social", slug: "introduction" },
+                { label: "Testimonials", slug: "introduction" },
+              ],
+            },
+            {
+              label: "Payments",
+              items: [
+                { label: "CheckoutForm", slug: "introduction" },
+                { label: "Pricing", slug: "introduction" },
+              ],
+            },
+          ],
+        },
+        {
           label: "Guides",
           items: [
             { label: "Development Workflow", slug: "guides/development" },
