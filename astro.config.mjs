@@ -34,6 +34,11 @@ export default defineConfig({
               label: "Project Structure",
               slug: "getting-started/project-structure",
             },
+            {
+              label: "Development Workflow",
+              slug: "getting-started/development",
+            },
+            { label: "Deployment Setup", slug: "getting-started/deployment" },
           ],
         },
         {
@@ -109,14 +114,6 @@ export default defineConfig({
                 { label: "Pricing", slug: "introduction" },
               ],
             },
-          ],
-        },
-        {
-          label: "Guides",
-          items: [
-            { label: "Development Workflow", slug: "guides/development" },
-            { label: "Deployment Setup", slug: "guides/deployment" },
-            { label: "Testing", slug: "guides/testing" },
           ],
         },
       ],
