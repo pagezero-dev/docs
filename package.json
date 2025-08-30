@@ -11,8 +11,6 @@
     "astro": "astro",
     "reset": "git clean -fdxq && npm i",
     "start": "wrangler dev --port 3000",
-    "format": "prettier . --write",
-    "format:check": "prettier . --check",
     "setup": "npm install && playwright install --with-deps chromium",
     "test:e2e": "playwright test --project=e2e",
     "test:e2e:ui": "playwright test --ui --project=e2e",
@@ -28,8 +26,6 @@
   "devDependencies": {
     "@biomejs/biome": "2.2.2",
     "@playwright/test": "1.54.2",
-    "prettier": "3.6.2",
-    "prettier-plugin-astro": "0.14.1",
     "wrangler": "4.28.0"
   }
 }
