@@ -6,11 +6,6 @@
     "useIgnoreFile": true
   },
   "files": {
-    "includes": [
-      "**",
-      "!packages/db/migrations/meta/*",
-      "!worker-configuration.d.ts"
-    ],
     "ignoreUnknown": false
   },
   "formatter": {
@@ -42,17 +37,5 @@
         "organizeImports": "on"
       }
     }
-  },
-  "overrides": [
-    {
-      "includes": ["**/*.stories.tsx", "**/*.test.tsx"],
-      "linter": {
-        "rules": {
-          "correctness": {
-            "useUniqueElementIds": "off"
-          }
-        }
-      }
-    }
-  ]
+  }
 }
