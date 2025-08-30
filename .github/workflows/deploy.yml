@@ -19,30 +19,11 @@ env:
   # This reliably gets the branch name regardless of event type
   BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
   # Node.js version to use throughout the workflow
-  NODE_VERSION: 24.5.0
+  NODE_VERSION: 24.6.0
 
 jobs:
-  format:
-    name: 👔 Format
-    runs-on: ubuntu-latest
-    steps:
-      - name: 📥 Checkout repo
-        uses: actions/checkout@v4
-
-      - name: ⎔ Setup node
-        uses: actions/setup-node@v4
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-          cache: npm
-
-      - name: 📦 Install dependencies
-        run: npm ci
-
-      - name: 👔 Format
-        run: npm run format:check
-
   check:
-    name: 🔍 Astro Check
+    name: 💎 Quality check
     runs-on: ubuntu-latest
     steps:
       - name: 📥 Checkout repo
@@ -57,7 +38,7 @@ jobs:
       - name: 📦 Install dependencies
         run: npm ci
 
-      - name: 🔍 Astro Check
+      - name: 💎 Quality check
         run: npm run check
 
   tests-e2e:
@@ -100,7 +81,7 @@ jobs:
   deploy:
     name: 🚀 Deploy
     runs-on: ubuntu-latest
-    needs: [format, check, tests-e2e]
+    needs: [check, tests-e2e]
     if: github.ref == 'refs/heads/main' || github.event.pull_request.draft == false
     environment:
       name: ${{ github.ref == 'refs/heads/main' && 'production' || 'preview' }}
