@@ -20,6 +20,8 @@ env:
   BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
   # Node.js version to use throughout the workflow
   NODE_VERSION: 24.6.0
+  # This is used to determine the environment to deploy to
+  APP_ENV: ${{ github.ref == 'refs/heads/main' && 'production' || 'preview' }}
 
 jobs:
   check:
@@ -85,7 +87,7 @@ jobs:
     if: github.ref == 'refs/heads/main' || github.event.pull_request.draft == false
     environment:
       name: ${{ github.ref == 'refs/heads/main' && 'production' || 'preview' }}
-      url: ${{ steps.deploy-preview.outputs.deployment-url || steps.deploy-production.outputs.deployment-url }}
+      url: ${{ steps.deploy.outputs.deployment-url }}
     permissions:
       contents: read
       deployments: write
@@ -105,19 +107,10 @@ jobs:
       - name: 🛠️ Build
         run: npm run build
 
-      - name: 🚀 Deploy Production
-        if: github.ref == 'refs/heads/main'
-        id: deploy-production
+      - name: 🚀 Deploy
+        id: deploy
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
-
-      - name: 🚀 Deploy Preview
-        if: github.ref != 'refs/heads/main'
-        id: deploy-preview
-        uses: cloudflare/wrangler-action@v3
-        with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
-          command: versions upload
+          command: ${{ env.APP_ENV == 'production' && 'deploy' || 'versions upload' }}
