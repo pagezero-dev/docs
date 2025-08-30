@@ -11,7 +11,7 @@
     "astro": "astro",
     "reset": "git clean -fdxq && npm i",
     "start": "wrangler dev --port 3000",
-    "setup": "npm install && playwright install --with-deps chromium",
+    "setup": "bun install && playwright install --with-deps chromium",
     "git:clean": "git branch -l | grep -v 'main' | xargs git branch -D",
     "test:e2e": "playwright test --project=e2e",
     "test:e2e:ui": "playwright test --ui --project=e2e",
