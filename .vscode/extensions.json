@@ -1,4 +1,9 @@
 {
-  "recommendations": ["astro-build.astro-vscode"],
+  "recommendations": [
+    "astro-build.astro-vscode",
+    "biomejs.biome",
+    "yoavbls.pretty-ts-errors",
+    "unifiedjs.vscode-mdx"
+  ],
   "unwantedRecommendations": []
 }
