@@ -25,7 +25,7 @@
     "typescript": "5.9.2"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.2.2",
+    "@biomejs/biome": "2.2.4",
     "@playwright/test": "1.55.0",
     "wrangler": "4.33.1"
   }
