@@ -102,7 +102,7 @@
     var(--muted-foreground) 50%,
     transparent
   );
-  --sl-color-accent-high: var(--primary);
+  --sl-color-accent-high: var(--muted);
   --sl-color-white: var(--foreground);
   --sl-color-gray-1: var(--foreground);
   --sl-color-gray-2: var(--muted-foreground);
@@ -114,6 +114,6 @@
   --sl-color-gray-4: #ff0000;
   --sl-color-gray-5: var(--border);
   --sl-color-gray-6: var(--muted);
-  --sl-color-gray-7: #ff0000;
+  --sl-color-gray-7: var(--muted);
   --sl-color-black: color-mix(in oklch, var(--muted) 50%, var(--background));
 }
