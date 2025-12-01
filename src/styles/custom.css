@@ -33,6 +33,11 @@
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
 
+  /* Starlight fonts. */
+  --sl-font:
+    "Inter", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+
   /* Starlight colors. */
   --sl-color-accent-low: var(--muted);
   --sl-color-accent: color-mix(
