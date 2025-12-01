@@ -37,11 +37,15 @@
   --sl-color-accent-low: #242424;
   --sl-color-accent: #6a6a6a;
   --sl-color-accent-high: #c8c8c8;
-  --sl-color-white: #ffffff;
-  --sl-color-gray-1: #eeeeee;
-  --sl-color-gray-2: #c2c2c2;
-  --sl-color-gray-3: #8b8b8b;
-  --sl-color-gray-4: #585858;
+  --sl-color-white: var(--foreground);
+  --sl-color-gray-1: var(--foreground);
+  --sl-color-gray-2: var(--muted-foreground);
+  --sl-color-gray-3: color-mix(
+    in oklch,
+    var(--muted-foreground) 80%,
+    transparent
+  );
+  --sl-color-gray-4: #ff0000;
   --sl-color-gray-5: var(--border);
   --sl-color-gray-6: var(--muted);
   --sl-color-black: color-mix(in oklch, var(--muted) 50%, var(--background));
@@ -86,13 +90,17 @@
   --sl-color-accent-low: #d7d7d7;
   --sl-color-accent: #6b6b6b;
   --sl-color-accent-high: #323232;
-  --sl-color-white: #181818;
-  --sl-color-gray-1: #272727;
-  --sl-color-gray-2: #383838;
-  --sl-color-gray-3: #585858;
-  --sl-color-gray-4: #8b8b8b;
+  --sl-color-white: var(--foreground);
+  --sl-color-gray-1: var(--foreground);
+  --sl-color-gray-2: var(--muted-foreground);
+  --sl-color-gray-3: color-mix(
+    in oklch,
+    var(--muted-foreground) 80%,
+    transparent
+  );
+  --sl-color-gray-4: #ff0000;
   --sl-color-gray-5: var(--border);
   --sl-color-gray-6: var(--muted);
-  --sl-color-gray-7: #f6f6f6;
+  --sl-color-gray-7: #ff0000;
   --sl-color-black: color-mix(in oklch, var(--muted) 50%, var(--background));
 }
