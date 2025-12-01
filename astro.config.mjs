@@ -10,11 +10,11 @@ export default defineConfig({
   },
   integrations: [
     starlight({
-      title: "PageZero Docs",
+      title: "PageZERO Docs",
       description:
-        "Documentation for PageZero - TypeScript starter for full-stack web development on Cloudflare",
+        "Documentation for PageZERO - TypeScript starter for full-stack web development on Cloudflare",
       logo: {
-        src: "./src/assets/logo.png",
+        src: "./src/assets/logo.svg",
         replacesTitle: true,
       },
       social: [
