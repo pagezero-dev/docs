@@ -34,9 +34,13 @@
   --sidebar-ring: oklch(0.556 0 0);
 
   /* Starlight colors. */
-  --sl-color-accent-low: #242424;
-  --sl-color-accent: #6a6a6a;
-  --sl-color-accent-high: #c8c8c8;
+  --sl-color-accent-low: var(--muted);
+  --sl-color-accent: color-mix(
+    in oklch,
+    var(--muted-foreground) 50%,
+    transparent
+  );
+  --sl-color-accent-high: var(--primary);
   --sl-color-white: var(--foreground);
   --sl-color-gray-1: var(--foreground);
   --sl-color-gray-2: var(--muted-foreground);
@@ -87,9 +91,13 @@
   --sidebar-ring: oklch(0.708 0 0);
 
   /* Starlight colors. */
-  --sl-color-accent-low: #d7d7d7;
-  --sl-color-accent: #6b6b6b;
-  --sl-color-accent-high: #323232;
+  --sl-color-accent-low: var(--muted);
+  --sl-color-accent: color-mix(
+    in oklch,
+    var(--muted-foreground) 50%,
+    transparent
+  );
+  --sl-color-accent-high: var(--primary);
   --sl-color-white: var(--foreground);
   --sl-color-gray-1: var(--foreground);
   --sl-color-gray-2: var(--muted-foreground);
