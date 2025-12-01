@@ -42,9 +42,9 @@
   --sl-color-gray-2: #c2c2c2;
   --sl-color-gray-3: #8b8b8b;
   --sl-color-gray-4: #585858;
-  --sl-color-gray-5: #383838;
-  --sl-color-gray-6: #272727;
-  --sl-color-black: #181818;
+  --sl-color-gray-5: var(--border);
+  --sl-color-gray-6: var(--muted);
+  --sl-color-black: color-mix(in oklch, var(--muted) 50%, var(--background));
 }
 /* Light mode colors. */
 :root[data-theme="light"] {
@@ -91,8 +91,8 @@
   --sl-color-gray-2: #383838;
   --sl-color-gray-3: #585858;
   --sl-color-gray-4: #8b8b8b;
-  --sl-color-gray-5: #c2c2c2;
-  --sl-color-gray-6: #eeeeee;
+  --sl-color-gray-5: var(--border);
+  --sl-color-gray-6: var(--muted);
   --sl-color-gray-7: #f6f6f6;
-  --sl-color-black: #ffffff;
+  --sl-color-black: color-mix(in oklch, var(--muted) 50%, var(--background));
 }
