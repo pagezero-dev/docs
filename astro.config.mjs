@@ -24,6 +24,7 @@ export default defineConfig({
           href: "https://github.com/pagezero-dev/pagezero",
         },
       ],
+      customCss: ["./src/styles/fonts.css", "./src/styles/custom.css"],
       sidebar: [
         {
           label: "Getting Started",
