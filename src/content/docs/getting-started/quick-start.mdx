@@ -4,7 +4,7 @@ description: Get up and running with PageZero in minutes
 sidebar:
   order: 1
 ---
-import { Steps, Aside, Tabs, TabItem, LinkButton } from '@astrojs/starlight/components';
+import { Steps, Aside, Tabs, TabItem, LinkButton, FileTree } from '@astrojs/starlight/components';
 
 <Aside type="note" title="Prerequisites">
 Before getting started, make sure you have the following installed:
@@ -67,3 +67,29 @@ asdf install
 ```
 
 Asdf will read the `.tool-versions` file from your project root and install the recommended Node.js and Bun versions.
+
+## Project structure
+
+<FileTree>
+
+- apps
+  - core/
+  - content/
+  - auth/ (paid edition)
+  - payments/ (paid edition)
+  - permissions/ (paid edition)
+  - user/ (paid edition)
+  - email/ (paid edition)
+- packages/
+  - db/
+  - generate/
+  - types/
+  - ui/
+  - config/ (paid edition)
+  - crypto/ (paid edition)
+  - ui-lite/ (paid edition)
+- e2e/
+- workers/
+- package.json
+
+</FileTree>
