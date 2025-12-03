@@ -72,6 +72,9 @@ This will read the `.tool-versions` file from your project root and automaticall
 
 ## Project structure
 
+PageZERO follows an **integrated monorepo** approach. Unlike typical monorepos, package linking 
+happens through TypeScript's path resolver (via `tsconfig.json` paths) rather than workspaces.
+
 <FileTree>
 
 - apps
