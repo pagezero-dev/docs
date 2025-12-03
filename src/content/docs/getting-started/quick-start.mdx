@@ -9,8 +9,8 @@ import { Steps, Aside, Tabs, TabItem, LinkButton, FileTree } from '@astrojs/star
 <Aside type="note" title="Prerequisites">
 Before getting started, make sure you have the following installed:
 
-- [**Node.js**](https://nodejs.org/): Version >= 24
-- [**Bun**](https://bun.com/): Version >= 1.3
+- [**Node.js**](https://nodejs.org/): Version 24 or higher
+- [**Bun**](https://bun.com/): Version 1.3 or higher
 
 If you're not sure how to install Node.js and Bun, check out the [Node and Bun setup](#node-and-bun-setup) section.
 </Aside>
@@ -34,17 +34,17 @@ If you're not sure how to install Node.js and Bun, check out the [Node and Bun s
       </TabItem>
    </Tabs>
 
-2. Enter your project directory:
+2. Navigate to your project directory:
    ```sh
    cd <your-project-name>
    ```
 
-3. Run development server:
+3. Start the development server:
    ```sh
    bun dev
    ```
 
-4. Navigate to [`http://localhost:3000`](http://localhost:3000) to see the app in action.
+4. Open [`http://localhost:3000`](http://localhost:3000) in your browser to see your app in action.
    That's it! 🎉
 
 </Steps>
@@ -57,7 +57,7 @@ If you're in a rush, already have Node.js installed, and want to quickly set up 
 npm install -g bun
 ```
 
-Otherwise, the recommended way in PageZERO is to use the [asdf](https://asdf-vm.com/) runtime version manager.
+For a more robust setup, the recommendation in PageZERO is to use the [asdf](https://asdf-vm.com/) runtime version manager.
 
 After installing asdf, run the following commands to install Node.js and Bun:
 
@@ -68,7 +68,7 @@ cd <your-project-name>
 asdf install
 ```
 
-asdf will read the `.tool-versions` file from your project root and install the recommended Node.js and Bun versions.
+This will read the `.tool-versions` file from your project root and automatically install the recommended versions of Node.js and Bun.
 
 ## Project structure
 
