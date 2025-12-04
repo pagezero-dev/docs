@@ -22,6 +22,11 @@ export default defineConfig({
           label: "GitHub",
           href: "https://github.com/pagezero-dev/pagezero",
         },
+        {
+          icon: "x.com",
+          label: "X",
+          href: "https://x.com/pawelgalazka",
+        },
       ],
       customCss: ["./src/styles/fonts.css", "./src/styles/custom.css"],
       sidebar: [
