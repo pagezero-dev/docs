@@ -4,7 +4,7 @@ description: Get up and running with PageZero in minutes
 sidebar:
   order: 1
 ---
-import { Steps, Aside, Tabs, TabItem, LinkButton, FileTree } from '@astrojs/starlight/components';
+import { Steps, Aside, Tabs, TabItem, LinkButton, FileTree, Badge } from '@astrojs/starlight/components';
 
 <Aside type="note" title="Prerequisites">
 Before getting started, make sure you have the following installed:
@@ -32,7 +32,7 @@ If you're not sure how to install Node.js or Bun, check out the [Node and Bun se
           Get PowerUP
         </LinkButton>
         <LinkButton href="https://pagezero.dev/#pricing" variant="secondary" icon="external">
-          Learn about PowerUP
+          Learn more
         </LinkButton>
       </TabItem>
    </Tabs>
@@ -106,3 +106,18 @@ than workspaces. This allows for a simpler yet modular setup.
 An **app** is a module that owns routes, DB schema or components specific to the app domain.
 
 A **package** is a module that owns utilities or UI components shared across multiple apps or other packages.
+
+## Essential scripts
+
+- `bun run setup` - performs bun install, sets up basic env vars, database and Playwright browser drivers
+- `bun run dev` - boots the development server 
+- `bun run dev:email` - boots the email development server <Badge text="paid edition" variant="note" />
+- `bun run preview` - builds the app and boots the compiled version
+- `bun run test` - executes unit tests
+- `bun run test:watch` - run unit tests in watch mode
+- `bun run test:e2e:ui` - executes browser tests in UI mode, perfect for development
+- `bun run check` - code quality check (linting and formatting)
+- `bun run check:types` - TypeScript types check
+- `bun run check:fix` - fix linting and formatting issues
+- `bun run storybook` - boots Storybook
+- `bun run doctor` - runs all basic sanity checks: format, lint, types check and unit tests
