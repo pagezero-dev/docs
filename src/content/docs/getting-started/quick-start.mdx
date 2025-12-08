@@ -4,15 +4,15 @@ description: Get up and running with PageZero in minutes
 sidebar:
   order: 1
 ---
-import { Steps, Aside, Tabs, TabItem, LinkButton } from '@astrojs/starlight/components';
+import { Steps, Aside, Tabs, TabItem, LinkButton, FileTree, Badge } from '@astrojs/starlight/components';
 
 <Aside type="note" title="Prerequisites">
 Before getting started, make sure you have the following installed:
 
-- [**Node.js**](https://nodejs.org/): Version >= 24
-- [**Bun**](https://bun.com/): Version >= 1.3
+- [**Node.js**](https://nodejs.org/): Version 24 or higher
+- [**Bun**](https://bun.com/): Version 1.3 or higher
 
-[Learn more](/getting-started/quick-start/#node-and-bun-setup)
+If you're not sure how to install Node.js or Bun, check out the [Node and Bun setup](#node-and-bun-setup) section.
 </Aside>
 
 <Steps>
@@ -25,39 +25,44 @@ Before getting started, make sure you have the following installed:
       ```
       </TabItem>
       <TabItem label="Paid edition">
-      ```sh
-      bunx pagezero@latest init --powerup
-      ```
+        ```sh
+        bunx pagezero@latest init --powerup
+        ```
+        <LinkButton href="https://pagezero.dev/#pricing">
+          Get PowerUP
+        </LinkButton>
         <LinkButton href="https://pagezero.dev/#pricing" variant="secondary" icon="external">
-          Learn about PowerUP
+          Learn more
         </LinkButton>
       </TabItem>
    </Tabs>
 
-2. Enter your project directory:
+2. Navigate to your project directory:
    ```sh
    cd <your-project-name>
    ```
 
-3. Run development server:
+3. Start the development server:
    ```sh
    bun dev
    ```
 
-4. Navigate to [`http://localhost:3000`](http://localhost:3000) to see the app in action.
+4. Open [`http://localhost:3000`](http://localhost:3000) in your browser to see your app in action.
    That's it! 🎉
 
 </Steps>
 
 ## Node and Bun setup
 
-If you are in a rush, already have Node.js installed and want to quickly setup Bun:
+If you're in a rush, already have Node.js installed, and want to quickly set up Bun:
 
 ```sh
 npm install -g bun
 ```
 
-Otherwise, the recommended way in PageZERO is to use [asdf](https://asdf-vm.com/) runtime version manager:
+For a more robust setup, the recommendation in PageZERO is to use the [asdf](https://asdf-vm.com/) runtime version manager.
+
+After installing asdf, run the following commands to install Node.js and Bun:
 
 ```sh
 asdf plugin add nodejs
@@ -65,3 +70,54 @@ asdf plugin add bun
 cd <your-project-name>
 asdf install
 ```
+
+This will read the `.tool-versions` file from your project root and automatically install the recommended versions of Node.js and Bun.
+
+## Project structure
+
+PageZERO follows an **integrated monorepo** approach. Unlike typical monorepos, 
+package linking happens through TypeScript's path resolver (via `tsconfig.json` paths) rather 
+than workspaces. This allows for a simpler yet modular setup.
+
+<FileTree>
+
+- apps
+  - core/
+  - content/ (extended in paid edition)
+  - auth/ (paid edition)
+  - payments/ (paid edition)
+  - permissions/ (paid edition)
+  - user/ (paid edition)
+  - email/ (paid edition)
+- packages/
+  - db/
+  - generate/
+  - types/
+  - ui/ (extended in paid edition)
+  - config/ (paid edition)
+  - crypto/ (paid edition)
+  - ui-lite/ (paid edition)
+- e2e/
+- workers/
+- package.json
+
+</FileTree>
+
+An **app** is a module that owns routes, DB schema or components specific to the app domain.
+
+A **package** is a module that owns utilities or UI components shared across multiple apps or other packages.
+
+## Essential scripts
+
+- `bun run setup` - performs bun install, sets up basic env vars, database and Playwright browser drivers
+- `bun run dev` - boots the development server 
+- `bun run dev:email` - boots the email development server <Badge text="paid edition" variant="note" />
+- `bun run preview` - builds the app and boots the compiled version
+- `bun run test` - executes unit tests
+- `bun run test:watch` - run unit tests in watch mode
+- `bun run test:e2e:ui` - executes browser tests in UI mode, perfect for development
+- `bun run check` - code quality check (linting and formatting)
+- `bun run check:types` - TypeScript types check
+- `bun run check:fix` - fix linting and formatting issues
+- `bun run storybook` - boots Storybook
+- `bun run doctor` - runs all basic sanity checks: format, lint, types check and unit tests
