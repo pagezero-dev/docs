@@ -8,7 +8,7 @@ import { Aside, Steps } from '@astrojs/starlight/components';
 
 
 <Aside type="note" title="Prerequisites">
-Before getting started, make sure to create a [Cloudflare](https://www.cloudflare.com/)  account.
+Before getting started, make sure you have created a [Cloudflare](https://www.cloudflare.com/) account.
 </Aside>
 
 ## Manual
@@ -27,7 +27,7 @@ Before getting started, make sure to create a [Cloudflare](https://www.cloudflar
    bunx wrangler d1 create <project-name>-preview
    ```
 
-1. Update `wrangler.json` with returned: project name, database names and `database_id`s
+1. Update `wrangler.json` with the returned project name, database names, and `database_id`s
 
 1. Perform manual deployments to create Cloudflare Workers:
    ```sh
@@ -38,10 +38,10 @@ Before getting started, make sure to create a [Cloudflare](https://www.cloudflar
 
 ## Automatic
 
-Described automatic deployment happens through the GitHub Actions CI/CD pipeline. That means once the pipeline is set,
-every merge to the `main` branch will automatically trigger deployment to Cloudflare Workers and database
-migration for Cloudflare D1. Additionally, every PR will trigger "preview deployment", so you can access the 
-version of your app for every PR.
+Automatic deployment happens through the GitHub Actions CI/CD pipeline. Once the pipeline is set up,
+every merge to the `main` branch will automatically trigger deployment to Cloudflare Workers and a database
+migration for Cloudflare D1. Additionally, every PR will trigger a preview deployment, allowing you to access a 
+specific version of your app for each PR.
 
 <Aside type="note">
 Steps below require [GitHub CLI](https://cli.github.com/).
@@ -99,16 +99,16 @@ For Mac, you can set it up with: `brew install gh`.
     ```
 
     <Aside type="note">
-      Secret for Dependabot needs to be set separately. Otherwise Dependabot PRs will not perform preview deploys.
+      The secret for Dependabot needs to be set separately. Otherwise, Dependabot PRs will not perform preview deployments.
       You can browse secrets by going to the GitHub UI "Settings / Secrets and variables / Actions" for your repo
       or by executing `gh secret list`.
     </Aside>
 
 </Steps>
 
-Now, you can test everything out. Create a PR in your project GitHub repository. You should notice an action 
-in the "Actions" section being triggered. If the basic checks pass, the workflow will perform preview deployment 
-to Cloudflare workers and database migration on your preview database. After deployment, the "View deployment" 
-button should appear in your PR, with a link to your PR "preview" deployment.
+Now you can test everything. Create a PR in your project's GitHub repository. You should see an action 
+in the "Actions" section being triggered. If the basic checks pass, the workflow will perform a preview deployment 
+to Cloudflare Workers and run a database migration on your preview database. After deployment, a "View deployment" 
+button should appear in your PR with a link to the preview deployment.
 
-When you merge PR to "main", production deployment will happen, and database migration will be performed on your production DB.
+When you merge the PR to `main`, a production deployment will occur, and a database migration will be performed on your production database.
