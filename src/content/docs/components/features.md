@@ -2,6 +2,8 @@
 title: Features
 ---
 
+![Features component](../../../assets/components/features.png)
+
 ## Import
 
 ```js

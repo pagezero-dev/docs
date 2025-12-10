@@ -2,6 +2,8 @@
 title: Section
 ---
 
+![Section component](../../../assets/components/section.png)
+
 ## Import
 
 ```js

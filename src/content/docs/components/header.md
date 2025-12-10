@@ -2,6 +2,8 @@
 title: Header
 ---
 
+![Header component](../../../assets/components/header.png)
+
 ## Import
 
 ```js

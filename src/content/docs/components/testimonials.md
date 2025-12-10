@@ -2,6 +2,8 @@
 title: Testimonials
 ---
 
+![Testimonials component](../../../assets/components/testimonials.png)
+
 ## Import
 
 ```js

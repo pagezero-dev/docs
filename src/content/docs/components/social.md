@@ -2,6 +2,8 @@
 title: Social
 ---
 
+![Social component](../../../assets/components/social.png)
+
 ## Import
 
 ```js

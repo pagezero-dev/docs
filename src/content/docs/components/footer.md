@@ -2,6 +2,8 @@
 title: Footer
 ---
 
+![Footer component](../../../assets/components/footer.png)
+
 ## Import
 
 ```js

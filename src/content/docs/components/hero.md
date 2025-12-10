@@ -2,6 +2,8 @@
 title: Hero
 ---
 
+![Hero component](../../../assets/components/hero.png)
+
 ## Import
 
 ```js
