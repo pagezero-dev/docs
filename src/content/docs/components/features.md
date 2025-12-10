@@ -11,35 +11,76 @@ import { Features } from '@/content/components/features'
 ## Usage
 
 ```js
-import { Zap, Shield, Rocket } from 'lucide-react'
+import { Building2, Archive, ArrowRightCircle, RefreshCw, TestTube, Zap } from 'lucide-react'
 import { Link } from '@/ui/link'
+import { Features } from '@/content/components/features'
 
 <Features>
   <Features.Item
-    title="Fast Performance"
-    icon={<Zap />}
+    title="Lorem"
+    icon={<Building2 />}
     cta={
-      <Link href="/learn-more" size="sm" underline="hover">
+      <Link href="/" size="sm" underline="hover">
         Learn more →
       </Link>
     }
   >
-    Built with performance in mind. Lightning-fast page loads and optimized
-    rendering ensure the best user experience.
+    Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
   </Features.Item>
   <Features.Item
-    title="Secure by Default"
-    icon={<Shield />}
+    title="Ipsum"
+    icon={<Archive />}
+    cta={
+      <Link href="/" size="sm" underline="hover">
+        Learn more →
+      </Link>
+    }
   >
-    Security best practices are built in from the ground up, protecting your
-    application and users.
+    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.
   </Features.Item>
   <Features.Item
-    title="Quick to Deploy"
-    icon={<Rocket />}
+    title="Dolor"
+    icon={<ArrowRightCircle />}
+    cta={
+      <Link href="/" size="sm" underline="hover">
+        Learn more →
+      </Link>
+    }
   >
-    Deploy to multiple platforms with ease. Get your application online in
-    minutes, not hours.
+    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla.
+  </Features.Item>
+  <Features.Item
+    title="Sit"
+    icon={<RefreshCw />}
+    cta={
+      <Link href="/" size="sm" underline="hover">
+        Learn more →
+      </Link>
+    }
+  >
+    Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim.
+  </Features.Item>
+  <Features.Item
+    title="Amet"
+    icon={<TestTube />}
+    cta={
+      <Link href="/" size="sm" underline="hover">
+        Learn more →
+      </Link>
+    }
+  >
+    Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.
+  </Features.Item>
+  <Features.Item
+    title="Consectetur"
+    icon={<Zap />}
+    cta={
+      <Link href="/" size="sm" underline="hover">
+        Learn more →
+      </Link>
+    }
+  >
+    Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur.
   </Features.Item>
 </Features>
 ```

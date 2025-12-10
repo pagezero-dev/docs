@@ -11,47 +11,49 @@ import { Footer } from '@/content/components/footer'
 ## Usage
 
 ```js
+import { Footer } from '@/content/components/footer'
+
 <Footer
   navigation={[
     {
-      heading: 'Product',
+      heading: 'Lorem',
       children: [
-        { label: 'Features', href: '/features' },
-        { label: 'Pricing', href: '/pricing' },
-        { label: 'Documentation', href: '/docs' }
+        { label: 'Ipsum', href: '/' },
+        { label: 'Dolor', href: '/' },
+        { label: 'Sit', href: '/' }
       ]
     },
     {
-      heading: 'Company',
+      heading: 'Amet',
       children: [
-        { label: 'About', href: '/about' },
-        { label: 'Blog', href: '/blog' },
-        { label: 'Careers', href: '/careers' }
+        { label: 'Consectetur', href: '/' },
+        { label: 'Adipiscing', href: '/' },
+        { label: 'Elit', href: '/' }
       ]
     },
     {
-      heading: 'Resources',
+      heading: 'Sed',
       children: [
-        { label: 'Community', href: '/community' },
-        { label: 'Support', href: '/support' },
-        { label: 'Status', href: '/status' }
+        { label: 'Eiusmod', href: '/' },
+        { label: 'Tempor', href: '/' },
+        { label: 'Incididunt', href: '/' }
       ]
     },
     {
-      heading: 'Legal',
+      heading: 'Labore',
       children: [
-        { label: 'Privacy', href: '/privacy' },
-        { label: 'Terms', href: '/terms' },
-        { label: 'Security', href: '/security' }
+        { label: 'Dolore', href: '/' },
+        { label: 'Magna', href: '/' },
+        { label: 'Aliqua', href: '/' }
       ]
     }
   ]}
   socialMediaUrls={{
-    facebookUrl: 'https://facebook.com/yourcompany',
-    twitterUrl: 'https://twitter.com/yourcompany',
-    githubUrl: 'https://github.com/yourcompany',
-    instagramUrl: 'https://instagram.com/yourcompany',
-    youtubeUrl: 'https://youtube.com/@yourcompany'
+    facebookUrl: 'https://www.facebook.com',
+    instagramUrl: 'https://www.instagram.com',
+    twitterUrl: 'https://www.twitter.com',
+    githubUrl: 'https://www.github.com',
+    youtubeUrl: 'https://www.youtube.com'
   }}
 />
 ```

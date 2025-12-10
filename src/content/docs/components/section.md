@@ -11,22 +11,13 @@ import { Section } from '@/content/components/section'
 ## Usage
 
 ```js
+import { Section } from '@/content/components/section'
+
 <Section
-  id="features"
-  title="Our Features"
-  description="Discover what makes our platform special"
-  spacingSize="default"
-  background="light"
+  title="Lorem ipsum dolor sit amet"
+  description="Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
 >
   {/* Your section content here */}
-</Section>
-```
-
-## Usage without title
-
-```js
-<Section spacingSize="lg" background="none">
-  {/* Your custom section content here */}
 </Section>
 ```
 

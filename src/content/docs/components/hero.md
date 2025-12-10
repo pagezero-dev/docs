@@ -12,17 +12,18 @@ import { Hero } from '@/content/components/hero'
 
 ```js
 import { Button } from '@/ui/button'
+import { Hero } from '@/content/components/hero'
 
 <Hero
-  title="Welcome to PageZERO"
-  description="Build modern web applications with ease. PageZERO provides everything you need to get started quickly with best practices built in."
+  title="Lorem ipsum dolor sit amet"
+  description="Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris."
   cta={
     <>
       <Button asChild>
-        <a href="/get-started">Get started</a>
+        <a href="/">Get started</a>
       </Button>
       <Button asChild variant="ghost">
-        <a href="/learn-more">Learn more →</a>
+        <a href="/">Learn more →</a>
       </Button>
     </>
   }

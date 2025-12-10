@@ -12,27 +12,29 @@ import { Header } from '@/content/components/header'
 
 ```js
 import { Button } from '@/ui/button'
-import { Logo } from '@/content/components/logo'
+import { Header } from '@/content/components/header'
 
 <Header
   logo={
     <a href="/" className="font-bold text-lg">
-      <Logo />
+      Logo
     </a>
   }
-  position="sticky"
 >
   <Button variant="ghost" asChild>
-    <a href="/pricing">Pricing</a>
+    <a href="/">Lorem</a>
   </Button>
   <Button variant="ghost" asChild>
-    <a href="/about">About us</a>
+    <a href="/">Ipsum</a>
   </Button>
   <Button variant="ghost" asChild>
-    <a href="/blog">Blog</a>
+    <a href="/">Dolor</a>
+  </Button>
+  <Button variant="ghost" asChild>
+    <a href="/">Sit</a>
   </Button>
   <Button variant="default" asChild>
-    <a href="/login">Log in</a>
+    <a href="/">Amet</a>
   </Button>
 </Header>
 ```

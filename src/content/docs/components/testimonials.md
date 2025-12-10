@@ -11,30 +11,35 @@ import { Testimonials } from '@/content/components/testimonials'
 ## Usage
 
 ```js
+import { Testimonials } from '@/content/components/testimonials'
+
 <Testimonials
   items={[
     {
-      quote: 'PageZERO has completely transformed how we build web applications. The developer experience is outstanding!',
-      url: 'https://twitter.com/user/status/123',
+      quote: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore.',
+      url: 'https://example.com',
       author: {
-        name: 'Sarah Johnson',
-        imageSrc: '/images/sarah.jpg',
-        id: 'sarahjdev'
+        name: 'Lorem Ipsum',
+        imageSrc: 'https://i.pravatar.cc/150?img=1',
+        id: 'lorem'
       }
     },
     {
-      quote: 'The best framework I\'ve used in years. Clean, fast, and incredibly well-documented.',
+      quote: 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.',
+      url: 'https://example.com',
       author: {
-        name: 'Michael Chen'
+        name: 'Dolor Sit',
+        imageSrc: 'https://i.pravatar.cc/150?img=2',
+        id: 'dolor'
       }
     },
     {
-      quote: 'We migrated our entire platform to PageZERO and couldn\'t be happier with the results.',
-      url: 'https://example.com/case-study',
+      quote: 'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla.',
+      url: 'https://example.com',
       author: {
-        name: 'Emily Rodriguez',
-        imageSrc: '/images/emily.jpg',
-        id: 'emilydev'
+        name: 'Amet Consectetur',
+        imageSrc: 'https://i.pravatar.cc/150?img=3',
+        id: 'amet'
       }
     }
   ]}

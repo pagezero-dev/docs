@@ -11,13 +11,14 @@ import { Social } from '@/content/components/social'
 ## Usage
 
 ```js
+import { Social } from '@/content/components/social'
+
 <Social
-  facebookUrl="https://facebook.com/yourcompany"
-  twitterUrl="https://twitter.com/yourcompany"
-  githubUrl="https://github.com/yourcompany"
-  instagramUrl="https://instagram.com/yourcompany"
-  youtubeUrl="https://youtube.com/@yourcompany"
-  size="default"
+  facebookUrl="https://www.facebook.com"
+  instagramUrl="https://www.instagram.com"
+  twitterUrl="https://www.twitter.com"
+  githubUrl="https://www.github.com"
+  youtubeUrl="https://www.youtube.com"
 />
 ```
 
