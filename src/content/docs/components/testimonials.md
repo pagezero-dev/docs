@@ -41,16 +41,3 @@ import { Testimonials } from '@/content/components/testimonials'
 />
 ```
 
-## Props
-
-- `items` (array, required) - Array of testimonial objects
-
-### Testimonial Item Object
-
-- `quote` (string, required) - The testimonial text
-- `url` (string, optional) - Link to the original testimonial source
-- `author` (object, required) - Author information
-  - `name` (string, required) - Author's name
-  - `imageSrc` (string, optional) - URL to author's profile image
-  - `id` (string, optional) - Author's social media handle or identifier
-

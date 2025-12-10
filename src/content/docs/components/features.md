@@ -44,16 +44,3 @@ import { Link } from '@/ui/link'
 </Features>
 ```
 
-## Props
-
-### Features
-
-- `children` (ReactNode, optional) - Feature items
-
-### Features.Item
-
-- `title` (string, required) - Feature title
-- `icon` (ReactNode, required) - Icon component
-- `cta` (ReactNode, optional) - Call-to-action link or button
-- `children` (ReactNode, required) - Feature description
-

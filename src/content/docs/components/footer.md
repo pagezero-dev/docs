@@ -56,17 +56,3 @@ import { Footer } from '@/content/components/footer'
 />
 ```
 
-## Props
-
-- `navigation` (array, required) - Array of navigation sections
-  - `heading` (string, required) - Section heading
-  - `children` (array, required) - Array of navigation links
-    - `label` (string, required) - Link text
-    - `href` (string, required) - Link URL
-- `socialMediaUrls` (object, optional) - Social media URLs
-  - `facebookUrl` (string, optional) - Facebook profile URL
-  - `instagramUrl` (string, optional) - Instagram profile URL
-  - `twitterUrl` (string, optional) - Twitter/X profile URL
-  - `githubUrl` (string, optional) - GitHub profile URL
-  - `youtubeUrl` (string, optional) - YouTube channel URL
-

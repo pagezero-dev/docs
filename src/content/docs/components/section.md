@@ -30,12 +30,3 @@ import { Section } from '@/content/components/section'
 </Section>
 ```
 
-## Props
-
-- `title` (string, optional) - Section heading
-- `description` (string, optional) - Section description (only shown when title is provided)
-- `id` (string, optional) - HTML id attribute for anchor links
-- `spacingSize` ("default" | "sm" | "lg" | "none", optional) - Vertical padding size (default: "default")
-- `background` ("none" | "light" | "dark", optional) - Background color variant (default: "none")
-- `children` (ReactNode, optional) - Section content
-

@@ -29,10 +29,3 @@ import { Button } from '@/ui/button'
 />
 ```
 
-## Props
-
-- `title` (string, required) - The main heading text
-- `description` (string, required) - The description text below the title
-- `cta` (ReactNode, required) - Call-to-action buttons or elements
-- `children` (ReactNode, optional) - Additional content, typically used for background elements
-

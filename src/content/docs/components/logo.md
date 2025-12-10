@@ -23,7 +23,3 @@ import { Logo } from '@/content/components/logo'
 </a>
 ```
 
-## Props
-
-- `className` (string, optional) - CSS classes for styling the logo size and appearance
-

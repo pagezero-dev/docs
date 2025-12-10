@@ -37,9 +37,3 @@ import { Logo } from '@/content/components/logo'
 </Header>
 ```
 
-## Props
-
-- `logo` (ReactNode, required) - Logo element or component
-- `children` (ReactNode, required) - Navigation items and buttons
-- `position` ("relative" | "sticky" | "absolute", optional) - Header positioning style (default: "relative")
-
