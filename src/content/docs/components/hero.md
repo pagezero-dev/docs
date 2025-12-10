@@ -12,7 +12,6 @@ import { Hero } from '@/content/components/hero'
 
 ```js
 import { Button } from '@/ui/button'
-import { Hero } from '@/content/components/hero'
 
 <Hero
   title="Lorem ipsum dolor sit amet"

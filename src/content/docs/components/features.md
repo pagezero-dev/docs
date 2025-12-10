@@ -13,7 +13,6 @@ import { Features } from '@/content/components/features'
 ```js
 import { Building2, Archive, ArrowRightCircle, RefreshCw, TestTube, Zap } from 'lucide-react'
 import { Link } from '@/ui/link'
-import { Features } from '@/content/components/features'
 
 <Features>
   <Features.Item

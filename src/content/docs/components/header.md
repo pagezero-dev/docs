@@ -12,7 +12,6 @@ import { Header } from '@/content/components/header'
 
 ```js
 import { Button } from '@/ui/button'
-import { Header } from '@/content/components/header'
 
 <Header
   logo={

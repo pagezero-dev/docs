@@ -11,8 +11,6 @@ import { Testimonials } from '@/content/components/testimonials'
 ## Usage
 
 ```js
-import { Testimonials } from '@/content/components/testimonials'
-
 <Testimonials
   items={[
     {

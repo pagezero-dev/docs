@@ -11,8 +11,6 @@ import { Footer } from '@/content/components/footer'
 ## Usage
 
 ```js
-import { Footer } from '@/content/components/footer'
-
 <Footer
   navigation={[
     {
