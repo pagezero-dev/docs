@@ -10,7 +10,9 @@ sidebar:
 
 ```js
 import { Button } from '@/ui/button'
+```
 
+```js
 <Button>Button</Button>
 ```
 
@@ -20,7 +22,9 @@ import { Button } from '@/ui/button'
 
 ```js
 import { Input } from '@/ui/input'
+```
 
+```js
 <Input placeholder="Enter text..." />
 ```
 
@@ -30,7 +34,9 @@ import { Input } from '@/ui/input'
 
 ```js
 import { Link } from '@/ui/link'
+```
 
+```js
 <Link href="/" size="default">Link</Link>
 ```
 
@@ -40,7 +46,9 @@ import { Link } from '@/ui/link'
 
 ```js
 import { Badge } from '@/ui/badge'
+```
 
+```js
 <Badge>Badge</Badge>
 ```
 
@@ -51,7 +59,9 @@ import { Badge } from '@/ui/badge'
 ```js
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from '@/ui/card'
 import { Button } from '@/ui/button'
+```
 
+```js
 <Card>
   <CardHeader>
     <CardTitle>Card Title</CardTitle>
@@ -75,7 +85,9 @@ import { Button } from '@/ui/button'
 
 ```js
 import { Alert, AlertTitle, AlertDescription } from '@/ui/alert'
+```
 
+```js
 <Alert>
   <AlertTitle>Alert Title</AlertTitle>
   <AlertDescription>This is a default alert.</AlertDescription>
@@ -89,7 +101,9 @@ import { Alert, AlertTitle, AlertDescription } from '@/ui/alert'
 ```js
 import { Checkbox } from '@/ui/checkbox'
 import { Label } from '@/ui/label'
+```
 
+```js
 <div className="flex items-center space-x-2">
   <Checkbox id="default" />
   <Label htmlFor="default">Default checkbox</Label>
@@ -103,7 +117,9 @@ import { Label } from '@/ui/label'
 ```js
 import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from '@/ui/dialog'
 import { Button } from '@/ui/button'
+```
 
+```js
 <Dialog>
   <DialogTrigger asChild>
     <Button variant="outline">Open Dialog</Button>
@@ -131,7 +147,9 @@ import { Button } from '@/ui/button'
 ```js
 import { Label } from '@/ui/label'
 import { Checkbox } from '@/ui/checkbox'
+```
 
+```js
 <div className="flex items-center space-x-2">
     <Checkbox id="with-label" />
     <Label htmlFor="with-label">Label with Checkbox</Label>
@@ -144,7 +162,9 @@ import { Checkbox } from '@/ui/checkbox'
 
 ```js
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/ui/tabs'
+```
 
+```js
 <Tabs defaultValue="account">
   <TabsList>
     <TabsTrigger value="account">Account</TabsTrigger>
@@ -178,7 +198,9 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/ui/tabs'
 
 ```js
 import { Heading, P, Lead, Blockquote, List, Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from '@/ui/typography'
+```
 
+```js
 <div>
   <Heading level={1}>Taxing Laughter: The Joke Tax Chronicles</Heading>
   <Lead>
@@ -221,7 +243,9 @@ import { Heading, P, Lead, Blockquote, List, Table, TableHeader, TableRow, Table
 ```js
 import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuGroup, DropdownMenuItem, DropdownMenuShortcut } from '@/ui/dropdown-menu'
 import { Button } from '@/ui/button'
+```
 
+```js
 <DropdownMenu>
   <DropdownMenuTrigger asChild>
     <Button variant="outline">Open Menu</Button>
@@ -258,7 +282,9 @@ import { Button } from '@/ui/button'
 ```js
 import { RadioGroup, RadioGroupItem } from '@/ui/radio-group'
 import { Label } from '@/ui/label'
+```
 
+```js
 <RadioGroup defaultValue="option1">
   <div className="flex items-center gap-3">
     <RadioGroupItem value="option1" id="option1" />
