@@ -4,6 +4,8 @@ sidebar:
   order: 1
 ---
 
+Essential UI components from [shadcn/ui](https://ui.shadcn.com/), a collection of re-usable components built with Radix UI and Tailwind CSS.
+
 ## Button
 
 ![Button component](../../../assets/components/essentials/button.png)
