@@ -6,6 +6,8 @@ sidebar:
 
 ## Button
 
+![Button component](../../../assets/components/essentials/button.png)
+
 ```js
 import { Button } from '@/ui/button'
 
@@ -13,6 +15,8 @@ import { Button } from '@/ui/button'
 ```
 
 ## Input
+
+![Input component](../../../assets/components/essentials/input.png)
 
 ```js
 import { Input } from '@/ui/input'
@@ -22,6 +26,8 @@ import { Input } from '@/ui/input'
 
 ## Link
 
+![Link component](../../../assets/components/essentials/link.png)
+
 ```js
 import { Link } from '@/ui/link'
 
@@ -30,6 +36,8 @@ import { Link } from '@/ui/link'
 
 ## Badge
 
+![Badge component](../../../assets/components/essentials/badge.png)
+
 ```js
 import { Badge } from '@/ui/badge'
 
@@ -37,6 +45,8 @@ import { Badge } from '@/ui/badge'
 ```
 
 ## Card
+
+![Card component](../../../assets/components/essentials/card.png)
 
 ```js
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from '@/ui/card'
@@ -61,6 +71,8 @@ import { Button } from '@/ui/button'
 
 ## Alert
 
+![Alert component](../../../assets/components/essentials/alert.png)
+
 ```js
 import { Alert, AlertTitle, AlertDescription } from '@/ui/alert'
 import { InfoIcon } from 'lucide-react'
@@ -74,6 +86,8 @@ import { InfoIcon } from 'lucide-react'
 
 ## Checkbox
 
+![Checkbox component](../../../assets/components/essentials/checkbox.png)
+
 ```js
 import { Checkbox } from '@/ui/checkbox'
 import { Label } from '@/ui/label'
@@ -85,6 +99,8 @@ import { Label } from '@/ui/label'
 ```
 
 ## Dialog
+
+![Dialog component](../../../assets/components/essentials/dialog.png)
 
 ```js
 import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from '@/ui/dialog'
@@ -112,6 +128,8 @@ import { Button } from '@/ui/button'
 
 ## Label
 
+![Label component](../../../assets/components/essentials/label.png)
+
 ```js
 import { Label } from '@/ui/label'
 
@@ -119,6 +137,8 @@ import { Label } from '@/ui/label'
 ```
 
 ## Tabs
+
+![Tabs component](../../../assets/components/essentials/tabs.png)
 
 ```js
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/ui/tabs'
@@ -152,6 +172,8 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/ui/tabs'
 
 ## Typography
 
+![Typography component](../../../assets/components/essentials/typography.png)
+
 ```js
 import { Heading, P, Lead, Large, Small, Muted, Blockquote, InlineCode, List } from '@/ui/typography'
 
@@ -173,6 +195,8 @@ import { Heading, P, Lead, Large, Small, Muted, Blockquote, InlineCode, List } f
 ```
 
 ## Dropdown Menu
+
+![Dropdown Menu component](../../../assets/components/essentials/dropdown-menu.png)
 
 ```js
 import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuGroup, DropdownMenuItem } from '@/ui/dropdown-menu'
@@ -199,6 +223,8 @@ import { Button } from '@/ui/button'
 ```
 
 ## Radio Group
+
+![Radio Group component](../../../assets/components/essentials/radio-group.png)
 
 ```js
 import { RadioGroup, RadioGroupItem } from '@/ui/radio-group'
