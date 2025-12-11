@@ -8,9 +8,13 @@ sidebar:
 
 ![Button component](../../../assets/components/essentials/button.png)
 
+**Import**
+
 ```js
 import { Button } from '@/ui/button'
 ```
+
+**Usage**
 
 ```js
 <Button>Button</Button>
@@ -20,9 +24,13 @@ import { Button } from '@/ui/button'
 
 ![Input component](../../../assets/components/essentials/input.png)
 
+**Import**
+
 ```js
 import { Input } from '@/ui/input'
 ```
+
+**Usage**
 
 ```js
 <Input placeholder="Enter text..." />
@@ -32,9 +40,13 @@ import { Input } from '@/ui/input'
 
 ![Link component](../../../assets/components/essentials/link.png)
 
+**Import**
+
 ```js
 import { Link } from '@/ui/link'
 ```
+
+**Usage**
 
 ```js
 <Link href="/" size="default">Link</Link>
@@ -44,9 +56,13 @@ import { Link } from '@/ui/link'
 
 ![Badge component](../../../assets/components/essentials/badge.png)
 
+**Import**
+
 ```js
 import { Badge } from '@/ui/badge'
 ```
+
+**Usage**
 
 ```js
 <Badge>Badge</Badge>
@@ -56,10 +72,14 @@ import { Badge } from '@/ui/badge'
 
 ![Card component](../../../assets/components/essentials/card.png)
 
+**Import**
+
 ```js
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from '@/ui/card'
 import { Button } from '@/ui/button'
 ```
+
+**Usage**
 
 ```js
 <Card>
@@ -83,9 +103,13 @@ import { Button } from '@/ui/button'
 
 ![Alert component](../../../assets/components/essentials/alert.png)
 
+**Import**
+
 ```js
 import { Alert, AlertTitle, AlertDescription } from '@/ui/alert'
 ```
+
+**Usage**
 
 ```js
 <Alert>
@@ -98,10 +122,14 @@ import { Alert, AlertTitle, AlertDescription } from '@/ui/alert'
 
 ![Checkbox component](../../../assets/components/essentials/checkbox.png)
 
+**Import**
+
 ```js
 import { Checkbox } from '@/ui/checkbox'
 import { Label } from '@/ui/label'
 ```
+
+**Usage**
 
 ```js
 <div className="flex items-center space-x-2">
@@ -114,10 +142,14 @@ import { Label } from '@/ui/label'
 
 ![Dialog component](../../../assets/components/essentials/dialog.png)
 
+**Import**
+
 ```js
 import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from '@/ui/dialog'
 import { Button } from '@/ui/button'
 ```
+
+**Usage**
 
 ```js
 <Dialog>
@@ -144,10 +176,14 @@ import { Button } from '@/ui/button'
 
 ![Label component](../../../assets/components/essentials/label.png)
 
+**Import**
+
 ```js
 import { Label } from '@/ui/label'
 import { Checkbox } from '@/ui/checkbox'
 ```
+
+**Usage**
 
 ```js
 <div className="flex items-center space-x-2">
@@ -160,9 +196,13 @@ import { Checkbox } from '@/ui/checkbox'
 
 ![Tabs component](../../../assets/components/essentials/tabs.png)
 
+**Import**
+
 ```js
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/ui/tabs'
 ```
+
+**Usage**
 
 ```js
 <Tabs defaultValue="account">
@@ -196,9 +236,13 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/ui/tabs'
 
 ![Typography component](../../../assets/components/essentials/typography.png)
 
+**Import**
+
 ```js
 import { Heading, P, Lead, Blockquote, List, Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from '@/ui/typography'
 ```
+
+**Usage**
 
 ```js
 <div>
@@ -240,10 +284,14 @@ import { Heading, P, Lead, Blockquote, List, Table, TableHeader, TableRow, Table
 
 ![Dropdown Menu component](../../../assets/components/essentials/dropdown-menu.png)
 
+**Import**
+
 ```js
 import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuGroup, DropdownMenuItem, DropdownMenuShortcut } from '@/ui/dropdown-menu'
 import { Button } from '@/ui/button'
 ```
+
+**Usage**
 
 ```js
 <DropdownMenu>
@@ -279,10 +327,14 @@ import { Button } from '@/ui/button'
 
 ![Radio Group component](../../../assets/components/essentials/radio-group.png)
 
+**Import**
+
 ```js
 import { RadioGroup, RadioGroupItem } from '@/ui/radio-group'
 import { Label } from '@/ui/label'
 ```
+
+**Usage**
 
 ```js
 <RadioGroup defaultValue="option1">
