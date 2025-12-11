@@ -11,7 +11,7 @@ sidebar:
 ```js
 import { Button } from '@/ui/button'
 
-<Button>Lorem</Button>
+<Button>Button</Button>
 ```
 
 ## Input
@@ -21,7 +21,7 @@ import { Button } from '@/ui/button'
 ```js
 import { Input } from '@/ui/input'
 
-<Input placeholder="Lorem ipsum..." />
+<Input placeholder="Enter text..." />
 ```
 
 ## Link
@@ -31,7 +31,7 @@ import { Input } from '@/ui/input'
 ```js
 import { Link } from '@/ui/link'
 
-<Link href="/">Lorem ipsum</Link>
+<Link href="/" size="default">Link</Link>
 ```
 
 ## Badge
@@ -41,7 +41,7 @@ import { Link } from '@/ui/link'
 ```js
 import { Badge } from '@/ui/badge'
 
-<Badge>Lorem</Badge>
+<Badge>Badge</Badge>
 ```
 
 ## Card
@@ -54,17 +54,17 @@ import { Button } from '@/ui/button'
 
 <Card>
   <CardHeader>
-    <CardTitle>Lorem Ipsum</CardTitle>
+    <CardTitle>Card Title</CardTitle>
     <CardDescription>
-      Dolor sit amet consectetur adipiscing elit.
+      This is a card description that explains what the card is about.
     </CardDescription>
   </CardHeader>
   <CardContent>
-    <p>Sed do eiusmod tempor incididunt ut labore.</p>
+    <p>This is the main content of the card.</p>
   </CardContent>
   <CardFooter>
-    <Button variant="outline">Lorem</Button>
-    <Button>Ipsum</Button>
+    <Button variant="outline">Cancel</Button>
+    <Button>Confirm</Button>
   </CardFooter>
 </Card>
 ```
@@ -79,8 +79,8 @@ import { InfoIcon } from 'lucide-react'
 
 <Alert>
   <InfoIcon />
-  <AlertTitle>Lorem Ipsum</AlertTitle>
-  <AlertDescription>Dolor sit amet consectetur.</AlertDescription>
+  <AlertTitle>Information</AlertTitle>
+  <AlertDescription>This is an alert with an icon.</AlertDescription>
 </Alert>
 ```
 
@@ -93,8 +93,8 @@ import { Checkbox } from '@/ui/checkbox'
 import { Label } from '@/ui/label'
 
 <div className="flex items-center space-x-2">
-  <Checkbox id="lorem" />
-  <Label htmlFor="lorem">Lorem ipsum</Label>
+  <Checkbox id="default" />
+  <Label htmlFor="default">Default checkbox</Label>
 </div>
 ```
 
@@ -108,19 +108,19 @@ import { Button } from '@/ui/button'
 
 <Dialog>
   <DialogTrigger asChild>
-    <Button variant="outline">Lorem Ipsum</Button>
+    <Button variant="outline">Open Dialog</Button>
   </DialogTrigger>
   <DialogContent>
     <DialogHeader>
-      <DialogTitle>Lorem Ipsum</DialogTitle>
+      <DialogTitle>Dialog Title</DialogTitle>
       <DialogDescription>
-        Dolor sit amet consectetur adipiscing elit.
+        This is a description of the dialog. You can put any content here.
       </DialogDescription>
     </DialogHeader>
-    <p className="py-4">Sed do eiusmod tempor incididunt.</p>
+    <p className="py-4">The main content of the dialog goes here.</p>
     <DialogFooter>
-      <Button variant="outline">Lorem</Button>
-      <Button>Ipsum</Button>
+      <Button variant="outline">Cancel</Button>
+      <Button>Save Changes</Button>
     </DialogFooter>
   </DialogContent>
 </Dialog>
@@ -133,7 +133,7 @@ import { Button } from '@/ui/button'
 ```js
 import { Label } from '@/ui/label'
 
-<Label>Lorem Ipsum</Label>
+<Label>Default Label</Label>
 ```
 
 ## Tabs
@@ -143,28 +143,28 @@ import { Label } from '@/ui/label'
 ```js
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/ui/tabs'
 
-<Tabs defaultValue="lorem">
+<Tabs defaultValue="account">
   <TabsList>
-    <TabsTrigger value="lorem">Lorem</TabsTrigger>
-    <TabsTrigger value="ipsum">Ipsum</TabsTrigger>
-    <TabsTrigger value="dolor">Dolor</TabsTrigger>
+    <TabsTrigger value="account">Account</TabsTrigger>
+    <TabsTrigger value="password">Password</TabsTrigger>
+    <TabsTrigger value="settings">Settings</TabsTrigger>
   </TabsList>
-  <TabsContent value="lorem" className="p-4">
-    <h3 className="font-medium text-lg">Lorem</h3>
+  <TabsContent value="account" className="p-4">
+    <h3 className="font-medium text-lg">Account</h3>
     <p className="mt-2 text-muted-foreground text-sm">
-      Consectetur adipiscing elit sed do eiusmod.
+      Make changes to your account settings here. Click save when you're done.
     </p>
   </TabsContent>
-  <TabsContent value="ipsum" className="p-4">
-    <h3 className="font-medium text-lg">Ipsum</h3>
+  <TabsContent value="password" className="p-4">
+    <h3 className="font-medium text-lg">Password</h3>
     <p className="mt-2 text-muted-foreground text-sm">
-      Tempor incididunt ut labore et dolore magna.
+      Change your password here. After saving, you'll be logged out.
     </p>
   </TabsContent>
-  <TabsContent value="dolor" className="p-4">
-    <h3 className="font-medium text-lg">Dolor</h3>
+  <TabsContent value="settings" className="p-4">
+    <h3 className="font-medium text-lg">Settings</h3>
     <p className="mt-2 text-muted-foreground text-sm">
-      Aliqua ut enim ad minim veniam quis nostrud.
+      Manage your account settings and set email preferences.
     </p>
   </TabsContent>
 </Tabs>
@@ -177,20 +177,25 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/ui/tabs'
 ```js
 import { Heading, P, Lead, Large, Small, Muted, Blockquote, InlineCode, List } from '@/ui/typography'
 
-<Heading level={1}>Lorem Ipsum</Heading>
-<Lead>Dolor sit amet consectetur adipiscing elit.</Lead>
-<P>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</P>
-<Large>Lorem ipsum dolor sit?</Large>
-<Small>Consectetur adipiscing</Small>
-<Muted>Elit sed do eiusmod.</Muted>
+<Heading level={1}>Heading 1</Heading>
+<Lead>
+  A modal dialog that interrupts the user with important content and expects a response.
+</Lead>
+<P>
+  This is a paragraph of text. Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+  Nullam euismod, nisl eget aliquam ultricies, nunc nisl aliquet nunc.
+</P>
+<Large>Are you absolutely sure?</Large>
+<Small>Email address</Small>
+<Muted>Enter your email address.</Muted>
 <Blockquote>
-  "Tempor incididunt ut labore et dolore magna aliqua ut enim ad minim veniam."
+  "After all," he said, "everyone enjoys a good joke, so it's only fair that they should pay for the privilege."
 </Blockquote>
-<InlineCode>@lorem/ipsum-dolor</InlineCode>
+<InlineCode>@radix-ui/react-dialog</InlineCode>
 <List>
-  <li>Lorem ipsum dolor</li>
-  <li>Sit amet consectetur</li>
-  <li>Adipiscing elit sed</li>
+  <li>1st level of puns: 5 gold coins</li>
+  <li>2nd level of jokes: 10 gold coins</li>
+  <li>3rd level of one-liners: 20 gold coins</li>
 </List>
 ```
 
@@ -199,24 +204,33 @@ import { Heading, P, Lead, Large, Small, Muted, Blockquote, InlineCode, List } f
 ![Dropdown Menu component](../../../assets/components/essentials/dropdown-menu.png)
 
 ```js
-import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuGroup, DropdownMenuItem } from '@/ui/dropdown-menu'
+import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuGroup, DropdownMenuItem, DropdownMenuShortcut } from '@/ui/dropdown-menu'
 import { Button } from '@/ui/button'
 
 <DropdownMenu>
   <DropdownMenuTrigger asChild>
-    <Button variant="outline">Lorem Ipsum</Button>
+    <Button variant="outline">Open Menu</Button>
   </DropdownMenuTrigger>
   <DropdownMenuContent className="w-56">
-    <DropdownMenuLabel>Lorem Ipsum</DropdownMenuLabel>
+    <DropdownMenuLabel>My Account</DropdownMenuLabel>
     <DropdownMenuSeparator />
     <DropdownMenuGroup>
-      <DropdownMenuItem>Lorem</DropdownMenuItem>
-      <DropdownMenuItem>Ipsum</DropdownMenuItem>
-      <DropdownMenuItem>Dolor</DropdownMenuItem>
+      <DropdownMenuItem>
+        Profile
+        <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
+      </DropdownMenuItem>
+      <DropdownMenuItem>
+        Billing
+        <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
+      </DropdownMenuItem>
+      <DropdownMenuItem>
+        Settings
+        <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
+      </DropdownMenuItem>
     </DropdownMenuGroup>
     <DropdownMenuSeparator />
     <DropdownMenuItem variant="destructive">
-      Sit Amet
+      Delete Account
     </DropdownMenuItem>
   </DropdownMenuContent>
 </DropdownMenu>
@@ -230,18 +244,18 @@ import { Button } from '@/ui/button'
 import { RadioGroup, RadioGroupItem } from '@/ui/radio-group'
 import { Label } from '@/ui/label'
 
-<RadioGroup defaultValue="lorem">
+<RadioGroup defaultValue="option1">
   <div className="flex items-center gap-3">
-    <RadioGroupItem value="lorem" id="lorem" />
-    <Label htmlFor="lorem">Lorem</Label>
+    <RadioGroupItem value="option1" id="option1" />
+    <Label htmlFor="option1">Option 1</Label>
   </div>
   <div className="flex items-center gap-3">
-    <RadioGroupItem value="ipsum" id="ipsum" />
-    <Label htmlFor="ipsum">Ipsum</Label>
+    <RadioGroupItem value="option2" id="option2" />
+    <Label htmlFor="option2">Option 2</Label>
   </div>
   <div className="flex items-center gap-3">
-    <RadioGroupItem value="dolor" id="dolor" />
-    <Label htmlFor="dolor">Dolor</Label>
+    <RadioGroupItem value="option3" id="option3" />
+    <Label htmlFor="option3">Option 3</Label>
   </div>
 </RadioGroup>
 ```
