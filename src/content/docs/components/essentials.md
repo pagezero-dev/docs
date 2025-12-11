@@ -175,28 +175,41 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/ui/tabs'
 ![Typography component](../../../assets/components/essentials/typography.png)
 
 ```js
-import { Heading, P, Lead, Large, Small, Muted, Blockquote, InlineCode, List } from '@/ui/typography'
+import { Heading, P, Lead, Blockquote, List, Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from '@/ui/typography'
 
-<Heading level={1}>Heading 1</Heading>
-<Lead>
-  A modal dialog that interrupts the user with important content and expects a response.
-</Lead>
-<P>
-  This is a paragraph of text. Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-  Nullam euismod, nisl eget aliquam ultricies, nunc nisl aliquet nunc.
-</P>
-<Large>Are you absolutely sure?</Large>
-<Small>Email address</Small>
-<Muted>Enter your email address.</Muted>
-<Blockquote>
-  "After all," he said, "everyone enjoys a good joke, so it's only fair that they should pay for the privilege."
-</Blockquote>
-<InlineCode>@radix-ui/react-dialog</InlineCode>
-<List>
-  <li>1st level of puns: 5 gold coins</li>
-  <li>2nd level of jokes: 10 gold coins</li>
-  <li>3rd level of one-liners: 20 gold coins</li>
-</List>
+<div>
+  <Heading level={1}>Taxing Laughter: The Joke Tax Chronicles</Heading>
+  <Lead>
+    Once upon a time, in a far-off land, there was a very lazy king who
+    spent all day lounging on his throne. One day, his advisors came to him
+    with a problem: the kingdom was running out of money.
+  </Lead>
+  <Heading level={2}>The King's Plan</Heading>
+  <P>
+    The king thought long and hard, and finally came up with{" "}
+    <a
+      href="https://example.com"
+      className="font-medium text-primary underline underline-offset-4"
+    >
+      a brilliant plan
+    </a>
+    : he would tax the jokes in the kingdom.
+  </P>
+  <Blockquote>
+    "After all," he said, "everyone enjoys a good joke, so it's only fair
+    that they should pay for the privilege."
+  </Blockquote>
+  <Heading level={3}>The Joke Tax</Heading>
+  <P>
+    The king's subjects were not amused. They grumbled and complained, but
+    the king was firm:
+  </P>
+  <List>
+    <li>1st level of puns: 5 gold coins</li>
+    <li>2nd level of jokes: 10 gold coins</li>
+    <li>3rd level of one-liners: 20 gold coins</li>
+  </List>
+</div>
 ```
 
 ## Dropdown Menu
