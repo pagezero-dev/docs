@@ -117,3 +117,7 @@
   --sl-color-gray-7: var(--muted);
   --sl-color-black: color-mix(in oklch, var(--muted) 50%, var(--background));
 }
+
+.sl-markdown-content img[data-image-component] {
+  border-radius: 0.625rem;
+}
