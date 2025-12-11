@@ -36,6 +36,10 @@ export default defineConfig({
         },
         {
           label: "Components",
+          badge: {
+            text: "PowerUP",
+            variant: "note",
+          },
           autogenerate: { directory: "components" },
         },
       ],
