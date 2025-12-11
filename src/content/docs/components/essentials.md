@@ -75,12 +75,10 @@ import { Button } from '@/ui/button'
 
 ```js
 import { Alert, AlertTitle, AlertDescription } from '@/ui/alert'
-import { InfoIcon } from 'lucide-react'
 
 <Alert>
-  <InfoIcon />
-  <AlertTitle>Information</AlertTitle>
-  <AlertDescription>This is an alert with an icon.</AlertDescription>
+  <AlertTitle>Alert Title</AlertTitle>
+  <AlertDescription>This is a default alert.</AlertDescription>
 </Alert>
 ```
 
@@ -132,8 +130,12 @@ import { Button } from '@/ui/button'
 
 ```js
 import { Label } from '@/ui/label'
+import { Checkbox } from '@/ui/checkbox'
 
-<Label>Default Label</Label>
+<div className="flex items-center space-x-2">
+    <Checkbox id="with-label" />
+    <Label htmlFor="with-label">Label with Checkbox</Label>
+</div>
 ```
 
 ## Tabs
