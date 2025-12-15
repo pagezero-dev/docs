@@ -35,11 +35,11 @@ export default defineConfig({
           autogenerate: { directory: "getting-started" },
         },
         {
+          label: "Features",
+          autogenerate: { directory: "features" },
+        },
+        {
           label: "Components",
-          badge: {
-            text: "PowerUP",
-            variant: "note",
-          },
           autogenerate: { directory: "components" },
         },
       ],
