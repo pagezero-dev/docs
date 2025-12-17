@@ -4,7 +4,7 @@ description: Learn how to deploy your PageZero application to production
 sidebar:
   order: 2
 ---
-import { Aside, Steps } from '@astrojs/starlight/components';
+import { Aside, Steps, Badge } from '@astrojs/starlight/components';
 
 PageZERO is built specifically for Cloudflare's infrastructure, leveraging Cloudflare Workers for compute and Cloudflare D1 for database storage. 
 
@@ -37,6 +37,11 @@ You can deploy manually or set up automated deployments through a GitHub Actions
    ```sh
    bun run deploy:production
    bun run deploy:preview
+   ```
+
+1. <Badge text="PowerUP edition" variant="note" /> Add the following secrets for your Cloudflare Workers:
+   ```sh
+   bunx wrangler secret put OTP_SECRET
    ```
 
 </Steps>
