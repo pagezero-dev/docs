@@ -33,12 +33,18 @@ You can deploy manually or set up automated deployments through a GitHub Actions
 
 1. Update `wrangler.json` with the returned project name, database names, and `database_id`s
 
+1. Create Cloudflare Workers through initial deployment:
+   ```sh
+   bun run deploy:production
+   bun run deploy:preview
+   ```
+
 </Steps>
 
 ## Manual
 
 <Steps>
-1. Perform initial [setup](#setup) first to create D1 databases.
+1. Perform initial [setup](#setup) first to create D1 databases and Cloudflare Workers.
 
 1. Set up the following environment variables:
    ```sh
@@ -79,7 +85,7 @@ Steps below require [GitHub CLI](https://cli.github.com/).
 </Aside>
 
 <Steps>
-1.  Perform [manual](#manual) deployment first to create the initial Cloudflare Workers and D1 databases
+1. Perform initial [setup](#setup) first to create D1 databases and Cloudflare Workers.
 
 1.  Login through `gh auth login`
 
