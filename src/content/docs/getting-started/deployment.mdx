@@ -9,7 +9,7 @@ import { Aside, Steps } from '@astrojs/starlight/components';
 PageZERO is built specifically for Cloudflare's infrastructure, leveraging Cloudflare Workers for compute and Cloudflare D1 for database storage. 
 
 The deployment process involves setting up D1 databases and deploying your application as Cloudflare Workers. 
-You can deploy manually or set up automated deployments through GitHub Actions CI/CD pipeline.
+You can deploy manually or set up automated deployments through a GitHub Actions CI/CD pipeline.
 
 
 ## Setup
@@ -40,7 +40,7 @@ You can deploy manually or set up automated deployments through GitHub Actions C
 <Steps>
 1. Perform initial [setup](#setup) first to create D1 databases.
 
-1. Set up following environment variables:
+1. Set up the following environment variables:
    ```sh
    CLOUDFLARE_ACCOUNT_ID=<your-cloudflare-account-id>
    CLOUDFLARE_API_TOKEN=<your-cloudflare-api-token>
@@ -50,7 +50,7 @@ You can deploy manually or set up automated deployments through GitHub Actions C
       `CLOUDFLARE_ACCOUNT_ID` value can be obtained through `bunx wrangler whoami` command.
 
       `CLOUDFLARE_API_TOKEN` value can be obtained through the Cloudflare dashboard under "Manage account / Account API Tokens".
-      You have to create a new token there. The token will require the following permission: `D1:Edit`.
+      You will need to create a new token there. The token will require the following permission: `D1:Edit`.
    </Aside>
 
 1. Perform Cloudflare D1 databases migrations:
@@ -107,9 +107,9 @@ Steps below require [GitHub CLI](https://cli.github.com/).
 
     <Aside type="note">
       `CLOUDFLARE_API_TOKEN` value can be obtained through the Cloudflare dashboard under "Manage account / Account API Tokens". 
-      You have to create a new token there. The token will require the following permissions: `D1:Edit`, `Workers Scripts:Edit`.
+      You will need to create a new token there. The token will require the following permissions: `D1:Edit`, `Workers Scripts:Edit`.
       
-      The secret for Dependabot needs to be set separately. Otherwise, Dependabot PRs will not perform preview deployments.
+      The secret for Dependabot needs to be set separately; otherwise, Dependabot PRs will not perform preview deployments.
     </Aside>
 
 </Steps>
