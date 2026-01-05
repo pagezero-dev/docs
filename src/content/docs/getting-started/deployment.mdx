@@ -45,6 +45,7 @@ You can deploy manually or set up automated deployments through a GitHub Actions
          _No secrets are needed for the open-source edition._
       </TabItem>
       <TabItem label="Paid edition">
+         The following secrets are needed to successfully setup [authentication](/features/authentication), [email delivery](/features/email) and [payments](/features/payments) services:
          ```sh
          bunx wrangler secret put OTP_SECRET --env=production
          bunx wrangler secret put OTP_SECRET --env=preview
@@ -61,9 +62,9 @@ You can deploy manually or set up automated deployments through a GitHub Actions
          ```
          <Aside type="note">
          - `OTP_SECRET` and `SESSION_COOKIE_SECRET` values can be generated with `bun -e "console.log(require('crypto').randomBytes(32).toString('hex'))"` command.
-         - `RESEND_API_KEY` value can be obtained from your [Resend account](https://resend.com/). Resend is used for sending emails.
-         - `POLAR_WEBHOOK_SECRET` value can be obtained from your [Polar account](https://polar.sh/). Polar is used for payments.
-         - `CLOUDFLARE_TURNSTILE_SECRET_KEY` and `CLOUDFLARE_TURNSTILE_PUBLIC_KEY` values can be obtained from your [Cloudflare account](https://dash.cloudflare.com/). Turnstile is used for captcha.
+         - `RESEND_API_KEY` value can be obtained from your [Resend account](https://resend.com/). Check [E-mail](/features/email) documentation for more details.
+         - `POLAR_WEBHOOK_SECRET` value can be obtained from your [Polar account](https://polar.sh/). Check [Payments](/features/payments) documentation for more details.
+         - `CLOUDFLARE_TURNSTILE_SECRET_KEY` and `CLOUDFLARE_TURNSTILE_PUBLIC_KEY` values can be obtained from your [Cloudflare account](https://dash.cloudflare.com/). Check [Authentication](/features/authentication) documentation for more details.
          </Aside>
         <LinkButton href="https://pagezero.dev/#pricing">
           Get PowerUP
