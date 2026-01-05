@@ -4,7 +4,7 @@ description: Learn how to deploy your PageZero application to production
 sidebar:
   order: 2
 ---
-import { Aside, Steps, Badge } from '@astrojs/starlight/components';
+import { Aside, Steps, Badge, Tabs, TabItem, LinkButton } from '@astrojs/starlight/components';
 
 PageZERO is built specifically for Cloudflare's infrastructure, leveraging Cloudflare Workers for compute and Cloudflare D1 for database storage. 
 
@@ -36,13 +36,37 @@ You can deploy manually or set up automated deployments through a GitHub Actions
 1. Create Cloudflare Workers through initial deployment:
    ```sh
    bun run deploy:production
-   bun run deploy:preview
+   bun run deploy:preview 
    ```
 
-1. <Badge text="PowerUP edition" variant="note" /> Add the following secrets for your Cloudflare Workers:
-   ```sh
-   bunx wrangler secret put OTP_SECRET
-   ```
+1. Add the necessary secrets for your Cloudflare Workers:
+   <Tabs>
+      <TabItem label="Open-source edition">
+         _No secrets are needed for the open-source edition._
+      </TabItem>
+      <TabItem label="Paid edition">
+         ```sh
+         bunx wrangler secret put OTP_SECRET --env=production
+         bunx wrangler secret put OTP_SECRET --env=preview
+         bunx wrangler secret put SESSION_COOKIE_SECRET --env=production
+         bunx wrangler secret put SESSION_COOKIE_SECRET --env=preview
+         bunx wrangler secret put RESEND_API_KEY --env=production
+         bunx wrangler secret put RESEND_API_KEY --env=preview
+         bunx wrangler secret put POLAR_WEBHOOK_SECRET --env=production
+         bunx wrangler secret put POLAR_WEBHOOK_SECRET --env=preview
+         bunx wrangler secret put CLOUDFLARE_TURNSTILE_SECRET_KEY --env=production
+         bunx wrangler secret put CLOUDFLARE_TURNSTILE_SECRET_KEY --env=preview
+         bunx wrangler secret put CLOUDFLARE_TURNSTILE_PUBLIC_KEY --env=production
+         bunx wrangler secret put CLOUDFLARE_TURNSTILE_PUBLIC_KEY --env=preview
+         ```
+        <LinkButton href="https://pagezero.dev/#pricing">
+          Get PowerUP
+        </LinkButton>
+        <LinkButton href="https://pagezero.dev/#pricing" variant="secondary" icon="external">
+          Learn more
+        </LinkButton>
+      </TabItem>
+   </Tabs>
 
 </Steps>
 
