@@ -6,21 +6,34 @@ PowerUp is built on modern, battle-tested technologies that prioritize developer
 
 ## Core
 
-- **[Vite](https://vite.dev/)** — Lightning-fast build tool and dev server
-- **[React](https://react.dev/)** — UI library for building component-based interfaces
-- **[React Router v7](https://reactrouter.com/)** — Full-stack routing with SSR support
-- **[Cloudflare Workers](https://workers.cloudflare.com/)** — Edge hosting with global distribution
-- **[Cloudflare D1](https://www.cloudflare.com/en-au/developer-platform/products/d1/)** — Serverless SQLite database at the edge
-- **[TypeScript](https://www.typescriptlang.org/)** — Type-safe JavaScript
-- **[TailwindCSS](https://tailwindcss.com/)** — Utility-first CSS framework
-- **[Drizzle ORM](https://orm.drizzle.team/)** — Type-safe SQL ORM with migrations
+**[Vite](https://vite.dev/)** — serves as the build tool and development server. It provides near-instant hot module replacement during development and optimized production builds. Vite's native ES modules approach eliminates the bundling step during development, making the feedback loop incredibly fast.
+
+**[React](https://react.dev/)** — powers the UI layer. Its component-based architecture makes it easy to build and maintain complex interfaces. The ecosystem is mature, well-documented, and offers excellent tooling support.
+
+**[React Router v7](https://reactrouter.com/)** — handles both client and server-side routing. It provides a full-stack framework experience with server-side rendering, data loading, and mutations — all while maintaining the flexibility to deploy anywhere.
+
+**[Cloudflare Workers](https://workers.cloudflare.com/)** — hosts the application at the edge. Code runs in data centers around the world, close to your users. This means faster response times and lower latency compared to traditional server hosting. The generous free tier makes it cost-effective for projects of any size.
+
+**[Cloudflare D1](https://www.cloudflare.com/en-au/developer-platform/products/d1/)** — provides the database layer. It's a serverless SQLite database that runs at the edge alongside your Workers. D1 offers familiar SQL semantics with automatic replication and zero cold starts.
+
+**[TypeScript](https://www.typescriptlang.org/)** — adds static typing to the entire codebase. It catches errors at compile time, improves IDE autocomplete, and makes refactoring safer. The type system also serves as living documentation for the codebase.
+
+**[TailwindCSS](https://tailwindcss.com/)** — handles styling with utility classes. It keeps styles co-located with components, eliminates naming debates, and produces small production bundles through automatic purging of unused styles.
+
+**[Drizzle ORM](https://orm.drizzle.team/)** — provides type-safe database access. It generates TypeScript types from your schema, supports migrations, and produces efficient SQL queries. Drizzle is lightweight and works seamlessly with D1.
 
 ## Tooling
 
-- **[Bun](https://bun.sh/)** — Fast JavaScript runtime and package manager
-- **[Biome](https://biomejs.dev/)** — Formatter and linter for code quality
-- **[GitHub Actions](https://github.com/features/actions)** — CI/CD automation
-- **[Vitest](https://vitest.dev/)** — Unit testing framework
-- **[Playwright](https://playwright.dev/)** — End-to-end testing
-- **[Shadcn](https://ui.shadcn.com/)** — Accessible component primitives
-- **[Storybook](https://storybook.js.org/)** — Component documentation and development
+**[Bun](https://bun.sh/)** — serves as the package manager and JavaScript runtime. It's significantly faster than npm or yarn for installing dependencies. Bun also provides a built-in test runner and bundler, though PowerUp uses specialized tools for those tasks.
+
+**[Biome](https://biomejs.dev/)** — handles formatting and linting in a single tool. It's a fast, Rust-based alternative to ESLint and Prettier. Biome provides consistent code style with minimal configuration.
+
+**[GitHub Actions](https://github.com/features/actions)** — automates CI/CD workflows. It runs tests, checks formatting, and deploys to Cloudflare on every push. The tight GitHub integration makes it easy to enforce quality gates on pull requests.
+
+**[Vitest](https://vitest.dev/)** — runs unit and integration tests. It's built on Vite, so it shares the same configuration and transformation pipeline. Tests run fast with native ES modules support and excellent watch mode.
+
+**[Playwright](https://playwright.dev/)** — handles end-to-end testing. It can test across multiple browsers and provides reliable automation for complex user flows. Playwright's auto-waiting and debugging tools make tests easier to write and maintain.
+
+**[Shadcn](https://ui.shadcn.com/)** — provides accessible, customizable UI components. Unlike traditional component libraries, Shadcn copies component code directly into your project. This gives you full control over styling and behavior without dependency lock-in.
+
+**[Storybook](https://storybook.js.org/)** — documents and develops components in isolation. It provides a visual catalog of all UI components, making it easier to review designs and catch visual regressions.
