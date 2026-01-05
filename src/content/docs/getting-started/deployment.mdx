@@ -59,6 +59,12 @@ You can deploy manually or set up automated deployments through a GitHub Actions
          bunx wrangler secret put CLOUDFLARE_TURNSTILE_PUBLIC_KEY --env=production
          bunx wrangler secret put CLOUDFLARE_TURNSTILE_PUBLIC_KEY --env=preview
          ```
+         <Aside type="note">
+         - `OTP_SECRET` and `SESSION_COOKIE_SECRET` values can be generated with `bun -e "console.log(require('crypto').randomBytes(32).toString('hex'))"` command.
+         - `RESEND_API_KEY` value can be obtained from your [Resend account](https://resend.com/). Resend is used for sending emails.
+         - `POLAR_WEBHOOK_SECRET` value can be obtained from your [Polar account](https://polar.sh/). Polar is used for payments.
+         - `CLOUDFLARE_TURNSTILE_SECRET_KEY` and `CLOUDFLARE_TURNSTILE_PUBLIC_KEY` values can be obtained from your [Cloudflare account](https://dash.cloudflare.com/). Turnstile is used for captcha.
+         </Aside>
         <LinkButton href="https://pagezero.dev/#pricing">
           Get PowerUP
         </LinkButton>
