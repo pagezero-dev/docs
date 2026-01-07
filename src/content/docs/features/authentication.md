@@ -54,18 +54,31 @@ function MyComponent() {
 }
 ```
 
+## Logout
+
+Send a POST request to `/logout` to end the session:
+
+```tsx
+<Form method="post" action="/logout">
+  <button type="submit">Sign out</button>
+</Form>
+```
+
+## Session Details
+
+- **Duration:** 7 days
+- **OTP expiration:** 5 minutes
+- **Cookie:** `httpOnly`, `secure`, `sameSite: strict`
+
 ## Captcha (Optional)
 
 Enable [Cloudflare Turnstile](https://www.cloudflare.com/products/turnstile/) to protect against bots.
 
-**Setup:**
-
 1. Create a Turnstile widget in your Cloudflare dashboard
-2. Add environment variables:
+2. Configure `CLOUDFLARE_TURNSTILE_PUBLIC_KEY` and `CLOUDFLARE_TURNSTILE_SECRET_KEY`
 
-```
-CLOUDFLARE_TURNSTILE_PUBLIC_KEY=your_site_key
-CLOUDFLARE_TURNSTILE_SECRET_KEY=your_secret_key
-```
+The captcha appears automatically on the login page when configured.
 
-The captcha appears automatically on the login page when these keys are configured.
+## Setup
+
+Authentication requires `SESSION_COOKIE_SECRET` and `OTP_SECRET` environment variables. See [Deployment](/getting-started/deployment) for configuration details.
