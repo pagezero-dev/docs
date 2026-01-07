@@ -17,9 +17,7 @@ Built-in authentication using **OTP (One-Time Password)** via email. No third-pa
 
 Authentication requires `SESSION_COOKIE_SECRET` and `OTP_SECRET` environment variables. For local development, these are already configured in the `.env` file. For production, see [Deployment](/getting-started/deployment).
 
-**Captcha (optional):** 
-
-Enable [Cloudflare Turnstile](https://www.cloudflare.com/products/turnstile/) to protect against bots. Create a widget in your Cloudflare dashboard and configure `CLOUDFLARE_TURNSTILE_PUBLIC_KEY` and `CLOUDFLARE_TURNSTILE_SECRET_KEY`. The captcha appears automatically on the login page when configured. For local development, Turnstile always passes.
+**Captcha (optional):** Enable [Cloudflare Turnstile](https://www.cloudflare.com/products/turnstile/) to protect against bots. Create a widget in your Cloudflare dashboard, then configure `CLOUDFLARE_TURNSTILE_PUBLIC_KEY` in `wrangler.json` (under `vars`) and `CLOUDFLARE_TURNSTILE_SECRET_KEY` as a secret. The captcha appears automatically on the login page when configured. For local development, Turnstile always passes.
 
 ## Login & Logout
 

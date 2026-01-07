@@ -57,9 +57,9 @@ You can deploy manually or set up automated deployments through a GitHub Actions
          bunx wrangler secret put POLAR_WEBHOOK_SECRET --env=preview
          bunx wrangler secret put CLOUDFLARE_TURNSTILE_SECRET_KEY --env=production
          bunx wrangler secret put CLOUDFLARE_TURNSTILE_SECRET_KEY --env=preview
-         bunx wrangler secret put CLOUDFLARE_TURNSTILE_PUBLIC_KEY --env=production
-         bunx wrangler secret put CLOUDFLARE_TURNSTILE_PUBLIC_KEY --env=preview
          ```
+         Additionally, set `CLOUDFLARE_TURNSTILE_PUBLIC_KEY` in `wrangler.json` under `env.production.vars` and `env.preview.vars`.
+
          <Aside type="note">
          - `OTP_SECRET` and `SESSION_COOKIE_SECRET` values can be generated with `bun -e "console.log(require('crypto').randomBytes(32).toString('hex'))"` command.
          - `RESEND_API_KEY` value can be obtained from your [Resend account](https://resend.com/). Check [E-mail](/features/email) documentation for more details.
