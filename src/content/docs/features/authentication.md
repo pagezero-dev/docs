@@ -13,6 +13,13 @@ Built-in authentication using **OTP (One-Time Password)** via email. No third-pa
 1. User enters the code
 1. Session is created
 
+## Setup
+
+Authentication requires `SESSION_COOKIE_SECRET` and `OTP_SECRET` environment variables. For local development, these are already configured in the `.env` file. For production, see [Deployment](/getting-started/deployment).
+
+**Captcha (optional):** 
+
+Enable [Cloudflare Turnstile](https://www.cloudflare.com/products/turnstile/) to protect against bots. Create a widget in your Cloudflare dashboard and configure `CLOUDFLARE_TURNSTILE_PUBLIC_KEY` and `CLOUDFLARE_TURNSTILE_SECRET_KEY`. The captcha appears automatically on the login page when configured. For local development, Turnstile always passes.
 
 ## Login Page
 
@@ -73,15 +80,3 @@ Send a POST request to `/logout` to end the session:
 - **OTP expiration:** 5 minutes
 - **Cookie:** `httpOnly`, `secure`, `sameSite: strict`
 
-## Captcha (Optional)
-
-Enable [Cloudflare Turnstile](https://www.cloudflare.com/products/turnstile/) to protect against bots.
-
-1. Create a Turnstile widget in your Cloudflare dashboard
-2. Configure `CLOUDFLARE_TURNSTILE_PUBLIC_KEY` and `CLOUDFLARE_TURNSTILE_SECRET_KEY`
-
-The captcha appears automatically on the login page when configured.
-
-## Setup
-
-Authentication requires `SESSION_COOKIE_SECRET` and `OTP_SECRET` environment variables. See [Deployment](/getting-started/deployment) for configuration details.
