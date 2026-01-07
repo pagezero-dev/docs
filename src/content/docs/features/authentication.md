@@ -56,7 +56,7 @@ If not authenticated, the user is redirected to `/login` with a `redirectTo` par
 
 ## Accessing User Data
 
-Use the `useUser` hook to get the current user on the client:
+**On the client**, use the `useUser` hook:
 
 ```tsx
 import { useUser } from "@/user"
@@ -69,6 +69,19 @@ function MyComponent() {
   }
   
   return <p>Not signed in</p>
+}
+```
+
+**On the server**, use `requireUserId` and `getUserById`:
+
+```tsx
+import { requireUserId } from "@/auth"
+import { getUserById } from "@/user"
+
+export async function loader({ request, context: { db, session } }: Route.LoaderArgs) {
+  const userId = await requireUserId(request, session)
+  const user = await getUserById(db, userId)
+  // ...
 }
 ```
 
