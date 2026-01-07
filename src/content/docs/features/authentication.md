@@ -5,7 +5,7 @@ title: Authentication
 Built-in authentication using **OTP (One-Time Password)** via email. No third-party auth services required. No passwords to store or reset. Users don't need to remember credentials. Simple to implement, secure by design, and works for most applications.
 
 
-**How it works?**
+**How it works**
 
 1. User clicks on "Login" button
 1. User enters email on `/login`
@@ -31,7 +31,7 @@ The `/login` route handles the entire auth flow. It supports a `redirectTo` quer
 
 After successful authentication, the user is redirected to the specified URL.
 
-To sign out, POST request needs to be sent to `/logout`:
+To sign out, send a POST request to `/logout`:
 
 ```tsx
 <Form method="post" action="/logout">
@@ -77,4 +77,3 @@ function MyComponent() {
 - **Duration:** 7 days
 - **OTP expiration:** 5 minutes
 - **Cookie:** `httpOnly`, `secure`, `sameSite: strict`
-
