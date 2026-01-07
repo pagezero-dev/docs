@@ -21,7 +21,9 @@ Authentication requires `SESSION_COOKIE_SECRET` and `OTP_SECRET` environment var
 
 Enable [Cloudflare Turnstile](https://www.cloudflare.com/products/turnstile/) to protect against bots. Create a widget in your Cloudflare dashboard and configure `CLOUDFLARE_TURNSTILE_PUBLIC_KEY` and `CLOUDFLARE_TURNSTILE_SECRET_KEY`. The captcha appears automatically on the login page when configured. For local development, Turnstile always passes.
 
-## Login Page
+## Login & Logout
+
+Login and logout buttons are already included in the header (`apps/content/routes/layout.tsx`).
 
 The `/login` route handles the entire auth flow. It supports a `redirectTo` query parameter:
 
@@ -30,6 +32,14 @@ The `/login` route handles the entire auth flow. It supports a `redirectTo` quer
 ```
 
 After successful authentication, the user is redirected to the specified URL.
+
+To sign out, POST request needs to be sent to `/logout`:
+
+```tsx
+<Form method="post" action="/logout">
+  <button type="submit">Sign out</button>
+</Form>
+```
 
 ## Protecting Pages
 
@@ -62,16 +72,6 @@ function MyComponent() {
   
   return <p>Not signed in</p>
 }
-```
-
-## Logout
-
-Send a POST request to `/logout` to end the session:
-
-```tsx
-<Form method="post" action="/logout">
-  <button type="submit">Sign out</button>
-</Form>
 ```
 
 ## Session Details
