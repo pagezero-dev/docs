@@ -2,14 +2,17 @@
 title: Authentication
 ---
 
-Self-owned authentication using **OTP (One-Time Password)** via email. No third-party auth services required.
+Built-in authentication using **OTP (One-Time Password)** via email. No third-party auth services required. No passwords to store or reset. Users don't need to remember credentials. Simple to implement, secure by design, and works for most applications.
 
-## How It Works
 
+**How it works?**
+
+1. User clicks on "Login" button
 1. User enters email on `/login`
-2. System sends a 6-digit code to their email
-3. User enters the code
-4. Session is created
+1. System sends a 6-digit code to their email
+1. User enters the code
+1. Session is created
+
 
 ## Login Page
 
