@@ -4,7 +4,8 @@ description: Get up and running with PageZero in minutes
 sidebar:
   order: 1
 ---
-import { Steps, Aside, Tabs, TabItem, LinkButton, FileTree, Badge } from '@astrojs/starlight/components';
+import { Steps, Aside, Tabs, TabItem, FileTree, Badge } from '@astrojs/starlight/components';
+import PowerUpButtons from '@/components/powerup-buttons.astro';
 
 <Aside type="note" title="Prerequisites">
 Before getting started, make sure you have the following installed:
@@ -28,12 +29,7 @@ If you're not sure how to install Node.js or Bun, check out the [Node and Bun se
         ```sh
         bunx pagezero@latest init --powerup
         ```
-        <LinkButton href="https://pagezero.dev/#pricing">
-          Get PowerUP
-        </LinkButton>
-        <LinkButton href="https://pagezero.dev/#pricing" variant="secondary" icon="external">
-          Learn more
-        </LinkButton>
+        <PowerUpButtons />
       </TabItem>
    </Tabs>
 

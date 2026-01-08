@@ -1,18 +1,9 @@
 ---
 title: Authentication
 ---
-import { Aside, LinkButton } from '@astrojs/starlight/components';
+import PowerUpAside from '@/components/powerup-aside.astro';
 
-<Aside type="tip">
-  This feature is available only in the paid edition of PageZERO: **PowerUP**.
-
-  <LinkButton href="https://pagezero.dev/#pricing">
-    Get PowerUP
-  </LinkButton>
-  <LinkButton href="https://pagezero.dev/#pricing" variant="secondary" icon="external">
-    Learn more
-  </LinkButton>
-</Aside>
+<PowerUpAside />
 
 Built-in authentication using **OTP (One-Time Password)** via email. No third-party auth services required. No passwords to store or reset. Users don't need to remember credentials. Simple, secure by design, and works for most applications.
 

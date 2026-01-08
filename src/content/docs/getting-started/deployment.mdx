@@ -4,7 +4,8 @@ description: Learn how to deploy your PageZero application to production
 sidebar:
   order: 2
 ---
-import { Aside, Steps, Badge, Tabs, TabItem, LinkButton } from '@astrojs/starlight/components';
+import { Aside, Steps, Badge, Tabs, TabItem } from '@astrojs/starlight/components';
+import PowerUpButtons from '@/components/powerup-buttons.astro';
 
 PageZERO is built specifically for Cloudflare's infrastructure, leveraging Cloudflare Workers for compute and Cloudflare D1 for database storage. 
 
@@ -66,12 +67,7 @@ You can deploy manually or set up automated deployments through a GitHub Actions
          - `POLAR_WEBHOOK_SECRET` value can be obtained from your [Polar account](https://polar.sh/). Check [Payments](/features/payments) documentation for more details.
          - `CLOUDFLARE_TURNSTILE_SECRET_KEY` and `CLOUDFLARE_TURNSTILE_PUBLIC_KEY` values can be obtained from your [Cloudflare account](https://dash.cloudflare.com/). Check [Authentication](/features/authentication) documentation for more details.
          </Aside>
-        <LinkButton href="https://pagezero.dev/#pricing">
-          Get PowerUP
-        </LinkButton>
-        <LinkButton href="https://pagezero.dev/#pricing" variant="secondary" icon="external">
-          Learn more
-        </LinkButton>
+        <PowerUpButtons />
       </TabItem>
    </Tabs>
 
