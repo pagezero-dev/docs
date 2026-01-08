@@ -47,20 +47,39 @@ All functions are exported from `@/permissions`.
 | `grantUserRole(db, userId, roleName)` | Assigns a role to user |
 | `revokeUserRole(db, userId, roleName)` | Removes a role from user |
 
-**Examples**
+## Protecting Pages
 
-```ts
-// Protecting a route
+Use `requireUserPermissions` in your loader to restrict access by permission:
+
+```tsx
+import { requireUserId } from "@/auth"
 import { requireUserPermissions } from "@/permissions"
 
-export async function loader({ context }: Route.LoaderArgs) {
-  const userId = await requireAuth(context)
-  await requireUserPermissions(context.db, userId, ["viewPremiumContent"])
+export async function loader({ request, context: { db, session } }: Route.LoaderArgs) {
+  const userId = await requireUserId(request, session)
+  await requireUserPermissions(db, userId, ["viewPremiumContent"])
+  // User has permission, continue...
 }
+```
 
-// Conditional check
+Or check for a specific role:
+
+```tsx
+import { hasUserRole } from "@/permissions"
+
 const isElite = await hasUserRole(db, userId, "elite")
+```
 
-// Granting access
+## Granting & Revoking Access
+
+Assign or remove roles from users:
+
+```tsx
+import { grantUserRole, revokeUserRole } from "@/permissions"
+
+// After a purchase
 await grantUserRole(db, userId, "premium")
+
+// When subscription ends
+await revokeUserRole(db, userId, "premium")
 ```
