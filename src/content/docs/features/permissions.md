@@ -62,7 +62,20 @@ export async function loader({ request, context: { db, session } }: Route.Loader
 }
 ```
 
-Or check for a specific role:
+Or `requireUserRole` to restrict access by role:
+
+```tsx
+import { requireUserId } from "@/auth"
+import { requireUserRole } from "@/permissions"
+
+export async function loader({ request, context: { db, session } }: Route.LoaderArgs) {
+  const userId = await requireUserId(request, session)
+  await requireUserRole(db, userId, "elite")
+  // User has role, continue...
+}
+```
+
+For conditional checks without throwing:
 
 ```tsx
 import { hasUserRole } from "@/permissions"
