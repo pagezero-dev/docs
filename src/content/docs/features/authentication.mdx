@@ -31,6 +31,15 @@ Authentication requires `SESSION_COOKIE_SECRET` and `OTP_SECRET` environment var
 
 **Captcha (optional):** Enable [Cloudflare Turnstile](https://www.cloudflare.com/products/turnstile/) to protect against bots. The captcha appears automatically on the login page when configured. For local development it's already configured and Turnstile always passes. For production, [add a Turnstile widget](https://dash.cloudflare.com/?to=/:account/turnstile), then configure `CLOUDFLARE_TURNSTILE_PUBLIC_KEY` in `wrangler.json` (under `vars`) and `CLOUDFLARE_TURNSTILE_SECRET_KEY` as a secret as stated in [Cloudflare setup](/getting-started/deployment#cloudflare-setup).
 
+## API
+
+| Function | Module | Purpose |
+|----------|--------|---------|
+| `requireUserId(request, session)` | `@/auth` | Returns user ID or redirects to `/login` |
+| `getUserId(session)` | `@/user` | Returns user ID from session (no redirect) |
+| `getUserById(db, userId)` | `@/user` | Returns user record from database |
+| `useUser()` | `@/user` | Client-side hook to access current user |
+
 ## Login & Logout
 
 Login and logout buttons are already included in the header (`apps/content/routes/layout.tsx`).
