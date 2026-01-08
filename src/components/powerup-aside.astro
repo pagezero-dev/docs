@@ -1,14 +1,10 @@
 ---
-import { Aside, LinkButton } from '@astrojs/starlight/components';
+import { Aside } from '@astrojs/starlight/components';
+import PowerUpButtons from './powerup-buttons.astro';
 ---
 
 <Aside type="tip">
   This feature is available only in the paid edition of PageZERO: <strong>PowerUP</strong>.
 
-  <LinkButton href="https://pagezero.dev/#pricing">
-    Get PowerUP
-  </LinkButton>
-  <LinkButton href="https://pagezero.dev/#pricing" variant="secondary" icon="external">
-    Learn more
-  </LinkButton>
+  <PowerUpButtons />
 </Aside>
