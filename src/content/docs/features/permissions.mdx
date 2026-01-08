@@ -1,6 +1,18 @@
 ---
 title: Permissions
 ---
+import { Aside, LinkButton } from '@astrojs/starlight/components';
+
+<Aside type="tip">
+  This feature is available only in the paid edition of PageZERO: **PowerUP**.
+
+  <LinkButton href="https://pagezero.dev/#pricing">
+    Get PowerUP
+  </LinkButton>
+  <LinkButton href="https://pagezero.dev/#pricing" variant="secondary" icon="external">
+    Learn more
+  </LinkButton>
+</Aside>
 
 A simple RBAC (Role-Based Access Control) system with a twist: roles live in the database, while permissions are defined in config.
 
