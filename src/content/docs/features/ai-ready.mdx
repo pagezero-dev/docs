@@ -2,40 +2,38 @@
 title: AI Ready
 ---
 import PowerUpAside from '@/components/powerup-aside.astro';
-
-<PowerUpAside />
+import { FileTree } from '@astrojs/starlight/components';
 
 PageZERO is designed to work seamlessly with AI coding assistants like Cursor, Copilot, and Claude. The codebase includes specific structures and documentation that help AI agents understand, navigate, and modify code effectively.
 
-## AGENTS.md
+**Why This Matters**
 
-The project includes an `AGENTS.md` file at the root—a comprehensive guide written specifically for AI coding agents:
+Traditional codebases require AI agents to explore directories, infer conventions from scattered examples, and guess at patterns. PageZERO eliminates this guesswork:
 
-- **Project overview** — tech stack, architecture, and directory structure
-- **Coding conventions** — TypeScript patterns, file naming, component structure
-- **Step-by-step guides** — how to add features, components, and database tables
-- **Scripts reference** — common commands and their usage
-- **Key files** — where to find routes, config, schema, and other important files
+1. AI reads `AGENTS.md` for complete context
+2. Follows documented patterns with confidence
+3. Generates code that matches codebase style
 
-When an AI agent opens the project, it reads `AGENTS.md` and immediately understands how to write code that matches your codebase style.
+The result: faster iterations, fewer errors, and AI-assisted development that actually works.
 
 ## Predictable Structure
 
 The codebase follows a consistent, modular architecture:
 
-```
-├── apps/           # Feature modules (auth, payments, user, etc.)
-│   └── feature/
-│       ├── index.ts           # Public exports
-│       ├── components/        # Feature-specific components
-│       ├── routes/            # Route handlers
-│       └── db/                # Database schema (if needed)
-│
-├── packages/       # Shared, reusable code
-│   ├── ui/                    # UI component library
-│   ├── db/                    # Database utilities
-│   └── types/                 # Shared TypeScript types
-```
+<FileTree>
+
+- apps/ Feature modules (auth, payments, user, etc.)
+  - feature/
+    - index.ts Public exports
+    - components/ Feature-specific components
+    - routes/ Route handlers
+    - db/ Database schema (if needed)
+- packages/ Shared, reusable code
+  - ui/ UI component library
+  - db/ Database utilities
+  - types/ Shared TypeScript types
+
+</FileTree>
 
 Each feature module is self-contained. AI agents can add new features by following existing module patterns and find related code in predictable locations.
 
@@ -43,13 +41,15 @@ Each feature module is self-contained. AI agents can add new features by followi
 
 **Component structure.** Every UI component follows the same four-file pattern:
 
-```
-component-name/
-├── index.ts                    # Re-exports public API
-├── component-name.tsx          # Implementation
-├── component-name.test.tsx     # Unit tests
-└── component-name.stories.tsx  # Storybook stories
-```
+<FileTree>
+
+- component-name/
+  - index.ts Re-exports public API
+  - component-name.tsx Implementation
+  - component-name.test.tsx Unit tests
+  - component-name.stories.tsx Storybook stories
+
+</FileTree>
 
 **Code generation.** The built-in generator creates scaffolds that follow project conventions:
 
@@ -61,12 +61,16 @@ bun run generate component MyComponent packages/ui
 
 **Auto-formatting.** Biome normalizes all code automatically. AI-generated code gets formatted to match codebase style on save.
 
-## Why This Matters
+## AGENTS.md
 
-Traditional codebases require AI agents to explore directories, infer conventions from scattered examples, and guess at patterns. PageZERO eliminates this guesswork:
+<PowerUpAside />
 
-1. AI reads `AGENTS.md` for complete context
-2. Follows documented patterns with confidence
-3. Generates code that matches codebase style
+The project includes an `AGENTS.md` file at the root—a comprehensive guide written specifically for AI coding agents:
 
-The result: faster iterations, fewer errors, and AI-assisted development that actually works.
+- **Project overview** — tech stack, architecture, and directory structure
+- **Coding conventions** — TypeScript patterns, file naming, component structure
+- **Step-by-step guides** — how to add features, components, and database tables
+- **Scripts reference** — common commands and their usage
+- **Key files** — where to find routes, config, schema, and other important files
+
+When an AI agent opens the project, it reads `AGENTS.md` and immediately understands how to write code that matches your codebase style.
