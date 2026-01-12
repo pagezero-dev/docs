@@ -1,6 +1,121 @@
 ---
-title: E-mail
+title: Email
 ---
 import PowerUpAside from '@/components/powerup-aside.astro';
 
 <PowerUpAside />
+
+Email functionality powered by **[React Email](https://react.email/)** and **[Resend](https://resend.com/)**. Build beautiful, responsive email templates using React components and send them through Resend's reliable delivery infrastructure.
+
+**Key features**
+
+- React components for email templates
+- TailwindCSS styling support
+- Development mode (logs emails to console, no API key needed)
+- Pre-built templates for authentication and access management
+
+## Setup
+
+For local development, emails are logged to the console—no configuration needed.
+
+For production, you need a Resend API key:
+
+1. Create an account at [resend.com](https://resend.com/)
+2. Add and verify your domain
+3. Generate an API key
+4. Add `RESEND_API_KEY` as a secret in Cloudflare (see [Cloudflare setup](/getting-started/deployment#cloudflare-setup))
+
+Configure the sender address in `packages/config/index.ts`:
+
+```typescript
+email: {
+  from: "Your App <hello@yourdomain.com>",
+}
+```
+
+## API
+
+| Function | Module | Purpose |
+|----------|--------|---------|
+| `sendEmail(options)` | `@/email` | Low-level email sending |
+| `sendAuthOtpEmail({ to, otp, env })` | `@/email/templates.server` | Send OTP verification code |
+| `sendAccessGrantedEmail({ to, env, productName })` | `@/email/templates.server` | Notify user of granted access |
+| `sendAccessRevokedEmail({ to, env, productName })` | `@/email/templates.server` | Notify user of revoked access |
+| `sendAccessFailureEmail({ to, env })` | `@/email/templates.server` | Notify user of access failure |
+
+## Sending Emails
+
+Use the pre-built template functions for common scenarios:
+
+```typescript
+import { sendAuthOtpEmail } from "@/email/templates.server"
+
+await sendAuthOtpEmail({
+  to: "user@example.com",
+  otp: "123456",
+  env,
+})
+```
+
+For custom emails, use the low-level `sendEmail` function:
+
+```typescript
+import { sendEmail } from "@/email"
+import config from "@/config"
+import MyCustomEmail from "./templates/my-custom-email"
+
+await sendEmail({
+  from: config.email.from,
+  to: "user@example.com",
+  subject: "Welcome!",
+  react: <MyCustomEmail name="John" />,
+  resendApiKey: env.RESEND_API_KEY,
+})
+```
+
+## Creating Templates
+
+Email templates are React components located in `apps/email/templates/`. They use React Email components for cross-client compatibility.
+
+**Basic template structure:**
+
+```tsx
+import { Heading, Text } from "@react-email/components"
+import Layout from "./layout"
+
+interface WelcomeEmailProps {
+  name: string
+}
+
+export default function WelcomeEmail({ name }: WelcomeEmailProps) {
+  return (
+    <Layout>
+      <Heading as="h1">Welcome, {name}!</Heading>
+      <Text>Thanks for signing up.</Text>
+    </Layout>
+  )
+}
+```
+
+The `Layout` component provides consistent styling with:
+- TailwindCSS support
+- Custom fonts (Inter)
+- Footer with project name and website link
+
+## Built-in Templates
+
+| Template | File | Purpose |
+|----------|------|---------|
+| `AuthOtpEmail` | `auth-otp.tsx` | OTP verification code |
+| `AccessGrantedEmail` | `access.granted.tsx` | Purchase confirmation |
+| `AccessRevokedEmail` | `access.revoked.tsx` | Access revocation notice |
+| `AccessFailureEmail` | `access.failure.tsx` | Access failure notification |
+
+## Development Mode
+
+When `RESEND_API_KEY` is not set (local development), emails are:
+- Logged to the console with full content
+- Stored in memory for testing
+- Accessible via `GET /email/sent` endpoint (development only)
+
+This allows you to develop and test email flows without sending real emails.
