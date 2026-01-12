@@ -10,8 +10,9 @@ This hybrid approach keeps role assignments flexible (database) while keeping pe
 
 **How it works**
 
-```
-User → Roles (DB) → Permissions (Config)
+```mermaid
+flowchart LR
+    User --> Roles["Roles (DB)"] --> Permissions["Permissions (Config)"]
 ```
 
 - **Users** are assigned **roles** (stored in `user_roles` database table)
