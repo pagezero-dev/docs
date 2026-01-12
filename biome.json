@@ -50,11 +50,13 @@
       }
     },
     {
-      "includes": ["**/*.css"],
+      "includes": ["./src/styles/custom.css"],
       "linter": {
         "rules": {
-          "nursery": {
-            "noImportantInKeyframe": "off",
+          "complexity": {
+            "noImportantStyles": "off"
+          },
+          "style": {
             "noDescendingSpecificity": "off"
           }
         }
