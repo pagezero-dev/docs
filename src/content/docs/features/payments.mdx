@@ -4,3 +4,75 @@ title: Payments
 import PowerUpAside from '@/components/powerup-aside.astro';
 
 <PowerUpAside />
+
+Payment integration powered by **[Polar.sh](https://polar.sh/)**. Sell digital products, subscriptions, or one-time purchases. Payments are handled entirely by Polar—no Stripe setup, webhook complexity, or compliance headaches.
+
+**Key features**
+
+- One-time payments and subscriptions
+- Automatic role assignment on purchase
+- Email notifications for access changes
+- Ready-to-use checkout button component
+- Webhook handling for payment events
+
+## Setup
+
+1. Create an account at [polar.sh](https://polar.sh/)
+2. Create your products in the Polar dashboard
+3. Generate checkout links for each product
+4. Create a webhook endpoint pointing to `/payments/webhook` and enable these events: `order.paid`, `order.refunded`, `subscription.active`, `subscription.revoked`
+5. Add `POLAR_WEBHOOK_SECRET` as a secret in Cloudflare (see [Cloudflare setup](/getting-started/deployment#cloudflare-setup))
+
+Configure your products in `packages/config/index.ts`:
+
+```typescript
+payments: {
+  products: {
+    premium: {
+      name: "Premium",
+      userRoleToGrant: "premium",
+      polarProductId: {
+        preview: "your-preview-product-id",
+        production: "your-production-product-id",
+      },
+      checkoutLink: {
+        preview: "https://sandbox-api.polar.sh/v1/checkout-links/.../redirect",
+        production: "https://api.polar.sh/v1/checkout-links/.../redirect",
+      },
+    },
+  },
+}
+```
+
+Each product maps to a user role via `userRoleToGrant`. When a customer completes payment, they're automatically granted the corresponding role (see [permissions](/features/permissions)). The role is automatically revoked on refund or subscription cancellation.
+
+## CheckoutButton
+
+A styled button that links to the Polar checkout page. Automatically pre-fills the customer's email if they're logged in.
+
+```tsx
+import { CheckoutButton } from "@/payments/components/checkout-button"
+
+<CheckoutButton productId="premium">
+  Get Premium Access
+</CheckoutButton>
+```
+
+The `productId` must match a key in your `payments.products` config.
+
+## Purchase Flow
+
+1. User clicks a `CheckoutButton`
+2. User is redirected to Polar's hosted checkout
+3. After payment, Polar sends a webhook to `/payments/webhook`
+4. The webhook handler grants the user role and sends a confirmation email
+5. User is redirected to `/payments/success`
+
+**Webhook events handled:**
+
+| Event | Action |
+|-------|--------|
+| `order.paid` | Grant role, send access granted email |
+| `subscription.active` | Grant role, send access granted email |
+| `order.refunded` | Revoke role, send access revoked email |
+| `subscription.revoked` | Revoke role, send access revoked email |
