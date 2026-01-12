@@ -121,3 +121,32 @@
 .sl-markdown-content img[data-image-component] {
   border-radius: 0.625rem;
 }
+
+/* Mermaid diagram dark mode support */
+.sl-markdown-content svg.flowchart {
+  --mermaid-fg: var(--foreground);
+  --mermaid-bg: var(--muted);
+  --mermaid-border: var(--muted-foreground);
+
+  & .flowchart-link {
+    stroke: var(--mermaid-fg) !important;
+  }
+  & .marker {
+    fill: var(--mermaid-fg) !important;
+  }
+  & .nodeLabel {
+    color: var(--mermaid-fg) !important;
+  }
+  & .node rect,
+  & .node polygon {
+    fill: var(--mermaid-bg) !important;
+    stroke: var(--mermaid-border) !important;
+  }
+  & .cluster rect {
+    fill: var(--background) !important;
+    stroke: var(--mermaid-border) !important;
+  }
+  & .cluster-label .nodeLabel {
+    color: var(--mermaid-border) !important;
+  }
+}

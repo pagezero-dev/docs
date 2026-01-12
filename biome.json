@@ -48,6 +48,19 @@
           }
         }
       }
+    },
+    {
+      "includes": ["./src/styles/custom.css"],
+      "linter": {
+        "rules": {
+          "complexity": {
+            "noImportantStyles": "off"
+          },
+          "style": {
+            "noDescendingSpecificity": "off"
+          }
+        }
+      }
     }
   ]
 }
