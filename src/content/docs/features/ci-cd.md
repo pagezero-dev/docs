@@ -39,6 +39,8 @@ flowchart LR
 | `main` | Production | Production D1 | Your custom domain |
 | PR branches | Preview | Preview D1 | `*.workers.dev` |
 
+Draft PRs only run quality checks, type checks, and tests. Database migrations and deployments are skipped until the PR is marked as ready for review.
+
 ## Setup
 
 For setup instructions, see the [Automatic deployment](/getting-started/deployment#automatic) section in the deployment guide.
@@ -56,14 +58,16 @@ Once configured, users must authenticate before accessing preview URLs.
 
 ## Smoke Tests (optional)
 
-Smoke tests run against the deployed preview URL. If your preview environment is protected by Cloudflare Zero Trust (see above), you'll need to configure service authentication so the pipeline can access it:
+Smoke tests run against the deployed URL to verify the deployment succeeded. They only run when `CLOUDFLARE_ACCESS_CLIENT_ID` is configured in GitHub Actions.
+
+If your preview environment is protected by Cloudflare Zero Trust (see above), configure service authentication:
 
 1. Create a [Service Token](https://developers.cloudflare.com/cloudflare-one/identity/service-tokens/) in Cloudflare Zero Trust
 2. Add a [Service Auth policy](https://developers.cloudflare.com/cloudflare-one/policies/access/#service-auth) to your Access application
 3. Add `CLOUDFLARE_ACCESS_CLIENT_ID` as a GitHub Actions variable
 4. Add `CLOUDFLARE_ACCESS_CLIENT_SECRET` as a GitHub Actions secret
 
-The pipeline will use these credentials to authenticate smoke test requests against protected preview URLs.
+The pipeline uses these credentials to authenticate requests against protected URLs.
 
 ## Preview Database Reset
 
