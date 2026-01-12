@@ -13,7 +13,7 @@ PageZERO includes a pre-configured pipeline using **GitHub Actions** and **Cloud
 3. E2E tests verify the app works end-to-end
 4. Database migrations run automatically
 5. Code deploys to Cloudflare Workers
-6. Smoke tests verify the deployment succeeded
+6. Smoke tests verify the deployment succeeded (optional)
 
 **Pipeline Overview**
 
