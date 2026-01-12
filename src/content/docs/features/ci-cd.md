@@ -13,11 +13,7 @@ Automated deployment pipeline using **GitHub Actions** and **Cloudflare Workers*
 - Smoke tests after deployment
 - Database migrations in the pipeline
 
-## Setup
-
-For setup instructions, see the [Automatic deployment](/getting-started/deployment#automatic) section in the deployment guide.
-
-## Pipeline Overview
+**Pipeline Overview**
 
 ```mermaid
 flowchart LR
@@ -34,16 +30,16 @@ flowchart LR
     DP --> S[Smoke Tests]
 ```
 
-The first three jobs (quality, types, unit tests) run in parallel. E2E tests wait for them to pass, then migration, deployment, and smoke tests run sequentially.
-
-## Environments
+**Environments**
 
 | Branch | Environment | Database | URL |
 |--------|-------------|----------|-----|
 | `main` | Production | Production D1 | Your custom domain |
 | PR branches | Preview | Preview D1 | `*.workers.dev` |
 
-All PRs deploy to a shared preview environment with a separate database. This allows testing without affecting production data.
+## Setup
+
+For setup instructions, see the [Automatic deployment](/getting-started/deployment#automatic) section in the deployment guide.
 
 ## Preview Database Reset
 
