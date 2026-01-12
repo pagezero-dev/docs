@@ -48,6 +48,17 @@
           }
         }
       }
+    },
+    {
+      "includes": ["**/*.css"],
+      "linter": {
+        "rules": {
+          "nursery": {
+            "noImportantInKeyframe": "off",
+            "noDescendingSpecificity": "off"
+          }
+        }
+      }
     }
   ]
 }
