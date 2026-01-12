@@ -2,11 +2,19 @@
 
 import starlight from "@astrojs/starlight"
 import { defineConfig } from "astro/config"
+import rehypeMermaid from "rehype-mermaid"
 
 // https://astro.build/config
 export default defineConfig({
   server: {
     port: 3000,
+  },
+  markdown: {
+    syntaxHighlight: {
+      type: "shiki",
+      excludeLangs: ["mermaid"],
+    },
+    rehypePlugins: [rehypeMermaid],
   },
   integrations: [
     starlight({
