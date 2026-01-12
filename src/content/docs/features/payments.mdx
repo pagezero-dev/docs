@@ -20,7 +20,7 @@ Payment integration powered by **[Polar.sh](https://polar.sh/)**. Sell digital p
 1. Create an account at [polar.sh](https://polar.sh/)
 2. Create your products in the Polar dashboard
 3. Generate checkout links for each product
-4. Create a webhook endpoint pointing to `/payments/webhook`
+4. Create a webhook endpoint pointing to `/payments/webhook` and enable these events: `order.paid`, `order.refunded`, `subscription.active`, `subscription.revoked`
 5. Add `POLAR_WEBHOOK_SECRET` as a secret in Cloudflare (see [Cloudflare setup](/getting-started/deployment#cloudflare-setup))
 
 Configure your products in `packages/config/index.ts`:
