@@ -2,16 +2,18 @@
 title: CI / CD
 ---
 
-Automated deployment pipeline using **GitHub Actions** and **Cloudflare Workers**. Every push triggers quality checks, tests, and deployments—zero manual steps required.
+**CI/CD** (Continuous Integration / Continuous Deployment) automates testing and deployment of your code. When you push changes, the pipeline automatically runs quality checks, tests, and deploys to production—no manual steps required.
 
-**Key features**
+PageZERO includes a pre-configured pipeline using **GitHub Actions** and **Cloudflare Workers**.
 
-- Automatic deployments on every push to `main`
-- Preview environments for pull requests
-- Parallel quality, type, and unit test checks
-- E2E tests before deployment
-- Smoke tests after deployment
-- Database migrations in the pipeline
+**How it works**
+
+1. You push code to GitHub
+2. Pipeline runs linting, type checking, and unit tests in parallel
+3. E2E tests verify the app works end-to-end
+4. Database migrations run automatically
+5. Code deploys to Cloudflare Workers
+6. Smoke tests verify the deployment succeeded
 
 **Pipeline Overview**
 
