@@ -12,7 +12,7 @@ Payment integration powered by **[Polar.sh](https://polar.sh/)**. Sell digital p
 - One-time payments and subscriptions
 - Automatic role assignment on purchase
 - Email notifications for access changes
-- Ready-to-use checkout button and pricing components
+- Ready-to-use checkout button component
 - Webhook handling for payment events
 
 ## Setup
@@ -44,18 +44,9 @@ payments: {
 }
 ```
 
-Each product maps to a user role. When a customer completes payment, they're automatically granted the corresponding role.
+Each product maps to a user role via `userRoleToGrant`. When a customer completes payment, they're automatically granted the corresponding role (see [permissions](/features/permissions)). The role is automatically revoked on refund or subscription cancellation.
 
-## API
-
-| Function | Module | Purpose |
-|----------|--------|---------|
-| `onPaymentSuccess(event, context)` | `@/payments/handlers.server` | Handle successful payments |
-| `onPaymentRevoked(event, context)` | `@/payments/handlers.server` | Handle refunds and cancellations |
-
-## Components
-
-### CheckoutButton
+## CheckoutButton
 
 A styled button that links to the Polar checkout page. Automatically pre-fills the customer's email if they're logged in.
 
@@ -69,54 +60,7 @@ import { CheckoutButton } from "@/payments/components/checkout-button"
 
 The `productId` must match a key in your `payments.products` config.
 
-### Pricing
-
-A responsive pricing section with plan cards.
-
-```tsx
-import { Pricing } from "@/payments/components/pricing"
-import { CheckoutButton } from "@/payments/components/checkout-button"
-
-<Pricing>
-  <Pricing.Plan
-    name="Premium"
-    price="$29"
-    period="/month"
-    description="For individual creators"
-    features={[
-      "Feature one",
-      "Feature two",
-      "Feature three",
-    ]}
-    cta={
-      <CheckoutButton productId="premium" className="w-full">
-        Get Started
-      </CheckoutButton>
-    }
-  />
-  <Pricing.Plan
-    name="Elite"
-    price="$99"
-    period="/month"
-    description="For power users"
-    features={[
-      "Everything in Premium",
-      "Priority support",
-      "Early access",
-    ]}
-    popular
-    cta={
-      <CheckoutButton productId="elite" className="w-full">
-        Get Started
-      </CheckoutButton>
-    }
-  />
-</Pricing>
-```
-
-## How It Works
-
-**Purchase flow:**
+## Purchase Flow
 
 1. User clicks a `CheckoutButton`
 2. User is redirected to Polar's hosted checkout
@@ -132,36 +76,3 @@ import { CheckoutButton } from "@/payments/components/checkout-button"
 | `subscription.active` | Grant role, send access granted email |
 | `order.refunded` | Revoke role, send access revoked email |
 | `subscription.revoked` | Revoke role, send access revoked email |
-
-## Permissions Integration
-
-Payments integrate with the [permissions system](/features/permissions). When configuring a product, set `userRoleToGrant` to the role you want customers to receive:
-
-```typescript
-products: {
-  elite: {
-    name: "Elite",
-    userRoleToGrant: "elite", // Grants the "elite" role on purchase
-    // ...
-  },
-}
-```
-
-The role is automatically revoked on refund or subscription cancellation.
-
-## Routes
-
-| Route | Purpose |
-|-------|---------|
-| `/payments/webhook` | Receives webhook events from Polar |
-| `/payments/success` | Success page shown after checkout |
-
-## Testing
-
-In development, use Polar's sandbox environment:
-
-1. Set `preview` product IDs and checkout links from Polar sandbox
-2. Use test card numbers provided by Polar
-3. Verify webhooks are received and roles are assigned correctly
-
-For production, update the `production` values in your config with live product IDs and checkout links.
