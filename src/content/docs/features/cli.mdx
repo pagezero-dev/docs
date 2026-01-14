@@ -1,6 +1,8 @@
 ---
 title: CLI
 ---
+import { Tabs, TabItem, Aside } from '@astrojs/starlight/components';
+import PowerUpButtons from '@/components/powerup-buttons.astro';
 
 Command-line tool for scaffolding and upgrading PageZERO projects. Initialize new projects with a single command or upgrade existing ones to the latest version.
 
@@ -12,29 +14,25 @@ Command-line tool for scaffolding and upgrading PageZERO projects. Initialize ne
 - Upgrade existing projects
 - Support for both open-source and PowerUP editions
 
-## Installation
-
-The CLI is designed to be used via `bunx` without global installation:
-
-```bash
-bunx pagezero@latest <command>
-```
-
 ## Commands
 
 ### init
 
 Initialize a new PageZERO project:
 
-```bash
-bunx pagezero@latest init
-```
-
-For the PowerUP edition:
-
-```bash
-bunx pagezero@latest init --powerup
-```
+<Tabs>
+  <TabItem label="Open-source edition">
+  ```bash
+  bunx pagezero@latest init
+  ```
+  </TabItem>
+  <TabItem label="Paid edition">
+  ```bash
+  bunx pagezero@latest init --powerup
+  ```
+  <PowerUpButtons />
+  </TabItem>
+</Tabs>
 
 **What it does:**
 
@@ -54,17 +52,25 @@ bun dev
 
 ### upgrade
 
-Upgrade an existing PageZERO project to the latest version:
+Upgrade an existing PageZERO project to the latest version of PageZERO:
 
-```bash
-bunx pagezero@latest upgrade
-```
+<Tabs>
+  <TabItem label="Open-source edition">
+  ```bash
+  bunx pagezero@latest upgrade
+  ```
+  </TabItem>
+  <TabItem label="Paid edition">
+  ```bash
+  bunx pagezero@latest upgrade --powerup
+  ```
+  <PowerUpButtons />
+  </TabItem>
+</Tabs>
 
-For the PowerUP edition:
-
-```bash
-bunx pagezero@latest upgrade --powerup
-```
+<Aside type="caution">
+The upgrade command overwrites existing files. After upgrading, review the changes using `git diff` to ensure your customizations are preserved.
+</Aside>
 
 **Requirements:**
 
@@ -76,17 +82,3 @@ bunx pagezero@latest upgrade --powerup
 1. Downloads the latest PageZERO stack
 2. Copies new files to your project (excluding `.git`)
 3. Cleans up temporary files
-
-**Important:** The upgrade command overwrites existing files. After upgrading, review the changes using `git diff` to ensure your customizations are preserved.
-
-## Options
-
-| Option | Description |
-|--------|-------------|
-| `-p, --powerup` | Use PowerUP edition instead of open-source |
-| `-h, --help` | Display help information |
-
-## Requirements
-
-- **Bun**: Version 1.3 or higher
-- **rsync**: Required for the upgrade command (pre-installed on macOS and most Linux distributions)
