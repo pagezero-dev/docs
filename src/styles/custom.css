@@ -138,7 +138,9 @@
     color: var(--mermaid-fg) !important;
   }
   & .node rect,
-  & .node polygon {
+  & .node polygon,
+  & .node circle,
+  & .node path {
     fill: var(--mermaid-bg) !important;
     stroke: var(--mermaid-border) !important;
   }
