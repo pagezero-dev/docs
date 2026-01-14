@@ -2,6 +2,8 @@
 title: Storybook
 ---
 
+import { FileTree } from '@astrojs/starlight/components';
+
 Develop and document UI components in isolation with **[Storybook](https://storybook.js.org/)**. Pre-configured for React with TailwindCSS, dark mode, and automatic documentation.
 
 **Key features**
@@ -26,13 +28,15 @@ Opens Storybook at [localhost:6006](http://localhost:6006) where you can browse 
 
 Stories define the different states and variations of a component. They're co-located with their components:
 
-```
-component-name/
-├── component-name.tsx         # Component implementation
-├── component-name.stories.tsx # Storybook stories
-├── component-name.test.tsx    # Tests
-└── index.ts                   # Public exports
-```
+<FileTree>
+
+- component-name/
+  - component-name.tsx Component implementation
+  - component-name.stories.tsx Storybook stories
+  - component-name.test.tsx Tests
+  - index.ts Public exports
+
+</FileTree>
 
 **Basic story structure:**
 

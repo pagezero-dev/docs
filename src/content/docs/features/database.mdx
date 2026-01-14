@@ -2,6 +2,8 @@
 title: Database
 ---
 
+import { Steps, FileTree } from '@astrojs/starlight/components';
+
 Database integration with **[Cloudflare D1](https://developers.cloudflare.com/d1/)** (SQLite) and **[Drizzle ORM](https://orm.drizzle.team/)**. Pre-configured for local development, migrations, and production deployment.
 
 **Key features**
@@ -42,16 +44,17 @@ The `db` object is a Drizzle ORM instance with full TypeScript support.
 
 Database schemas are defined in feature modules and automatically aggregated:
 
-```
-apps/
-├── user/db/schema.ts        # User tables
-├── permissions/db/schema.ts # Permission tables
-└── payments/db/schema.ts    # Payment tables
+<FileTree>
 
-packages/db/
-├── schema.ts                # Auto-generated exports
-└── migrations/              # Generated SQL migrations
-```
+- apps/
+  - user/db/schema.ts User tables
+  - permissions/db/schema.ts Permission tables
+  - payments/db/schema.ts Payment tables
+- packages/db/
+  - schema.ts Auto-generated exports
+  - migrations/ Generated SQL migrations
+
+</FileTree>
 
 **Example schema:**
 
@@ -66,30 +69,34 @@ export const users = sqliteTable("users", {
 
 ## Adding a New Table
 
+<Steps>
+
 1. Create or update a schema file in your feature's `db/` folder:
 
-```tsx
-// apps/blog/db/schema.ts
-import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core"
+   ```tsx
+   // apps/blog/db/schema.ts
+   import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core"
 
-export const posts = sqliteTable("posts", {
-  id: integer("id").primaryKey(),
-  title: text("title").notNull(),
-  content: text("content"),
-})
-```
+   export const posts = sqliteTable("posts", {
+     id: integer("id").primaryKey(),
+     title: text("title").notNull(),
+     content: text("content"),
+   })
+   ```
 
-2. Generate a migration:
+1. Generate a migration:
 
-```bash
-bun run db:generate
-```
+   ```bash
+   bun run db:generate
+   ```
 
-3. Apply the migration locally:
+1. Apply the migration locally:
 
-```bash
-bun run db:migrate
-```
+   ```bash
+   bun run db:migrate
+   ```
+
+</Steps>
 
 The migration is automatically applied in CI/CD when you push your changes.
 
