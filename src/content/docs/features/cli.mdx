@@ -1,0 +1,82 @@
+---
+title: CLI
+---
+import { Tabs, TabItem, Aside } from '@astrojs/starlight/components';
+import PowerUpButtons from '@/components/powerup-buttons.astro';
+
+Command-line tool for scaffolding and upgrading PageZERO projects. Initialize new projects with a single command or upgrade existing ones to the latest version.
+
+**Usage**
+
+```bash
+bunx pagezero@latest <command>
+```
+
+## Commands
+
+### init
+
+Initialize a new PageZERO project:
+
+<Tabs>
+  <TabItem label="Open-source edition">
+  ```bash
+  bunx pagezero@latest init
+  ```
+  </TabItem>
+  <TabItem label="Paid edition">
+  ```bash
+  bunx pagezero@latest init --powerup
+  ```
+  <PowerUpButtons />
+  </TabItem>
+</Tabs>
+
+**What it does:**
+
+1. Prompts for your project name
+2. Clones the PageZERO repository
+3. Installs dependencies (`bun install`)
+4. Runs the setup script (`bun run setup`)
+5. Updates `wrangler.json` with your project name
+6. Initializes a fresh git repository with an initial commit
+
+After completion, you'll have a ready-to-run project:
+
+```bash
+cd <your-project-name>
+bun dev
+```
+
+### upgrade
+
+Upgrade an existing PageZERO project to the latest version of PageZERO:
+
+<Tabs>
+  <TabItem label="Open-source edition">
+  ```bash
+  bunx pagezero@latest upgrade
+  ```
+  </TabItem>
+  <TabItem label="Paid edition">
+  ```bash
+  bunx pagezero@latest upgrade --powerup
+  ```
+  <PowerUpButtons />
+  </TabItem>
+</Tabs>
+
+<Aside type="caution">
+The upgrade command overwrites existing files. After upgrading, review the changes using `git diff` to ensure your customizations are preserved.
+</Aside>
+
+**Requirements:**
+
+- Must be run from within a PageZERO project directory (requires `wrangler.json`)
+- Requires `rsync` to be installed on your system
+
+**How it works:**
+
+1. Downloads the latest PageZERO stack
+2. Copies new files to your project (excluding `.git`)
+3. Cleans up temporary files
