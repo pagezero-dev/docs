@@ -100,37 +100,6 @@ export const users = sqliteTable("users", {
 
 The migration is automatically applied in CI/CD when you push your changes.
 
-## Relationships
-
-Define relationships between tables using Drizzle's relations API:
-
-```tsx
-import { relations } from "drizzle-orm"
-import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core"
-
-export const users = sqliteTable("users", {
-  id: integer("id").primaryKey(),
-  email: text("email").notNull(),
-})
-
-export const posts = sqliteTable("posts", {
-  id: integer("id").primaryKey(),
-  authorId: integer("author_id").references(() => users.id),
-  title: text("title").notNull(),
-})
-
-export const usersRelations = relations(users, ({ many }) => ({
-  posts: many(posts),
-}))
-
-export const postsRelations = relations(posts, ({ one }) => ({
-  author: one(users, {
-    fields: [posts.authorId],
-    references: [users.id],
-  }),
-}))
-```
-
 ## Drizzle Studio
 
 Browse and edit your database visually:
@@ -146,15 +115,7 @@ Opens at [local.drizzle.studio](https://local.drizzle.studio) where you can:
 - Edit records directly
 - Explore relationships
 
-## Environments
-
-| Environment | Database | Command |
-|-------------|----------|---------|
-| Local | Local SQLite file | `bun run db:migrate` |
-| Preview | Preview D1 instance | Auto in CI/CD |
-| Production | Production D1 instance | Auto in CI/CD |
-
-Preview and production databases are separate instances. Migrations run automatically during deployment via the CI/CD pipeline.
+![Drizzle Studio](../../../assets/features/drizzle-studio.png)
 
 ## Seeding
 
