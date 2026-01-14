@@ -1,0 +1,145 @@
+---
+title: Database
+---
+
+import { Steps, FileTree } from '@astrojs/starlight/components';
+
+Database integration with **[Cloudflare D1](https://developers.cloudflare.com/d1/)** (SQLite) and **[Drizzle ORM](https://orm.drizzle.team/)**. Pre-configured for local development, migrations, and production deployment.
+
+**Key features**
+
+- SQLite database running on Cloudflare's edge
+- Type-safe queries with Drizzle ORM
+- Automatic migration generation
+- Visual database browser with Drizzle Studio
+- Separate databases for production and preview
+
+## Database Commands
+
+```bash
+bun run db:studio           # Open visual database browser
+bun run db:generate         # Generate migrations from schema changes
+bun run db:migrate          # Apply migrations locally
+bun run db:seed             # Seed database with sample data
+bun run db:setup            # Full setup (init + migrate + seed)
+```
+
+## Accessing the Database
+
+The database is available in route loaders and actions through the `context` object:
+
+```tsx
+import type { Route } from "@/types/route"
+import { users } from "@/db/schema"
+
+export async function loader({ context: { db } }: Route.LoaderArgs) {
+  const allUsers = await db.select().from(users).all()
+  return { users: allUsers }
+}
+```
+
+The `db` object is a Drizzle ORM instance with full TypeScript support.
+
+## Schema Definition
+
+Database schemas are defined in feature modules and automatically aggregated:
+
+<FileTree>
+
+- apps/
+  - user/db/schema.ts User tables
+  - permissions/db/schema.ts Permission tables
+  - payments/db/schema.ts Payment tables
+- packages/db/
+  - schema.ts Auto-generated exports
+  - migrations/ Generated SQL migrations
+
+</FileTree>
+
+**Example schema:**
+
+```tsx
+import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core"
+
+export const users = sqliteTable("users", {
+  id: integer("id").primaryKey(),
+  email: text("email").notNull(),
+})
+```
+
+## Adding a New Table
+
+<Steps>
+
+1. Create or update a schema file in your feature's `db/` folder:
+
+   ```tsx
+   // apps/blog/db/schema.ts
+   import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core"
+
+   export const posts = sqliteTable("posts", {
+     id: integer("id").primaryKey(),
+     title: text("title").notNull(),
+     content: text("content"),
+   })
+   ```
+
+1. Generate a migration:
+
+   ```bash
+   bun run db:generate
+   ```
+
+1. Apply the migration locally:
+
+   ```bash
+   bun run db:migrate
+   ```
+
+</Steps>
+
+The migration is automatically applied in CI/CD when you push your changes.
+
+## Drizzle Studio
+
+Browse and edit your database visually:
+
+```bash
+bun run db:studio
+```
+
+Opens at [local.drizzle.studio](https://local.drizzle.studio) where you can:
+
+- View all tables and their data
+- Run queries
+- Edit records directly
+- Explore relationships
+
+![Drizzle Studio](../../../assets/features/drizzle-studio.png)
+
+## Seeding
+
+Add test data to your database by editing the seed script:
+
+```tsx
+// packages/db/scripts/seed.ts
+import { users } from "../schema"
+import { getLocalOrRemoteDb } from "../utils"
+
+async function main() {
+  const db = getLocalOrRemoteDb()
+  console.log("🌱 Seeding database...")
+
+  await db.insert(users).values({ email: "test@example.com" })
+
+  console.log("✅ Seeding complete!")
+}
+
+main()
+```
+
+Run it locally:
+
+```bash
+bun run db:seed
+```
