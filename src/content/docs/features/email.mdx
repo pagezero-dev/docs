@@ -27,7 +27,7 @@ For production, you need a Resend API key:
 
 Configure the sender address in `packages/config/index.ts`:
 
-```typescript
+```ts
 email: {
   from: "Your App <hello@yourdomain.com>",
 }
@@ -47,7 +47,7 @@ email: {
 
 Use the pre-built template functions for common scenarios:
 
-```typescript
+```ts
 import { sendAuthOtpEmail } from "@/email/templates.server"
 
 await sendAuthOtpEmail({
@@ -59,7 +59,7 @@ await sendAuthOtpEmail({
 
 For custom emails, use the low-level `sendEmail` function:
 
-```typescript
+```ts
 import { sendEmail } from "@/email"
 import config from "@/config"
 import MyCustomEmail from "./templates/my-custom-email"
