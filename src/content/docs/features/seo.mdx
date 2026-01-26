@@ -1,0 +1,67 @@
+---
+title: SEO
+---
+
+import { FileTree } from '@astrojs/starlight/components';
+
+Built-in **SEO (Search Engine Optimization)** with centralized configuration. Manage your site's title, description, keywords, and canonical URL from a single config file.
+
+**Key features**
+
+- Centralized meta tag management
+- Page title and description
+- Keywords meta tag
+- Canonical URL for proper indexing
+
+**Why this matters?**
+
+Good SEO helps search engines understand and rank your content. Proper meta tags improve click-through rates from search results, while canonical URLs prevent duplicate content penalties.
+
+
+## Configuration
+
+Global SEO settings are defined in `packages/config/index.ts`:
+
+```ts
+const config: Config = {
+  core: {
+    websiteUrl: "https://www.example.com",
+    appTitle: "My App - A description of what it does",
+    appDescription: "A longer description for search engines",
+    appKeywords: ["keyword1", "keyword2", "keyword3"],
+  }
+}
+```
+
+| Property | Purpose | Required |
+|----------|---------|----------|
+| `websiteUrl` | Canonical URL for the site | Yes |
+| `appTitle` | Page title shown in browser tab and search results | Yes |
+| `appDescription` | Meta description for search engines | No |
+| `appKeywords` | Keywords meta tag (array of strings) | No |
+
+## Best Practices
+
+**Title:** Keep it under 60 characters. Include your brand name and a clear value proposition.
+
+**Description:** Write 150-160 characters describing your page content. This appears in search results.
+
+**Keywords:** While less important for modern SEO, include relevant terms that describe your content.
+
+## Per-Page SEO
+
+To override the global SEO settings for a specific page, use built-in `<title>` and `<meta>` elements directly in your page components. Since React 19, this is the recommended approach:
+
+```tsx
+export default function AboutPage() {
+  return (
+    <div>
+      <title>About Us - My App</title>
+      <meta name="description" content="Learn more about our team and mission" />
+      {/* Page content */}
+    </div>
+  )
+}
+```
+
+React 19 automatically hoists these elements to the document `<head>`, overriding the global config values for that page.
