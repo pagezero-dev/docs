@@ -76,3 +76,25 @@ The project includes an `AGENTS.md` file at the root—a comprehensive guide wri
 - **Key files** — where to find routes, config, schema, and other important files
 
 When an AI agent opens the project, it reads `AGENTS.md` and immediately understands how to write code that matches your codebase style.
+
+## Cursor Commands
+
+<PowerUpAside />
+
+The project includes useful custom Cursor commands in `.cursor/commands/` folder. These are reusable AI workflows for common tasks:
+
+| Command | Description |
+|---------|-------------|
+| `create-component` | Creates a new UI component with all four files (implementation, index, test, stories) following PageZERO conventions |
+| `change-theme` | Modifies the shadcn/ui theme by updating CSS custom properties in OKLCH color space |
+
+**How to use them:**
+
+1. In Cursor, open a new AI agent chat (⌘+Shift+L or Ctrl+Shift+L)
+2. Type: `/`
+3. Select the command you want to run
+4. Follow the prompts in the chat
+
+Each command guides the AI through a structured workflow - gathering requirements, following project conventions, and generating consistent code.
+
+![Cursor Commands](../../../assets/features/cursor-commands.png)
