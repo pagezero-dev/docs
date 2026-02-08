@@ -48,7 +48,7 @@ All functions are exported from `@/permissions`.
 |----------|---------|
 | `requireUserPermissions(db, userId, permissions)` | Throws 403 if user lacks **any** of the specified permissions |
 | `requireUserRole(db, userId, roleName)` | Throws 403 if user doesn't have the role |
-| `hasUserRole(db, userId, roleName)` | Returns `boolean` — use when you need to check without throwing |
+| `hasUserRole(db, userId, roleName)` | Returns `boolean` - use when you need to check without throwing |
 | `grantUserRole(db, userId, roleName)` | Assigns a role to user |
 | `revokeUserRole(db, userId, roleName)` | Removes a role from user |
 
