@@ -2,7 +2,7 @@
 title: Cloudflare
 ---
 
-PageZERO is built specifically for **[Cloudflare's](https://www.cloudflare.com/)** edge platform. Your application runs on Cloudflare Workers with data stored in Cloudflare D1—a fully integrated, serverless architecture that scales automatically.
+PageZERO is built specifically for **[Cloudflare's](https://www.cloudflare.com/)** edge platform. Your application runs on Cloudflare Workers with data stored in Cloudflare D1-a fully integrated, serverless architecture that scales automatically.
 
 **Key features**
 
@@ -40,6 +40,6 @@ flowchart TB
 
 **Simplicity:** No servers to provision, scale, or maintain. Cloudflare handles infrastructure automatically.
 
-**Cost:** The [free tier](https://developers.cloudflare.com/workers/platform/pricing/) includes 100,000 Worker requests/day and 5GB D1 storage—enough for most projects. You only pay when you scale.
+**Cost:** The [free tier](https://developers.cloudflare.com/workers/platform/pricing/) includes 100,000 Worker requests/day and 5GB D1 storage-enough for most projects. You only pay when you scale.
 
 **Integration:** Workers, D1, and Turnstile work together seamlessly. No complex configuration or third-party services needed for core functionality.

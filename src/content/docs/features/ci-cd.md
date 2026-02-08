@@ -2,7 +2,7 @@
 title: CI / CD
 ---
 
-**CI/CD** (Continuous Integration / Continuous Deployment) automates testing and deployment of your code. When you push changes, the pipeline automatically runs quality checks, tests, and deploys to production—no manual steps required.
+**CI/CD** (Continuous Integration / Continuous Deployment) automates testing and deployment of your code. When you push changes, the pipeline automatically runs quality checks, tests, and deploys to production-no manual steps required.
 
 PageZERO includes a pre-configured pipeline using **GitHub Actions** and **Cloudflare Workers**.
 
