@@ -26,13 +26,14 @@ bun run db:setup            # Full setup (init + migrate + seed)
 
 ## Accessing the Database
 
-The database is available in route loaders and actions through the `context` object:
+The database is available in route loaders and actions through the React Router context. Use `context.get(dbContext)` to access the Drizzle ORM instance:
 
 ```tsx
-import type { Route } from "@/types/route"
+import { dbContext } from "@/db/context"
 import { users } from "@/db/schema"
 
-export async function loader({ context: { db } }: Route.LoaderArgs) {
+export async function loader({ context }: Route.LoaderArgs) {
+  const db = context.get(dbContext)
   const allUsers = await db.select().from(users).all()
   return { users: allUsers }
 }

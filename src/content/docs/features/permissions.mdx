@@ -57,10 +57,14 @@ All functions are exported from `@/permissions`.
 Use `requireUserPermissions` in your loader to restrict access by permission:
 
 ```tsx
+import { authContext } from "@/auth/context"
+import { dbContext } from "@/db/context"
 import { requireUserId } from "@/auth"
 import { requireUserPermissions } from "@/permissions"
 
-export async function loader({ request, context: { db, session } }: Route.LoaderArgs) {
+export async function loader({ request, context }: Route.LoaderArgs) {
+  const db = context.get(dbContext)
+  const { session } = context.get(authContext)
   const userId = await requireUserId(request, session)
   await requireUserPermissions(db, userId, ["viewPremiumContent"])
   // User has permission, continue...
@@ -70,10 +74,14 @@ export async function loader({ request, context: { db, session } }: Route.Loader
 Or `requireUserRole` to restrict access by role:
 
 ```tsx
+import { authContext } from "@/auth/context"
+import { dbContext } from "@/db/context"
 import { requireUserId } from "@/auth"
 import { requireUserRole } from "@/permissions"
 
-export async function loader({ request, context: { db, session } }: Route.LoaderArgs) {
+export async function loader({ request, context }: Route.LoaderArgs) {
+  const db = context.get(dbContext)
+  const { session } = context.get(authContext)
   const userId = await requireUserId(request, session)
   await requireUserRole(db, userId, "elite")
   // User has role, continue...
