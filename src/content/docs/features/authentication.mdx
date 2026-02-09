@@ -56,9 +56,11 @@ To sign out, send a POST request to `/logout`:
 Use `requireUserId` in your loader to restrict access:
 
 ```tsx
+import { authContext } from "@/auth/context"
 import { requireUserId } from "@/auth"
 
-export async function loader({ request, context: { session } }: Route.LoaderArgs) {
+export async function loader({ request, context }: Route.LoaderArgs) {
+  const { session } = context.get(authContext)
   const userId = await requireUserId(request, session)
   // User is authenticated, continue...
 }
@@ -87,10 +89,14 @@ function MyComponent() {
 **On the server**, use `requireUserId` and `getUserById`:
 
 ```tsx
+import { authContext } from "@/auth/context"
+import { dbContext } from "@/db/context"
 import { requireUserId } from "@/auth"
 import { getUserById } from "@/user"
 
-export async function loader({ request, context: { db, session } }: Route.LoaderArgs) {
+export async function loader({ request, context }: Route.LoaderArgs) {
+  const db = context.get(dbContext)
+  const { session } = context.get(authContext)
   const userId = await requireUserId(request, session)
   const user = await getUserById(db, userId)
   // ...
