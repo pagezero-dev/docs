@@ -77,24 +77,20 @@ The project includes an `AGENTS.md` file at the root-a comprehensive guide writt
 
 When an AI agent opens the project, it reads `AGENTS.md` and immediately understands how to write code that matches your codebase style.
 
-## Cursor Commands
+## Agent Skills
 
 <PowerUpAside />
 
-The project includes useful custom Cursor commands in `.cursor/commands/` folder. These are reusable AI workflows for common tasks:
+The project ships [Agent Skills](https://cursor.com/docs/context/skills) under `.agents/skills/`. Each skill is a folder containing a `SKILL.md` file with instructions the AI applies when the task matches the skill’s description (or when you ask for that workflow explicitly).
 
-| Command | Description |
-|---------|-------------|
+| Skill | Description |
+|-------|-------------|
 | `create-component` | Creates a new UI component with all four files (implementation, index, test, stories) following PageZERO conventions |
 | `change-theme` | Modifies the shadcn/ui theme by updating CSS custom properties in OKLCH color space |
 
 **How to use them:**
 
-1. In Cursor, open a new AI agent chat (⌘+Shift+L or Ctrl+Shift+L)
-2. Type: `/`
-3. Select the command you want to run
-4. Follow the prompts in the chat
+- **Ask in plain language.** Say what you want to do—for example, scaffold a button in `packages/ui`, or adjust primary colors in light and dark mode. Cursor loads project skills when the workspace opens; the agent picks up a skill when your request matches its description.
+- **Invoke by name.** In Agent chat, type `/`, then search for the skill (e.g. `/create-component`) to apply that workflow explicitly.
 
-Each command guides the AI through a structured workflow - gathering requirements, following project conventions, and generating consistent code.
-
-![Cursor Commands](../../../assets/features/cursor-commands.png)
+Skills encode the same structured workflows as before-gathering requirements, following conventions, and generating consistent output.
