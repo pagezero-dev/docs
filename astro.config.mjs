@@ -38,6 +38,14 @@ export default defineConfig({
       ],
       head: [
         {
+          tag: "link",
+          attrs: {
+            rel: "icon",
+            href: "/favicon.ico",
+            sizes: "any",
+          },
+        },
+        {
           tag: "script",
           content: `if (!localStorage.getItem('starlight-theme')) { localStorage.setItem('starlight-theme', 'dark'); }`,
         },
