@@ -36,6 +36,12 @@ export default defineConfig({
           href: "https://x.com/pawelgalazka",
         },
       ],
+      head: [
+        {
+          tag: "script",
+          content: `if (!localStorage.getItem('starlight-theme')) { localStorage.setItem('starlight-theme', 'dark'); }`,
+        },
+      ],
       customCss: ["./src/styles/fonts.css", "./src/styles/custom.css"],
       sidebar: [
         {
