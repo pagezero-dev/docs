@@ -2,7 +2,6 @@
 title: CLI
 ---
 import { Tabs, TabItem, Aside } from '@astrojs/starlight/components';
-import PowerUpButtons from '@/components/powerup-buttons.astro';
 
 Command-line tool for scaffolding and upgrading PageZERO projects. Initialize new projects with a single command or upgrade existing ones to the latest version.
 
@@ -18,19 +17,9 @@ bunx pagezero@latest <command>
 
 Initialize a new PageZERO project:
 
-<Tabs>
-  <TabItem label="Open-source edition">
-  ```bash
-  bunx pagezero@latest init
-  ```
-  </TabItem>
-  <TabItem label="Paid edition">
-  ```bash
-  bunx pagezero@latest init --powerup
-  ```
-  <PowerUpButtons />
-  </TabItem>
-</Tabs>
+```bash
+bunx pagezero@latest init
+```
 
 **What it does:**
 
@@ -52,19 +41,9 @@ bun dev
 
 Upgrade an existing PageZERO project to the latest version of PageZERO:
 
-<Tabs>
-  <TabItem label="Open-source edition">
-  ```bash
-  bunx pagezero@latest upgrade
-  ```
-  </TabItem>
-  <TabItem label="Paid edition">
-  ```bash
-  bunx pagezero@latest upgrade --powerup
-  ```
-  <PowerUpButtons />
-  </TabItem>
-</Tabs>
+```bash
+bunx pagezero@latest upgrade
+```
 
 <Aside type="caution">
 The upgrade command overwrites existing files. After upgrading, review the changes using `git diff` to ensure your customizations are preserved.

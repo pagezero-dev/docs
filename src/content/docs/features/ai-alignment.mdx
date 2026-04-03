@@ -1,7 +1,6 @@
 ---
 title: AI-alignment
 ---
-import PowerUpAside from '@/components/powerup-aside.astro';
 import { FileTree } from '@astrojs/starlight/components';
 
 PageZERO architecture is designed from the ground up for AI-assisted development. Every structure, pattern, and convention exists to help AI coding assistants like Cursor, Copilot, and Claude understand, navigate, and modify code effectively.
@@ -65,8 +64,6 @@ bun run generate component MyComponent packages/ui
 
 ## AGENTS.md
 
-<PowerUpAside />
-
 The project includes an `AGENTS.md` file at the root-a comprehensive guide written specifically for AI coding agents:
 
 - **Project overview** - tech stack, architecture, and directory structure
@@ -78,8 +75,6 @@ The project includes an `AGENTS.md` file at the root-a comprehensive guide writt
 When an AI agent opens the project, it reads `AGENTS.md` and immediately understands how to write code that matches your codebase style.
 
 ## Agent Skills
-
-<PowerUpAside />
 
 The project ships [Agent Skills](https://cursor.com/docs/context/skills) under `.agents/skills/`. Each skill is a folder containing a `SKILL.md` file with instructions the AI applies when the task matches the skill’s description (or when you ask for that workflow explicitly).
 

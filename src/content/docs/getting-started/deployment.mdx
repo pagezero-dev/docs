@@ -5,7 +5,6 @@ sidebar:
   order: 2
 ---
 import { Aside, Steps, Badge, Tabs, TabItem } from '@astrojs/starlight/components';
-import PowerUpButtons from '@/components/powerup-buttons.astro';
 
 PageZERO is built specifically for Cloudflare's infrastructure, leveraging Cloudflare Workers for compute and Cloudflare D1 for database storage. 
 
@@ -41,35 +40,28 @@ You can deploy manually or set up automated deployments through a GitHub Actions
    ```
 
 1. Add the necessary secrets for your Cloudflare Workers:
-   <Tabs>
-      <TabItem label="Open-source edition">
-         _No secrets are needed for the open-source edition._
-      </TabItem>
-      <TabItem label="Paid edition">
-         The following secrets are needed to successfully setup [authentication](/features/authentication), [email delivery](/features/email) and [payments](/features/payments) services:
-         ```sh
-         bunx wrangler secret put OTP_SECRET --env=production
-         bunx wrangler secret put OTP_SECRET --env=preview
-         bunx wrangler secret put SESSION_COOKIE_SECRET --env=production
-         bunx wrangler secret put SESSION_COOKIE_SECRET --env=preview
-         bunx wrangler secret put RESEND_API_KEY --env=production
-         bunx wrangler secret put RESEND_API_KEY --env=preview
-         bunx wrangler secret put POLAR_WEBHOOK_SECRET --env=production
-         bunx wrangler secret put POLAR_WEBHOOK_SECRET --env=preview
-         bunx wrangler secret put CLOUDFLARE_TURNSTILE_SECRET_KEY --env=production
-         bunx wrangler secret put CLOUDFLARE_TURNSTILE_SECRET_KEY --env=preview
-         ```
-         Additionally, set `CLOUDFLARE_TURNSTILE_PUBLIC_KEY` in `wrangler.json` under `env.production.vars` and `env.preview.vars`.
 
-         <Aside type="note">
-         - `OTP_SECRET` and `SESSION_COOKIE_SECRET` values can be generated with `bun -e "console.log(require('crypto').randomBytes(32).toString('hex'))"` command.
-         - `RESEND_API_KEY` value can be obtained from your [Resend account](https://resend.com/). Check [E-mail](/features/email) documentation for more details.
-         - `POLAR_WEBHOOK_SECRET` value can be obtained from your [Polar account](https://polar.sh/). Check [Payments](/features/payments) documentation for more details.
-         - `CLOUDFLARE_TURNSTILE_SECRET_KEY` and `CLOUDFLARE_TURNSTILE_PUBLIC_KEY` values can be obtained from your [Cloudflare account](https://dash.cloudflare.com/). Check [Authentication](/features/authentication) documentation for more details.
-         </Aside>
-        <PowerUpButtons />
-      </TabItem>
-   </Tabs>
+   The following secrets are needed to successfully setup [authentication](/features/authentication), [email delivery](/features/email) and [payments](/features/payments) services:
+   ```sh
+   bunx wrangler secret put OTP_SECRET --env=production
+   bunx wrangler secret put OTP_SECRET --env=preview
+   bunx wrangler secret put SESSION_COOKIE_SECRET --env=production
+   bunx wrangler secret put SESSION_COOKIE_SECRET --env=preview
+   bunx wrangler secret put RESEND_API_KEY --env=production
+   bunx wrangler secret put RESEND_API_KEY --env=preview
+   bunx wrangler secret put POLAR_WEBHOOK_SECRET --env=production
+   bunx wrangler secret put POLAR_WEBHOOK_SECRET --env=preview
+   bunx wrangler secret put CLOUDFLARE_TURNSTILE_SECRET_KEY --env=production
+   bunx wrangler secret put CLOUDFLARE_TURNSTILE_SECRET_KEY --env=preview
+   ```
+   Additionally, set `CLOUDFLARE_TURNSTILE_PUBLIC_KEY` in `wrangler.json` under `env.production.vars` and `env.preview.vars`.
+
+   <Aside type="note">
+   - `OTP_SECRET` and `SESSION_COOKIE_SECRET` values can be generated with `bun -e "console.log(require('crypto').randomBytes(32).toString('hex'))"` command.
+   - `RESEND_API_KEY` value can be obtained from your [Resend account](https://resend.com/). Check [E-mail](/features/email) documentation for more details.
+   - `POLAR_WEBHOOK_SECRET` value can be obtained from your [Polar account](https://polar.sh/). Check [Payments](/features/payments) documentation for more details.
+   - `CLOUDFLARE_TURNSTILE_SECRET_KEY` and `CLOUDFLARE_TURNSTILE_PUBLIC_KEY` values can be obtained from your [Cloudflare account](https://dash.cloudflare.com/). Check [Authentication](/features/authentication) documentation for more details.
+   </Aside>
 
 </Steps>
 
