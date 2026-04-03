@@ -20,7 +20,7 @@ export default defineConfig({
   integrations: [
     starlight({
       title: "PageZERO Docs",
-      description: "A web app stack engineered for tiny, fast-moving teams",
+      description: "Open source, Cloudflare-based web app foundation for the AI era.",
       logo: {
         src: "./src/assets/logo.svg",
         replacesTitle: true,
