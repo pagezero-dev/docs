@@ -4,8 +4,7 @@ description: Get up and running with PageZero in minutes
 sidebar:
   order: 1
 ---
-import { Steps, Aside, Tabs, TabItem, FileTree, Badge } from '@astrojs/starlight/components';
-import PowerUpButtons from '@/components/powerup-buttons.astro';
+import { Steps, Aside, FileTree, Badge } from '@astrojs/starlight/components';
 
 <Aside type="note" title="Prerequisites">
 Before getting started, make sure you have the following installed:
@@ -19,19 +18,9 @@ If you're not sure how to install Node.js or Bun, check out the [Node and Bun se
 <Steps>
 
 1. Initialize a new PageZERO project:
-   <Tabs>
-      <TabItem label="Open-source edition">
-      ```sh
-      bunx pagezero@latest init
-      ```
-      </TabItem>
-      <TabItem label="Paid edition">
-        ```sh
-        bunx pagezero@latest init --powerup
-        ```
-        <PowerUpButtons />
-      </TabItem>
-   </Tabs>
+   ```sh
+   bunx pagezero@latest init
+   ```
 
 2. Navigate to your project directory:
    ```sh
@@ -79,20 +68,20 @@ than workspaces. This allows for a simpler yet modular setup.
 
 - apps
   - core/
-  - content/ (extended in paid edition)
-  - auth/ (paid edition)
-  - payments/ (paid edition)
-  - permissions/ (paid edition)
-  - user/ (paid edition)
-  - email/ (paid edition)
+  - content/
+  - auth/
+  - payments/
+  - permissions/
+  - user/
+  - email/
 - packages/
   - db/
   - generate/
   - types/
-  - ui/ (extended in paid edition)
-  - config/ (paid edition)
-  - crypto/ (paid edition)
-  - ui-lite/ (paid edition)
+  - ui/
+  - config/
+  - crypto/
+  - ui-lite/
 - e2e/
 - workers/
 - package.json
@@ -107,7 +96,7 @@ A **package** is a module that owns utilities or UI components shared across mul
 
 - `bun run setup` - performs bun install, sets up basic env vars, database and Playwright browser drivers
 - `bun run dev` - boots the development server 
-- `bun run dev:email` - boots the email development server <Badge text="PowerUP" variant="note" />
+- `bun run dev:email` - boots the email development server
 - `bun run preview` - builds the app and boots the compiled version
 - `bun run test` - executes unit tests
 - `bun run test:watch` - run unit tests in watch mode
