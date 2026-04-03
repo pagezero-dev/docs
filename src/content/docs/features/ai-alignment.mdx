@@ -76,16 +76,18 @@ When an AI agent opens the project, it reads `AGENTS.md` and immediately underst
 
 ## Agent Skills
 
-The project ships [Agent Skills](https://cursor.com/docs/context/skills) under `.agents/skills/`. Each skill is a folder containing a `SKILL.md` file with instructions the AI applies when the task matches the skill’s description (or when you ask for that workflow explicitly).
+The repo ships [Agent Skills](https://cursor.com/docs/context/skills) under `.agents/skills/`. The folder is the only content under `.agents` today: each skill is a subdirectory with a `SKILL.md` file (YAML frontmatter plus instructions) that the AI applies when your task matches the skill’s description, or when you invoke the workflow explicitly.
 
 | Skill | Description |
 |-------|-------------|
-| `create-component` | Creates a new UI component with all four files (implementation, index, test, stories) following PageZERO conventions |
-| `change-theme` | Modifies the shadcn/ui theme by updating CSS custom properties in OKLCH color space |
+| `create-component` | Scaffolds a UI component with implementation, `index`, tests, and Storybook stories following PageZERO conventions (`packages/ui` or feature `apps/{feature}/components`) |
+| `change-theme` | Updates the shadcn/ui theme by editing OKLCH CSS custom properties in `apps/core/styles/tailwind.css` |
+| `create-pr` | Opens a GitHub pull request with conventional branch naming, creating a branch from `main`/`master` when needed, then pushing and creating the PR |
+| `merge-pr` | Squash-merges the **open** PR for the **current branch** after checks pass, then cleans up the branch (no PR number—the skill uses the branch context only) |
 
 **How to use them:**
 
-- **Ask in plain language.** Say what you want to do—for example, scaffold a button in `packages/ui`, or adjust primary colors in light and dark mode. Cursor loads project skills when the workspace opens; the agent picks up a skill when your request matches its description.
-- **Invoke by name.** In Agent chat, type `/`, then search for the skill (e.g. `/create-component`) to apply that workflow explicitly.
+- **Ask in plain language.** For example: add a component in `packages/ui`, tweak light/dark primary colors, open a PR for your changes, or merge the PR for the branch you have checked out. Cursor loads project skills when the workspace opens; the agent picks a skill when your request matches its description.
+- **Invoke by name.** In Agent chat, type `/`, then search for the skill (e.g. `/create-component`, `/merge-pr`) to run that workflow explicitly.
 
-Skills encode the same structured workflows as before-gathering requirements, following conventions, and generating consistent output.
+Skills encode structured workflows: gather requirements, follow repo conventions, and produce consistent output.
