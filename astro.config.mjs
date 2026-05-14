@@ -56,15 +56,15 @@ export default defineConfig({
       sidebar: [
         {
           label: "Getting Started",
-          autogenerate: { directory: "getting-started" },
+          items: [{ autogenerate: { directory: "getting-started" } }],
         },
         {
           label: "Features",
-          autogenerate: { directory: "features" },
+          items: [{ autogenerate: { directory: "features" } }],
         },
         {
           label: "Components",
-          autogenerate: { directory: "components" },
+          items: [{ autogenerate: { directory: "components" } }],
         },
       ],
     }),
