@@ -43,46 +43,44 @@ All functions are exported from `@/permissions`.
 
 | Function | Purpose |
 |----------|---------|
-| `requireUserPermissions(db, userId, permissions)` | Throws 403 if user lacks **any** of the specified permissions |
-| `requireUserRole(db, userId, roleName)` | Throws 403 if user doesn't have the role |
-| `hasUserRole(db, userId, roleName)` | Returns `boolean` - use when you need to check without throwing |
-| `grantUserRole(db, userId, roleName)` | Assigns a role to user |
-| `revokeUserRole(db, userId, roleName)` | Removes a role from user |
+| `requireUserPermissions({ data: { userId, permissions } })` | Server function - throws if user lacks **any** of the specified permissions |
+| `requireUserRole({ data: { userId, roleName } })` | Server function - throws if user doesn't have the role |
+| `hasUserRole(userId, roleName)` | Returns `boolean` - use when you need to check without throwing |
+| `grantUserRole(userId, roleName)` | Assigns a role to user |
+| `revokeUserRole(userId, roleName)` | Removes a role from user |
 
 ## Protecting Pages
 
-Use `requireUserPermissions` in your loader to restrict access by permission:
+Use `requireUserPermissions` in `beforeLoad` to restrict access by permission:
 
 ```tsx
-import { authContext } from "@/auth/context"
-import { dbContext } from "@/db/context"
+import { createFileRoute } from "@tanstack/react-router"
 import { requireUserId } from "@/auth"
 import { requireUserPermissions } from "@/permissions"
 
-export async function loader({ request, context }: Route.LoaderArgs) {
-  const db = context.get(dbContext)
-  const { session } = context.get(authContext)
-  const userId = await requireUserId(request, session)
-  await requireUserPermissions(db, userId, ["viewPremiumContent"])
-  // User has permission, continue...
-}
+export const Route = createFileRoute("/premium")({
+  beforeLoad: async () => {
+    const userId = await requireUserId()
+    await requireUserPermissions({ data: { userId, permissions: ["viewPremiumContent"] } })
+    // User has permission, continue...
+  },
+})
 ```
 
 Or `requireUserRole` to restrict access by role:
 
 ```tsx
-import { authContext } from "@/auth/context"
-import { dbContext } from "@/db/context"
+import { createFileRoute } from "@tanstack/react-router"
 import { requireUserId } from "@/auth"
 import { requireUserRole } from "@/permissions"
 
-export async function loader({ request, context }: Route.LoaderArgs) {
-  const db = context.get(dbContext)
-  const { session } = context.get(authContext)
-  const userId = await requireUserId(request, session)
-  await requireUserRole(db, userId, "elite")
-  // User has role, continue...
-}
+export const Route = createFileRoute("/elite")({
+  beforeLoad: async () => {
+    const userId = await requireUserId()
+    await requireUserRole({ data: { userId, roleName: "elite" } })
+    // User has role, continue...
+  },
+})
 ```
 
 For conditional checks without throwing:
@@ -90,7 +88,7 @@ For conditional checks without throwing:
 ```tsx
 import { hasUserRole } from "@/permissions"
 
-const isElite = await hasUserRole(db, userId, "elite")
+const isElite = await hasUserRole(userId, "elite")
 ```
 
 ## Granting & Revoking Access
@@ -101,8 +99,8 @@ Assign or remove roles from users:
 import { grantUserRole, revokeUserRole } from "@/permissions"
 
 // After a purchase
-await grantUserRole(db, userId, "premium")
+await grantUserRole(userId, "premium")
 
 // When subscription ends
-await revokeUserRole(db, userId, "premium")
+await revokeUserRole(userId, "premium")
 ```
