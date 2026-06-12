@@ -25,8 +25,9 @@ Authentication requires `SESSION_COOKIE_SECRET` and `OTP_SECRET` environment var
 |----------|--------|---------|
 | `requireUserId()` | `@/auth` | Server function - returns user ID or redirects to `/login` |
 | `getUserId(session)` | `@/user` | Returns user ID from session (no redirect) |
-| `getUserById(db, userId)` | `@/user` | Returns user record from database |
+| `getUserById(userId)` | `@/user` | Returns user record from database |
 | `useUser()` | `@/user` | Client-side hook to access current user |
+| `useLogout()` | `@/user` | Client-side hook that returns an async logout function |
 
 ## Login & Logout
 
@@ -40,12 +41,20 @@ The `/login` route handles the entire auth flow. It supports a `redirectTo` quer
 
 After successful authentication, the user is redirected to the specified URL.
 
-To sign out, send a POST request to `/logout`:
+To sign out, use the `useLogout` hook:
 
 ```tsx
-<form action="/logout" method="post">
-  <button type="submit">Sign out</button>
-</form>
+import { useLogout } from "@/user/use-logout"
+
+function LogoutButton() {
+  const logout = useLogout()
+
+  return (
+    <button type="button" onClick={() => void logout()}>
+      Sign out
+    </button>
+  )
+}
 ```
 
 ## Protecting Pages
