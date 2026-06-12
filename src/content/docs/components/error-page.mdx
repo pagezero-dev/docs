@@ -18,8 +18,11 @@ import { ErrorPage } from '@/core/components/error-page'
 
 ```js
 <ErrorPage
-  title="Lorem ipsum error"
-  error={new Error('Consectetur adipiscing elit')}
+  error={{
+    name: "Server Error",
+    message: "Failed to load data"
+  }}
+  details="@http://localhost:6006/apps/core/components/error-page/error-page.stories.tsx:16:21"
 />
 ```
 
