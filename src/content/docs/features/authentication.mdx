@@ -24,10 +24,10 @@ Authentication requires `SESSION_COOKIE_SECRET` and `OTP_SECRET` environment var
 | Function | Module | Purpose |
 |----------|--------|---------|
 | `requireUserId()` | `@/auth` | Server function - returns user ID or redirects to `/login` |
-| `getUserId(session)` | `@/user` | Returns user ID from session (no redirect) |
-| `getUserById(userId)` | `@/user` | Returns user record from database |
-| `useUser()` | `@/user` | Client-side hook to access current user |
-| `useLogout()` | `@/user` | Client-side hook that returns an async logout function |
+| `getUserId(session)` | `@/auth` | Returns user ID from session (no redirect) |
+| `getUserById(userId)` | `@/auth` | Returns user record from database |
+| `useUser()` | `@/auth` | Client-side hook to access current user |
+| `useLogout()` | `@/auth` | Client-side hook that returns an async logout function |
 
 ## Login & Logout
 
@@ -44,7 +44,7 @@ After successful authentication, the user is redirected to the specified URL.
 To sign out, use the `useLogout` hook:
 
 ```tsx
-import { useLogout } from "@/user/hooks"
+import { useLogout } from "@/auth/hooks"
 
 function LogoutButton() {
   const logout = useLogout()
@@ -79,7 +79,7 @@ If not authenticated, the user is redirected to `/login` with a `redirectTo` par
 **On the client**, use the `useUser` hook:
 
 ```tsx
-import { useUser } from "@/user"
+import { useUser } from "@/auth"
 
 function MyComponent() {
   const { data } = useUser()
@@ -97,7 +97,7 @@ function MyComponent() {
 ```tsx
 import { createServerFn } from "@tanstack/react-start"
 import { requireUserId } from "@/auth"
-import { getUserById } from "@/user"
+import { getUserById } from "@/auth"
 
 const getPageData = createServerFn({ method: "GET" }).handler(async () => {
   const userId = await requireUserId()
