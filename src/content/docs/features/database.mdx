@@ -26,7 +26,7 @@ bun run db:setup            # Full setup (init + migrate + seed)
 
 ## Accessing the Database
 
-Use `getDb()` from `@/db` to access the Drizzle ORM instance. Call it inside server functions or route loaders:
+Use `getDb()` from `@/db` to access the Drizzle ORM instance. Call it inside server functions:
 
 ```tsx
 import { createServerFn } from "@tanstack/react-start"
