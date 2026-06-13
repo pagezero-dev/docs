@@ -1,0 +1,113 @@
+---
+title: Forms
+---
+
+import { Steps } from '@astrojs/starlight/components';
+
+Type-safe form handling that ties together **[TanStack Start](https://tanstack.com/start)** server functions, **[TanStack Query](https://tanstack.com/query)** mutations, and **[Zod](https://zod.dev/)** validation. The `@/form` package lets you share a single schema between client and server, submit native `FormData`, and surface per-field validation errors with full TypeScript inference.
+
+**How it works**
+
+1. You write one Zod schema for your form
+1. The server validates `FormData` against it with `parseFormData`
+1. The client submits the form with `useFormAction`, using the same schema
+1. Validation errors come back mapped to each field, ready to display
+1. The schema is the single source of truth, so field names, types, and errors stay in sync
+
+## API
+
+| Export | Module | Purpose |
+|--------|--------|---------|
+| `parseFormData(data, schema)` | `@/form` | Server-side: validate `FormData` against a Zod schema, throwing a structured `FormError` on failure |
+| `useFormAction(serverFn, schema, options?)` | `@/form` | Client-side hook: wraps a server function in a mutation and exposes `onSubmit` plus typed `fields` |
+
+## Building a Form
+
+<Steps>
+
+1. Define the schema:
+
+   ```tsx
+   import { z } from "zod"
+
+   const contactFormSchema = z.object({
+     email: z.email(),
+     message: z.string().min(1),
+   })
+   ```
+
+1. Create a server function and validate the incoming `FormData` with `parseFormData`:
+
+   ```tsx
+   import { createServerFn } from "@tanstack/react-start"
+   import { parseFormData } from "@/form"
+
+   const contactFormAction = createServerFn({ method: "POST" })
+     .validator((data: FormData) => parseFormData(data, contactFormSchema))
+     .handler(async ({ data }) => {
+       // `data` is fully typed: { email: string; message: string }
+       await saveContactMessage(data)
+       return { success: "Thanks, we'll be in touch!" }
+     })
+   ```
+
+1. Build the form component with `useFormAction`:
+
+   ```tsx
+   import { useFormAction } from "@/form"
+
+   function ContactForm() {
+     const { data, error, isPending, onSubmit, fields } = useFormAction(
+       contactFormAction,
+       contactFormSchema,
+     )
+
+     return (
+       <form onSubmit={onSubmit} noValidate>
+         <input name={fields.email.name} type="email" />
+         {fields.email.errors.map((err) => (
+           <p key={err}>{err}</p>
+         ))}
+
+         <textarea name={fields.message.name} />
+         {fields.message.errors.map((err) => (
+           <p key={err}>{err}</p>
+         ))}
+
+         {error && <p>{error.message}</p>}
+         {data?.success && <p>{data.success}</p>}
+
+         <button type="submit" disabled={isPending}>
+           {isPending ? "Sending..." : "Send"}
+         </button>
+       </form>
+     )
+   }
+   ```
+
+</Steps>
+
+`onSubmit` calls `event.preventDefault()`, builds a `FormData` from the form element, and triggers the mutation-so you never have to manage individual input state.
+
+## Mutation Options
+
+The third argument to `useFormAction` is forwarded to TanStack Query's `useMutation`, so you can hook into the mutation lifecycle:
+
+```tsx
+import { useQueryClient } from "@tanstack/react-query"
+import { useFormAction } from "@/form"
+
+function ContactForm() {
+  const queryClient = useQueryClient()
+
+  const { onSubmit } = useFormAction(contactFormAction, contactFormSchema, {
+    onSuccess: () => {
+      void queryClient.invalidateQueries({ queryKey: ["messages"] })
+    },
+  })
+
+  // ...
+}
+```
+
+The returned object also spreads the full mutation result, giving you access to `isPending`, `isSuccess`, `reset`, `mutate`, and everything else from `useMutation`.

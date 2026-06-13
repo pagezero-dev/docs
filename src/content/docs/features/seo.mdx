@@ -50,18 +50,24 @@ const config: Config = {
 
 ## Per-Page SEO
 
-To override the global SEO settings for a specific page, use built-in `<title>` and `<meta>` elements directly in your page components. Since React 19, this is the recommended approach:
+To override the global SEO settings for a specific page, use the `head` option on your route. TanStack Start collects the `meta` and `links` returned here and renders them into the document `<head>`:
 
 ```tsx
-export default function AboutPage() {
-  return (
-    <div>
-      <title>About Us - My App</title>
-      <meta name="description" content="Learn more about our team and mission" />
-      {/* Page content */}
-    </div>
-  )
+import { createFileRoute } from "@tanstack/react-router"
+
+export const Route = createFileRoute("/about")({
+  head: () => ({
+    meta: [
+      { title: "About Us - My App" },
+      { name: "description", content: "Learn more about our team and mission" },
+    ],
+  }),
+  component: AboutPage,
+})
+
+function AboutPage() {
+  return <div>{/* Page content */}</div>
 }
 ```
 
-React 19 automatically hoists these elements to the document `<head>`, overriding the global config values for that page.
+The `meta` entries returned from a route override the matching global config values for that page. Make sure your root route renders `<HeadContent />` inside the document `<head>` so these tags are emitted.
