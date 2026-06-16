@@ -1,0 +1,109 @@
+---
+title: Blog
+---
+
+import { FileTree, Steps } from '@astrojs/starlight/components'
+
+A file-based **MDX blog** with dynamic routing, frontmatter validation, and styled typography. Posts live as `.mdx` files - drop one in and it appears on the blog index automatically.
+
+**Key features**
+
+- MDX authoring with embedded JSX support
+- Zod-validated frontmatter (title, description, date, cover image, author)
+- Automatic slug generation from filenames
+- Dynamic per-post routes with SEO meta tags
+- Sorted by date - newest posts first
+- Syntax-highlighted code blocks
+
+## Writing a Post
+
+<Steps>
+
+1. Create a new `.mdx` file in `apps/blog/content/`:
+
+   ```mdx
+   import cover from "../assets/my-cover.svg"
+
+   export const frontmatter = {
+     title: "My first post",
+     description: "A short summary shown on the blog index.",
+     keywords: ["keyword1", "keyword2"],
+     date: "2026-06-01",
+     imgSrc: cover,
+     author: {
+       name: "Your Name",
+       role: "Your Role",
+       imageSrc: "https://example.com/avatar.jpg",
+       url: "https://example.com",
+     },
+   }
+
+   Post content goes here. Standard Markdown plus JSX.
+   ```
+
+1. Add a cover image to `apps/blog/assets/` (SVG or any web image format).
+
+1. Visit `/blog` - the new post appears in the grid automatically.
+
+</Steps>
+
+The filename (without `.mdx`) becomes the URL slug. A file named `my-first-post.mdx` is served at `/blog/my-first-post`.
+
+## SEO
+
+Each post route sets the following meta tags automatically from frontmatter:
+
+- `<title>` - post title + site name
+- `<meta name="description">` - post description
+- `<meta name="keywords">` - post keywords (when provided)
+- `<meta property="og:image">` - post cover image
+
+## Frontmatter Schema
+
+Each post must export a `frontmatter` object matching this shape:
+
+```ts
+{
+  title: string           // Post heading
+  description: string     // Summary shown in the post card
+  keywords?: string[]     // Optional - added to <meta name="keywords">
+  date: string            // ISO date string, YYYY-MM-DD e.g. "2026-06-01"
+  imgSrc: string          // Cover image URL or imported asset
+  author: {
+    name: string
+    role?: string         // Optional job title
+    imageSrc?: string     // Optional avatar URL
+    url?: string          // Optional author profile URL
+  }
+}
+```
+
+Frontmatter is validated with Zod at load time. Missing required fields throw an error rather than silently producing a broken page.
+
+## MDX Content
+
+Post body content is rendered inside an `MDXProvider` that maps standard Markdown elements to design system components (from `@/ui/typography` and `@/ui/link`) automatically:
+
+| Markdown | Rendered as |
+|----------|-------------|
+| Headings `#` `##` `###` | Styled `Heading` component |
+| Paragraph | `P` component |
+| `**bold**`, `_italic_` | Standard HTML |
+| `` `inline code` `` | `InlineCode` component |
+| Fenced code blocks | Syntax-highlighted `pre`/`code` with `rehype-highlight` |
+| `> blockquote` | `Blockquote` component |
+| Unordered/ordered lists | `List` / styled `ol` |
+| `[links](url)` | `Link` component |
+| `---` horizontal rule | Styled `hr` |
+| Images | Rounded, bordered `img` |
+| Tables | `Table` / `TableHeader` / `TableRow` / `TableCell` components |
+
+You can also import and use any React component directly inside an `.mdx` file:
+
+```mdx
+import { Button } from "@/ui/button"
+
+Click the button below:
+
+<Button>Click me</Button>
+```
