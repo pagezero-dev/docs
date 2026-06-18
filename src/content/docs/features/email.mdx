@@ -40,8 +40,6 @@ email: {
 | `sendAccessRevokedEmail({ to, productName })` | `@/email/templates.server` | Notify user of revoked access |
 | `sendAccessFailureEmail({ to })` | `@/email/templates.server` | Notify user of access failure |
 
-`sendEmail` reads `RESEND_API_KEY` from the Cloudflare Workers environment automatically and returns `{ id: string }` (or `{ id: "development" }` in local development).
-
 ## Sending Emails
 
 Use the pre-built template functions for common scenarios:
