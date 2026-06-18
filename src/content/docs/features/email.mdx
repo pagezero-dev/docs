@@ -34,11 +34,13 @@ email: {
 
 | Function | Module | Purpose |
 |----------|--------|---------|
-| `sendEmail(options)` | `@/email` | Low-level email sending |
-| `sendAuthOtpEmail({ to, otp, env })` | `@/email/templates.server` | Send OTP verification code |
-| `sendAccessGrantedEmail({ to, env, productName })` | `@/email/templates.server` | Notify user of granted access |
-| `sendAccessRevokedEmail({ to, env, productName })` | `@/email/templates.server` | Notify user of revoked access |
-| `sendAccessFailureEmail({ to, env })` | `@/email/templates.server` | Notify user of access failure |
+| `sendEmail({ to, subject, react, from? })` | `@/email` | Low-level email sending |
+| `sendAuthOtpEmail({ to, otp })` | `@/email/templates.server` | Send OTP verification code |
+| `sendAccessGrantedEmail({ to, productName })` | `@/email/templates.server` | Notify user of granted access |
+| `sendAccessRevokedEmail({ to, productName })` | `@/email/templates.server` | Notify user of revoked access |
+| `sendAccessFailureEmail({ to })` | `@/email/templates.server` | Notify user of access failure |
+
+`sendEmail` reads `RESEND_API_KEY` from the Cloudflare Workers environment automatically and returns `{ id: string }` (or `{ id: "development" }` in local development).
 
 ## Sending Emails
 
@@ -50,7 +52,6 @@ import { sendAuthOtpEmail } from "@/email/templates.server"
 await sendAuthOtpEmail({
   to: "user@example.com",
   otp: "123456",
-  env,
 })
 ```
 
@@ -58,17 +59,16 @@ For custom emails, use the low-level `sendEmail` function:
 
 ```ts
 import { sendEmail } from "@/email"
-import config from "@/config"
 import MyCustomEmail from "./templates/my-custom-email"
 
 await sendEmail({
-  from: config.email.from,
   to: "user@example.com",
   subject: "Welcome!",
   react: <MyCustomEmail name="John" />,
-  resendApiKey: env.RESEND_API_KEY,
 })
 ```
+
+The `from` address defaults to `config.email.from`. Pass `from` only when you need a different sender.
 
 ## Creating Templates
 
@@ -121,6 +121,8 @@ The `Layout` component provides consistent styling with:
 When `RESEND_API_KEY` is not set (local development), emails are:
 - Logged to the console with full content
 - Stored in memory for testing
-- Accessible via `GET /email/sent` endpoint (development only)
+- Accessible via `GET /emails/sent` endpoint (development only)
+
+In production, `sendEmail` throws if `RESEND_API_KEY` is missing.
 
 This allows you to develop and test email flows without sending real emails.
