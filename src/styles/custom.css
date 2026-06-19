@@ -118,7 +118,7 @@
   --sl-color-black: color-mix(in oklch, var(--muted) 50%, var(--background));
 }
 
-.sl-markdown-content img[data-image-component] {
+.sl-markdown-content img {
   border-radius: 0.625rem;
 }
 
