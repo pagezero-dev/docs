@@ -103,23 +103,3 @@ export const Route = createFileRoute("/_brand-layout/")({
   component: Index,
 })
 ```
-
-## Routes
-
-| Route | File | Purpose |
-|-------|------|---------|
-| `/newsletter/confirm` | `apps/newsletter/routes/confirm.tsx` | Confirmation page after clicking email link |
-
-## RPC Functions
-
-| Function | Method | Purpose |
-|----------|--------|---------|
-| `subscribeFormAction` | `POST` | Validate email, run Turnstile check, send confirmation email |
-| `confirmFormAction` | `POST` | Verify signature and expiry, add contact to Resend |
-| `getConfirmPageData` | `GET` | Verify link before rendering the confirm page (returns 404 on invalid links) |
-
-## Email Template
-
-The confirmation email is defined in `apps/email/templates/newsletter-confirm.tsx`. It renders a **Confirm subscription** button that links to the signed confirmation URL.
-
-To customise the email copy or styling, edit that template file. See the [Email](/features/email) docs for the full templating guide.
