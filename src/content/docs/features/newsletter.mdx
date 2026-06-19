@@ -82,7 +82,7 @@ sequenceDiagram
     R-->>C: Success
 ```
 
-## NewsletterSignup Component
+## NewsletterSignup
 
 Drop the signup form anywhere in your app. It handles Turnstile, form state, loading, and success/error messages internally.
 
@@ -92,7 +92,7 @@ import { NewsletterSignup } from "@/newsletter/components/newsletter-signup"
 <NewsletterSignup cloudflareTurnstilePublicKey={cloudflareTurnstilePublicKey} />
 ```
 
-The `cloudflareTurnstilePublicKey` prop is optional. When omitted the Turnstile widget is not rendered and bot protection is skipped (server-side validation is also skipped when `CLOUDFLARE_TURNSTILE_SECRET_KEY` is absent).
+If `cloudflareTurnstilePublicKey` is not provided, bot protection is disabled.
 
 The component is already embedded on the home page. Its public key is loaded via a route loader:
 
