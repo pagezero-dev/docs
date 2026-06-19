@@ -50,6 +50,28 @@ Newsletter subscription powered by **[Resend](https://resend.com/)**. Collect em
 
 Turnstile bot protection is enabled automatically when `CLOUDFLARE_TURNSTILE_SECRET_KEY` is present (see [Cloudflare](/features/cloudflare)).
 
+## NewsletterSignup
+
+Drop the signup form anywhere in your app. It handles Turnstile, form state, loading, and success/error messages internally.
+
+```tsx
+import { NewsletterSignup } from "@/newsletter/components/newsletter-signup"
+
+<NewsletterSignup cloudflareTurnstilePublicKey={cloudflareTurnstilePublicKey} />
+```
+
+If `cloudflareTurnstilePublicKey` is not provided, bot protection is disabled.
+
+The component is already embedded on the home page. Its public key is loaded via a route loader:
+
+```tsx
+// apps/brand/routes/home.tsx
+export const Route = createFileRoute("/_brand-layout/")({
+  loader: () => getTurnstilePublicKey(),
+  component: Index,
+})
+```
+
 ## Subscription Flow
 
 1. User enters their email in the `NewsletterSignup` component
@@ -80,26 +102,4 @@ sequenceDiagram
     C->>R: confirmFormAction
     R->>E: Add contact + segment
     R-->>C: Success
-```
-
-## NewsletterSignup
-
-Drop the signup form anywhere in your app. It handles Turnstile, form state, loading, and success/error messages internally.
-
-```tsx
-import { NewsletterSignup } from "@/newsletter/components/newsletter-signup"
-
-<NewsletterSignup cloudflareTurnstilePublicKey={cloudflareTurnstilePublicKey} />
-```
-
-If `cloudflareTurnstilePublicKey` is not provided, bot protection is disabled.
-
-The component is already embedded on the home page. Its public key is loaded via a route loader:
-
-```tsx
-// apps/brand/routes/home.tsx
-export const Route = createFileRoute("/_brand-layout/")({
-  loader: () => getTurnstilePublicKey(),
-  component: Index,
-})
 ```
