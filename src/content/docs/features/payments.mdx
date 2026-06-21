@@ -2,6 +2,8 @@
 title: Payments
 ---
 
+import { Steps } from '@astrojs/starlight/components';
+
 Payment integration powered by **[Polar.sh](https://polar.sh/)**. Sell digital products, subscriptions, or one-time purchases. Payments are handled entirely by Polar-no Stripe setup, webhook complexity, or compliance headaches.
 
 **Key features**
@@ -14,32 +16,40 @@ Payment integration powered by **[Polar.sh](https://polar.sh/)**. Sell digital p
 
 ## Setup
 
-1. Create an account at [polar.sh](https://polar.sh/)
-2. Create your products in the Polar dashboard
-3. Generate checkout links for each product
-4. Create a webhook endpoint pointing to `/payments/webhook` and enable these events: `order.paid`, `order.refunded`, `subscription.active`, `subscription.revoked`
-5. Add `POLAR_WEBHOOK_SECRET` as a secret in Cloudflare (see [Cloudflare setup](/getting-started/deployment#cloudflare-setup))
+<Steps>
 
-Configure your products in `packages/config/index.ts`:
+1. **Create a Polar account** - sign up at [polar.sh](https://polar.sh/)
 
-```ts
-payments: {
-  products: {
-    premium: {
-      name: "Premium",
-      userRoleToGrant: "premium",
-      polarProductId: {
-        preview: "your-preview-product-id",
-        production: "your-production-product-id",
-      },
-      checkoutLink: {
-        preview: "https://sandbox-api.polar.sh/v1/checkout-links/.../redirect",
-        production: "https://api.polar.sh/v1/checkout-links/.../redirect",
-      },
-    },
-  },
-}
-```
+2. **Create products** - set up your products in the Polar dashboard
+
+3. **Generate checkout links** - create checkout links for each product
+
+4. **Configure webhooks** - create a webhook endpoint pointing to `/payments/webhook` and enable these events: `order.paid`, `order.refunded`, `subscription.active`, `subscription.revoked`
+
+5. **Add the secret** - add `POLAR_WEBHOOK_SECRET` as a secret in Cloudflare (see [Cloudflare setup](/getting-started/deployment#cloudflare-setup))
+
+6. **Configure your products** - add them to `packages/config/index.ts`:
+
+   ```ts
+   payments: {
+     products: {
+       premium: {
+         name: "Premium",
+         userRoleToGrant: "premium",
+         polarProductId: {
+           preview: "your-preview-product-id",
+           production: "your-production-product-id",
+         },
+         checkoutLink: {
+           preview: "https://sandbox-api.polar.sh/v1/checkout-links/.../redirect",
+           production: "https://api.polar.sh/v1/checkout-links/.../redirect",
+         },
+       },
+     },
+   }
+   ```
+
+</Steps>
 
 Each product maps to a user role via `userRoleToGrant`. When a customer completes payment, they're automatically granted the corresponding role (see [permissions](/features/permissions)). The role is automatically revoked on refund or subscription cancellation.
 
