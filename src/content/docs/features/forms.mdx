@@ -18,8 +18,8 @@ Type-safe form handling that ties together **[TanStack Start](https://tanstack.c
 
 | Export | Module | Purpose |
 |--------|--------|---------|
-| `parseFormData(data, schema)` | `@/form` | Server-side: validate `FormData` against a Zod schema, throwing a structured `FormError` on failure |
-| `useFormAction(serverFn, schema, options?)` | `@/form` | Client-side hook: wraps a server function in a mutation and exposes `onSubmit` plus typed `fields` |
+| `parseFormData(schema, data)` | `@/form` | Server-side: validate `FormData` against a Zod schema, throwing a structured `FormError` on failure |
+| `useFormAction(schema, serverFn, options?)` | `@/form` | Client-side hook: wraps a server function in a mutation and exposes `onSubmit` plus typed `fields` |
 
 ## Building a Form
 
@@ -43,7 +43,7 @@ Type-safe form handling that ties together **[TanStack Start](https://tanstack.c
    import { parseFormData } from "@/form"
 
    const contactFormAction = createServerFn({ method: "POST" })
-     .validator((data: FormData) => parseFormData(data, contactFormSchema))
+     .validator((data: FormData) => parseFormData(contactFormSchema, data))
      .handler(async ({ data }) => {
        // `data` is fully typed: { email: string; message: string }
        await saveContactMessage(data)
@@ -58,8 +58,8 @@ Type-safe form handling that ties together **[TanStack Start](https://tanstack.c
 
    function ContactForm() {
      const { data, error, isPending, onSubmit, fields } = useFormAction(
-       contactFormAction,
        contactFormSchema,
+       contactFormAction,
      )
 
      return (
@@ -100,7 +100,7 @@ import { useFormAction } from "@/form"
 function ContactForm() {
   const queryClient = useQueryClient()
 
-  const { onSubmit } = useFormAction(contactFormAction, contactFormSchema, {
+  const { onSubmit } = useFormAction(contactFormSchema, contactFormAction, {
     onSuccess: () => {
       void queryClient.invalidateQueries({ queryKey: ["messages"] })
     },
