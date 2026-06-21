@@ -22,12 +22,12 @@ Newsletter subscription powered by **[Resend](https://resend.com/)**. Collect em
 
 2. **Resend audience segment** - in the Resend dashboard, create an **Audience** and inside it create a **Segment**, then copy the segment ID.
 
-3. **Add the segment ID** - add `NEWSLETTER_SEGMENT_ID` to the `vars` section in `wrangler.json`. Set it at the top level for local development, and override it per environment if you want different segments for production and preview:
+3. **Add the segment ID** - add `NEWSLETTER_SEGMENT_ID` to the `vars` section in `wrangler.json`. Leave it empty at the top level for local development, and override it per environment for production and preview:
 
    ```json
    {
      "vars": {
-       "NEWSLETTER_SEGMENT_ID": "your-dev-segment-id"
+       "NEWSLETTER_SEGMENT_ID": ""
      },
      "env": {
        "production": {
