@@ -2,6 +2,8 @@
 title: Email
 ---
 
+import { Steps } from '@astrojs/starlight/components';
+
 Email functionality powered by **[React Email](https://react.email/)** and **[Resend](https://resend.com/)**. Build beautiful, responsive email templates using React components and send them through Resend's reliable delivery infrastructure.
 
 **Key features**
@@ -17,18 +19,25 @@ For local development, emails are logged to the console-no configuration needed.
 
 For production, you need a Resend API key:
 
-1. Create an account at [resend.com](https://resend.com/)
-2. Add and verify your domain
-3. Generate an API key
-4. Add `RESEND_API_KEY` as a secret in Cloudflare (see [Cloudflare setup](/getting-started/deployment#cloudflare-setup))
+<Steps>
 
-Configure the sender address in `packages/config/index.ts`:
+1. **Create a Resend account** - sign up at [resend.com](https://resend.com/)
 
-```ts
-email: {
-  from: "Your App <hello@yourdomain.com>",
-}
-```
+2. **Verify your domain** - add and verify your domain in the Resend dashboard
+
+3. **Generate an API key** - create an API key in the Resend dashboard
+
+4. **Add the secret** - add `RESEND_API_KEY` as a secret in Cloudflare (see [Cloudflare setup](/getting-started/deployment#cloudflare-setup))
+
+5. **Configure the sender address** - set `email.from` in `packages/config/index.ts`:
+
+   ```ts
+   email: {
+     from: "Your App <hello@yourdomain.com>",
+   }
+   ```
+
+</Steps>
 
 ## API
 
