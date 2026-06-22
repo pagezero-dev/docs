@@ -20,21 +20,20 @@ Database integration with **[Cloudflare D1](https://developers.cloudflare.com/d1
 bun run db:studio           # Open visual database browser
 bun run db:generate         # Generate migrations from schema changes
 bun run db:migrate          # Apply migrations locally
-bun run db:seed             # Seed database with sample data
-bun run db:setup            # Full setup (init + migrate + seed)
+bun run db:reset            # Delete all migrations and regenerate from scratch
 ```
 
 ## Accessing the Database
 
-Use `getDb()` from `@/db` to access the Drizzle ORM instance. Call it inside server functions:
+Use `getMainDb()` from `@/db/main` to access the Drizzle ORM instance. Call it inside server functions:
 
 ```tsx
 import { createServerFn } from "@tanstack/react-start"
-import { getDb } from "@/db"
-import { users } from "@/db/schema"
+import { getMainDb } from "@/db/main"
+import { users } from "@/db/main/schema"
 
 const listUsers = createServerFn({ method: "GET" }).handler(async () => {
-  const db = getDb()
+  const db = getMainDb()
   return db.select().from(users).all()
 })
 ```
@@ -43,7 +42,7 @@ The `db` object is a Drizzle ORM instance with full TypeScript support.
 
 ## Schema Definition
 
-Database schemas are defined in feature modules and automatically aggregated:
+Database schemas are defined in feature modules and then aggregated at `packages/db/main/`:
 
 <FileTree>
 
@@ -52,8 +51,9 @@ Database schemas are defined in feature modules and automatically aggregated:
   - permissions/db/schema.ts Permission tables
   - payments/db/schema.ts Payment tables
 - packages/db/
-  - schema.ts Auto-generated exports
-  - migrations/ Generated SQL migrations
+  - main/
+    - schema.ts Main database schema
+    - migrations/ Generated SQL migrations
 
 </FileTree>
 
@@ -99,7 +99,7 @@ export const users = sqliteTable("users", {
 
 </Steps>
 
-The migration is automatically applied in CI/CD when you push your changes.
+The migration is automatically applied in CI/CD via Wrangler when you push your changes.
 
 ## Drizzle Studio
 
@@ -118,29 +118,3 @@ Opens at [local.drizzle.studio](https://local.drizzle.studio) where you can:
 
 ![Drizzle Studio](../../../assets/features/drizzle-studio.png)
 
-## Seeding
-
-Add test data to your database by editing the seed script:
-
-```tsx
-// packages/db/scripts/seed.ts
-import { users } from "../schema"
-import { getLocalOrRemoteDb } from "../utils"
-
-async function main() {
-  const db = getLocalOrRemoteDb()
-  console.log("🌱 Seeding database...")
-
-  await db.insert(users).values({ email: "test@example.com" })
-
-  console.log("✅ Seeding complete!")
-}
-
-main()
-```
-
-Run it locally:
-
-```bash
-bun run db:seed
-```
