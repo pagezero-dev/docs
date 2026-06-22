@@ -85,6 +85,12 @@ export const users = sqliteTable("users", {
    })
    ```
 
+1. Export it from `packages/db/main/schema.ts`:
+
+   ```ts
+   export * from "@/blog/db/schema"
+   ```
+
 1. Generate a migration:
 
    ```bash
@@ -100,6 +106,64 @@ export const users = sqliteTable("users", {
 </Steps>
 
 The migration is automatically applied in CI/CD via Wrangler when you push your changes.
+
+## Multiple Databases
+
+The database package is structured to support multiple D1 databases. Each database configuration entry point lives under its own subdirectory in `packages/db/`, named after the binding (minus the `DB_` prefix and lowercased). The main database is at `packages/db/main/` - corresponding to the `DB_MAIN` binding - but additional databases can be added following the same pattern, e.g. `packages/db/secondary/` for a `DB_SECONDARY` binding.
+
+<Steps>
+
+1. Create the new database in Cloudflare:
+
+   ```sh
+   bunx wrangler d1 create <project-name>-secondary-development
+   ```
+
+1. Register the new binding in `wrangler.json` for every environment:
+
+   ```json
+   "d1_databases": [
+     { "binding": "DB_MAIN", ... },
+     {
+       "binding": "DB_SECONDARY",
+       "database_name": "<project-name>-secondary-development",
+       "database_id": "<DATABASE_ID>",
+       "migrations_dir": "./packages/db/secondary/migrations"
+     }
+   ]
+   ```
+
+1. Create the schema and db server files:
+
+   ```ts
+   // packages/db/secondary/schema.ts
+   import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core"
+
+   export const posts = sqliteTable("posts", {
+     id: integer("id").primaryKey(),
+     title: text("title").notNull(),
+   })
+   ```
+
+   ```ts
+   // packages/db/secondary/db.server.ts
+   import { env } from "cloudflare:workers"
+   import { drizzle } from "drizzle-orm/d1"
+   import * as schema from "./schema"
+
+   export function getSecondaryDb() {
+     return drizzle(env.DB_SECONDARY, { schema })
+   }
+   ```
+
+1. Generate and apply migrations for the new database:
+
+   ```sh
+   DB_BINDING=DB_SECONDARY bun run db:generate
+   DB_BINDING=DB_SECONDARY bun run db:migrate
+   ```
+
+</Steps>
 
 ## Drizzle Studio
 
