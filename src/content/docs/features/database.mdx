@@ -20,21 +20,20 @@ Database integration with **[Cloudflare D1](https://developers.cloudflare.com/d1
 bun run db:studio           # Open visual database browser
 bun run db:generate         # Generate migrations from schema changes
 bun run db:migrate          # Apply migrations locally
-bun run db:seed             # Seed database with sample data
-bun run db:setup            # Full setup (init + migrate + seed)
+bun run db:reset            # Delete all migrations and regenerate from scratch
 ```
 
 ## Accessing the Database
 
-Use `getDb()` from `@/db` to access the Drizzle ORM instance. Call it inside server functions:
+Use `getMainDb()` from `@/db/main` to access the Drizzle ORM instance. Call it inside server functions:
 
 ```tsx
 import { createServerFn } from "@tanstack/react-start"
-import { getDb } from "@/db"
-import { users } from "@/db/schema"
+import { getMainDb } from "@/db/main"
+import { users } from "@/db/main/schema"
 
 const listUsers = createServerFn({ method: "GET" }).handler(async () => {
-  const db = getDb()
+  const db = getMainDb()
   return db.select().from(users).all()
 })
 ```
@@ -43,7 +42,7 @@ The `db` object is a Drizzle ORM instance with full TypeScript support.
 
 ## Schema Definition
 
-Database schemas are defined in feature modules and automatically aggregated:
+Database schemas are defined in feature modules and then aggregated at `packages/db/main/`:
 
 <FileTree>
 
@@ -52,8 +51,9 @@ Database schemas are defined in feature modules and automatically aggregated:
   - permissions/db/schema.ts Permission tables
   - payments/db/schema.ts Payment tables
 - packages/db/
-  - schema.ts Auto-generated exports
-  - migrations/ Generated SQL migrations
+  - main/
+    - schema.ts Main database schema
+    - migrations/ Generated SQL migrations
 
 </FileTree>
 
@@ -85,6 +85,12 @@ export const users = sqliteTable("users", {
    })
    ```
 
+1. Export it from `packages/db/main/schema.ts`:
+
+   ```ts
+   export * from "@/blog/db/schema"
+   ```
+
 1. Generate a migration:
 
    ```bash
@@ -99,7 +105,65 @@ export const users = sqliteTable("users", {
 
 </Steps>
 
-The migration is automatically applied in CI/CD when you push your changes.
+The migration is automatically applied in CI/CD via Wrangler when you push your changes.
+
+## Multiple Databases
+
+The database package is structured to support multiple D1 databases. Each database configuration entry point lives under its own subdirectory in `packages/db/`, named after the binding (minus the `DB_` prefix and lowercased). The main database is at `packages/db/main/` - corresponding to the `DB_MAIN` binding - but additional databases can be added following the same pattern, e.g. `packages/db/secondary/` for a `DB_SECONDARY` binding.
+
+<Steps>
+
+1. Create the new database in Cloudflare:
+
+   ```sh
+   bunx wrangler d1 create <project-name>-secondary-development
+   ```
+
+1. Register the new binding in `wrangler.json` for every environment:
+
+   ```json
+   "d1_databases": [
+     { "binding": "DB_MAIN", ... },
+     {
+       "binding": "DB_SECONDARY",
+       "database_name": "<project-name>-secondary-development",
+       "database_id": "<DATABASE_ID>",
+       "migrations_dir": "./packages/db/secondary/migrations"
+     }
+   ]
+   ```
+
+1. Create the schema and db server files:
+
+   ```ts
+   // packages/db/secondary/schema.ts
+   import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core"
+
+   export const posts = sqliteTable("posts", {
+     id: integer("id").primaryKey(),
+     title: text("title").notNull(),
+   })
+   ```
+
+   ```ts
+   // packages/db/secondary/db.server.ts
+   import { env } from "cloudflare:workers"
+   import { drizzle } from "drizzle-orm/d1"
+   import * as schema from "./schema"
+
+   export function getSecondaryDb() {
+     return drizzle(env.DB_SECONDARY, { schema })
+   }
+   ```
+
+1. Generate and apply migrations for the new database:
+
+   ```sh
+   DB_BINDING=DB_SECONDARY bun run db:generate
+   DB_BINDING=DB_SECONDARY bun run db:migrate
+   ```
+
+</Steps>
 
 ## Drizzle Studio
 
@@ -118,29 +182,3 @@ Opens at [local.drizzle.studio](https://local.drizzle.studio) where you can:
 
 ![Drizzle Studio](../../../assets/features/drizzle-studio.png)
 
-## Seeding
-
-Add test data to your database by editing the seed script:
-
-```tsx
-// packages/db/scripts/seed.ts
-import { users } from "../schema"
-import { getLocalOrRemoteDb } from "../utils"
-
-async function main() {
-  const db = getLocalOrRemoteDb()
-  console.log("🌱 Seeding database...")
-
-  await db.insert(users).values({ email: "test@example.com" })
-
-  console.log("✅ Seeding complete!")
-}
-
-main()
-```
-
-Run it locally:
-
-```bash
-bun run db:seed
-```
