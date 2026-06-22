@@ -73,8 +73,8 @@ You can deploy manually or set up automated deployments through a GitHub Actions
 1. Perform Cloudflare D1 database migrations:
 
    ```sh
-   bun run db:migrate --env preview
-   bun run db:migrate --env production
+   bun run db:migrate --env preview --remote
+   bun run db:migrate --env production --remote
    ```
 
 1. Perform Cloudflare Workers deployments:
