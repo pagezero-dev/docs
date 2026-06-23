@@ -16,20 +16,20 @@ You can deploy manually or set up automated deployments through a GitHub Actions
 
 <Steps>
 
-1. If you don't have a Cloudflare account, create one at [https://dash.cloudflare.com/sign-up](https://dash.cloudflare.com/sign-up/).
+1. **Create a Cloudflare account** - sign up at [dash.cloudflare.com](https://dash.cloudflare.com/sign-up/) if you don't have one yet.
 
-1. In your project root directory, login to Cloudflare:
+1. **Login to Cloudflare** - in your project root directory, authenticate via the `wrangler` CLI:
 
    ```sh
    bunx wrangler login
    ```
 
-1. Reset your `wrangler.json` config:
+1. **Reset your `wrangler.json` config** - initialise the config for your project:
    ```sh
    bun setup:wrangler
    ```
 
-1. Deploy your app for _preview_ and _production_ environments:
+1. **Deploy your app** - deploy for _preview_ and _production_ environments:
    ```sh
    bun run deploy:preview
    ```
@@ -42,7 +42,7 @@ You can deploy manually or set up automated deployments through a GitHub Actions
    Wrangler automatically provisions resources defined in `wrangler.json` (such as D1 databases) on first deploy. No separate database creation step is needed. See [Automatic Provisioning](https://developers.cloudflare.com/workers/wrangler/configuration/#automatic-provisioning) for details.
    </Aside>
 
-1. Migrate your database for _preview_ and _production_ environments:
+1. **Migrate your database** - run migrations for _preview_ and _production_ environments:
    ```sh
    bun run db:migrate --env preview --remote
    ```
@@ -51,7 +51,7 @@ You can deploy manually or set up automated deployments through a GitHub Actions
    bun run db:migrate --env production --remote
    ```
 
-1. **Your app is now deployed! 🎉** - and ready to use with its core functionality
+1. **Your app is now ready! 🎉** - with its core functionality.
 
    To enable additional features such as authentication, email delivery, and payments, follow the setup sections in the [Authentication](/features/authentication#setup), [E-mail](/features/email#setup), and [Payments](/features/payments#setup) documentation.
 
@@ -69,17 +69,21 @@ Steps below require [GitHub CLI](https://cli.github.com/).
 </Aside>
 
 <Steps>
-1. Perform initial [Cloudflare setup](#cloudflare-setup) first to create D1 databases and Cloudflare Workers.
+1. **Complete the first deployment** - follow the [First deployment](#first-deployment) steps above to deploy your app and run database migrations.
 
-1.  Login through `gh auth login`
+1.  **Login to GitHub** - authenticate via the `gh` CLI:
 
-1.  Create a GitHub repo for the project and push all changes
+    ```sh
+    gh auth login
+    ```
+
+1.  **Create a GitHub repository** - create a private repo and push all changes:
 
     ```sh
     gh repo create <project-name> --private --source=. --remote=origin --push
     ```
 
-1.  Add the following repository variables:
+1.  **Add repository variable** - set your Cloudflare account ID:
 
     ```sh
     gh variable set CLOUDFLARE_ACCOUNT_ID --body "<your-cloudflare-account-id>"
@@ -88,10 +92,13 @@ Steps below require [GitHub CLI](https://cli.github.com/).
     `CLOUDFLARE_ACCOUNT_ID` value can be obtained through `bunx wrangler whoami` command.
     </Aside>
 
-1.  Add the following repository secret:
+1.  **Add repository secret** - set your Cloudflare API token:
 
     ```sh
     gh secret set CLOUDFLARE_API_TOKEN
+    ```
+
+    ```sh
     gh secret set CLOUDFLARE_API_TOKEN --app dependabot
     ```
 
@@ -102,11 +109,10 @@ Steps below require [GitHub CLI](https://cli.github.com/).
       The secret for Dependabot needs to be set separately; otherwise, Dependabot PRs will not perform preview deployments.
     </Aside>
 
+1.  **Done! 🎉**
+
+    Now let's test the pipeline. Create a PR in your GitHub repository. An action will be triggered in the "Actions" section. If the basic checks pass, the workflow will perform a preview deployment to Cloudflare Workers and run a database migration on your preview database. After deployment, a "View deployment" button will appear in your PR with a link to the preview.
+
+    When you merge the PR to `main`, a production deployment will occur and a database migration will be performed on your production database.
+
 </Steps>
-
-Now you can test everything. Create a PR in your project's GitHub repository. You should see an action 
-in the "Actions" section being triggered. If the basic checks pass, the workflow will perform a preview deployment 
-to Cloudflare Workers and run a database migration on your preview database. After deployment, a "View deployment" 
-button should appear in your PR with a link to the preview deployment.
-
-When you merge the PR to `main`, a production deployment will occur, and a database migration will be performed on your production database.
