@@ -21,7 +21,7 @@ MDX files compiled at **build time** into React components, with Zod-validated f
 
 1. Create a directory for your content and an `index.ts` that eagerly globs all `.mdx` files and exports a Zod schema:
 
-   ```ts
+   ```ts title="apps/docs/content/index.ts"
    import { z } from "zod"
    import type { MdxModule } from "@/mdx"
 
@@ -37,7 +37,7 @@ MDX files compiled at **build time** into React components, with Zod-validated f
 
 1. Add a list route that loads all items:
 
-   ```tsx
+   ```tsx title="apps/docs/routes/index.tsx"
    import { createFileRoute } from "@tanstack/react-router"
    import { getMdxFrontmatters } from "@/mdx"
    import { docModules, docFrontmatterSchema } from "../content"
@@ -52,7 +52,7 @@ MDX files compiled at **build time** into React components, with Zod-validated f
 
 1. Add a detail route that loads a single item by slug:
 
-   ```tsx
+   ```tsx title="apps/docs/routes/post.tsx"
    import { createFileRoute, notFound } from "@tanstack/react-router"
    import { getMdxModuleBySlug, MDXProvider } from "@/mdx"
    import { docModules, docFrontmatterSchema } from "../content"
@@ -78,12 +78,21 @@ MDX files compiled at **build time** into React components, with Zod-validated f
 
 1. Register the routes in `apps/routes.ts`:
 
-   ```ts
+   ```ts title="apps/routes.ts"
    route("/docs", "docs/routes/index.tsx"),
    route("/docs/$slug", "docs/routes/post.tsx"),
    ```
 
 1. Drop `.mdx` files into the content directory. Each file is automatically picked up — no further registration needed.
+
+   ```mdx title="apps/docs/content/getting-started.mdx"
+   export const frontmatter = {
+     title: "Getting Started",
+     date: "2026-06-01",
+   }
+
+   Welcome to the docs. This page is served at `/docs/getting-started`.
+   ```
 
 </Steps>
 
