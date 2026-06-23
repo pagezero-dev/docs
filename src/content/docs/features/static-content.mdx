@@ -8,9 +8,9 @@ MDX files compiled at **build time** into React components, with Zod-validated f
 
 **Key features**
 
-- Drop an `.mdx` file into a content directory and it is live — no registration needed
-- Frontmatter as JS exports — import assets, reference config, full TypeScript checking
-- Zod-validated frontmatter — missing fields throw at load time, not silently
+- Drop an `.mdx` file into a content directory and it is live, no registration needed
+- Frontmatter as JS exports, supports importing assets, referencing config, and full TypeScript checking
+- Zod-validated frontmatter, missing fields throw at load time rather than silently
 - Design system typography applied to all Markdown elements automatically
 - Syntax-highlighted code blocks with theme-aware colors
 - Static prerendering and sitemap generation ready to enable
@@ -23,7 +23,7 @@ Posts live in `apps/blog/content/`. Each `.mdx` file becomes a post at `/blog/<s
 
 **Legal**
 
-Legal documents live in `apps/brand/content/legal/`. Each file is served at `/legal/<slug>` — e.g. `/legal/privacy` and `/legal/terms-and-conditions`. 
+Legal documents live in `apps/brand/content/legal/`. Each file is served at `/legal/<slug>`, e.g. `/legal/privacy` and `/legal/terms-and-conditions`.
 
 
 ## Adding a Content Area
@@ -94,7 +94,7 @@ Legal documents live in `apps/brand/content/legal/`. Each file is served at `/le
    route("/docs/$slug", "docs/routes/post.tsx"),
    ```
 
-1. Drop `.mdx` files into the content directory. Each file is automatically picked up — no further registration needed.
+1. Drop `.mdx` files into the content directory. Each file is automatically picked up, no further registration needed.
 
    ```mdx title="apps/docs/content/getting-started.mdx"
    export const frontmatter = {
@@ -148,6 +148,6 @@ tanstackStart({
 })
 ```
 
-- `crawlLinks: true` — the prerenderer follows `<a>` tags to discover all routes automatically
-- `filter` — controls which paths are prerendered; add any new content area prefix here
-- `sitemap` — generates a sitemap at build time covering all prerendered paths
+- `crawlLinks: true` follows `<a>` tags to discover all routes automatically
+- `filter` controls which paths are prerendered; add any new content area prefix here
+- `sitemap` generates a sitemap at build time covering all prerendered paths
