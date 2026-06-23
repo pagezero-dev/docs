@@ -26,7 +26,15 @@ Payment integration powered by **[Polar.sh](https://polar.sh/)**. Sell digital p
 
 4. **Configure webhooks** - create a webhook endpoint pointing to `/payments/webhook` and enable these events: `order.paid`, `order.refunded`, `subscription.active`, `subscription.revoked`
 
-5. **Add the secret** - add `POLAR_WEBHOOK_SECRET` as a secret in Cloudflare (see [Cloudflare setup](/getting-started/deployment#cloudflare-setup))
+5. **Add the secret** - add `POLAR_WEBHOOK_SECRET` as a secret in Cloudflare for _preview_ and _production_ environments:
+
+   ```sh
+   bunx wrangler secret put POLAR_WEBHOOK_SECRET --env=preview
+   ```
+
+   ```sh
+   bunx wrangler secret put POLAR_WEBHOOK_SECRET --env=production
+   ```
 
 6. **Configure your products** - add them to `packages/config/index.ts`:
 
