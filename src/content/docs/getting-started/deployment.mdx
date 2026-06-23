@@ -38,32 +38,26 @@ You can deploy manually or set up automated deployments through a GitHub Actions
    bun run deploy:production
    ```
 
+   <Aside type="note">
+   Wrangler automatically provisions resources defined in `wrangler.json` (such as D1 databases) on first deploy. No separate database creation step is needed. See [Automatic Provisioning](https://developers.cloudflare.com/workers/wrangler/configuration/#automatic-provisioning) for details.
+   </Aside>
+
+1. Migrate your database for _preview_ and _production_ environments:
+   ```sh
+   bun run db:migrate --env preview --remote
+   ```
+
+   ```sh
+   bun run db:migrate --env production --remote
+   ```
+
 1. **Your app is now deployed! 🎉** - and ready to use with its core functionality
 
    To enable additional features such as authentication, email delivery, and payments, follow the setup sections in the [Authentication](/features/authentication#setup), [E-mail](/features/email#setup), and [Payments](/features/payments#setup) documentation.
 
 </Steps>
 
-## Manual
-
-<Steps>
-1. Perform initial [Cloudflare setup](#cloudflare-setup) first to create D1 databases and Cloudflare Workers.
-
-1. Perform Cloudflare D1 database migrations:
-
-   ```sh
-   bun run db:migrate --env preview --remote
-   bun run db:migrate --env production --remote
-   ```
-
-1. Perform Cloudflare Workers deployments:
-   ```sh
-   bun run deploy:preview
-   bun run deploy:production
-   ```
-</Steps>
-
-## Automatic
+## Automatic deployment
 
 Automatic deployment happens through the GitHub Actions CI/CD pipeline. Once the pipeline is set up,
 every merge to the `main` branch will automatically trigger deployment to Cloudflare Workers and a database
