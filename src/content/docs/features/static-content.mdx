@@ -72,13 +72,18 @@ Legal documents live in `apps/brand/content/legal/`. Each file is served at `/le
      loader: ({ params }) => {
        const mod = getMdxModuleBySlug(docModules, docFrontmatterSchema, params.slug)
        if (!mod) throw notFound()
-       return { doc: mod.frontmatter, DocComponent: mod.default }
+       return { doc: mod.frontmatter }
      },
      component: DocPage,
    })
 
    function DocPage() {
-     const { doc, DocComponent } = Route.useLoaderData()
+     const { doc } = Route.useLoaderData()
+     const { slug } = Route.useParams()
+     const mod = getMdxModuleBySlug(docModules, docFrontmatterSchema, slug)
+     const DocComponent = mod?.default
+     if (!DocComponent) throw notFound()
+
      return (
        <MDXProvider>
          <DocComponent />
