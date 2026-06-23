@@ -9,7 +9,7 @@ MDX files compiled at **build time** into React components, with Zod-validated f
 **Key features**
 
 - Drop an `.mdx` file into a content directory and it is live, no registration needed
-- Frontmatter as JS exports, supports importing assets, referencing config, and full TypeScript checking
+- Frontmatter as JS exports, supports importing assets and referencing config values
 - Zod-validated frontmatter, missing fields throw at load time rather than silently
 - Design system typography applied to all Markdown elements automatically
 - Syntax-highlighted code blocks with theme-aware colors
@@ -114,7 +114,7 @@ Legal documents live in `apps/brand/content/legal/`. Each file is served at `/le
 
 ## Frontmatter
 
-Frontmatter is a named JS export from the `.mdx` file rather than YAML. This allows importing local image assets processed by Vite, referencing the live config object, and getting TypeScript checking on every field.
+Frontmatter is a named JS export from the `.mdx` file rather than YAML. This allows importing local image assets processed by Vite and referencing the live config object directly in the content.
 
 ```mdx
 import cover from "../assets/my-cover.svg"
