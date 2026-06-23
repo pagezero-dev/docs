@@ -64,7 +64,7 @@ every merge to the `main` branch will automatically trigger deployment to Cloudf
 migration for Cloudflare D1. Additionally, every PR will trigger a preview deployment, allowing you to access a 
 specific version of your app for each PR.
 
-<Aside type="note">
+<Aside type="note" title="Prerequisites">
 Steps below require [GitHub CLI](https://cli.github.com/).
 </Aside>
 
@@ -82,6 +82,10 @@ Steps below require [GitHub CLI](https://cli.github.com/).
     ```sh
     gh repo create <project-name> --private --source=. --remote=origin --push
     ```
+
+    <Aside type="note">
+    Skip this step if your project is already hosted on GitHub.
+    </Aside>
 
 1.  **Add repository variable** - set your Cloudflare account ID:
 
