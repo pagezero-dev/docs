@@ -27,7 +27,15 @@ For production, you need a Resend API key:
 
 3. **Generate an API key** - create an API key in the Resend dashboard
 
-4. **Add the secret** - add `RESEND_API_KEY` as a secret in Cloudflare (see [Cloudflare setup](/getting-started/deployment#cloudflare-setup))
+4. **Add the secret** - add `RESEND_API_KEY` as a secret in Cloudflare for _preview_ and _production_ environments:
+
+   ```sh
+   bunx wrangler secret put RESEND_API_KEY --env=preview
+   ```
+
+   ```sh
+   bunx wrangler secret put RESEND_API_KEY --env=production
+   ```
 
 5. **Configure the sender address** - set `email.from` in `packages/config/index.ts`:
 
