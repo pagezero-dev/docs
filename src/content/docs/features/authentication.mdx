@@ -26,21 +26,21 @@ For production and preview environments:
 1. **Add `SESSION_COOKIE_SECRET`**:
 
    ```sh
-   bun -e "console.log(require('crypto').randomBytes(32).toString('hex'))" | bunx wrangler secret put SESSION_COOKIE_SECRET --env=preview
+   bun generate:secret | bunx wrangler secret put SESSION_COOKIE_SECRET --env=preview
    ```
 
    ```sh
-   bun -e "console.log(require('crypto').randomBytes(32).toString('hex'))" | bunx wrangler secret put SESSION_COOKIE_SECRET --env=production
+   bun generate:secret | bunx wrangler secret put SESSION_COOKIE_SECRET --env=production
    ```
 
 2. **Add `OTP_SECRET`**:
 
    ```sh
-   bun -e "console.log(require('crypto').randomBytes(32).toString('hex'))" | bunx wrangler secret put OTP_SECRET --env=preview
+   bun generate:secret | bunx wrangler secret put OTP_SECRET --env=preview
    ```
 
    ```sh
-   bun -e "console.log(require('crypto').randomBytes(32).toString('hex'))" | bunx wrangler secret put OTP_SECRET --env=production
+   bun generate:secret | bunx wrangler secret put OTP_SECRET --env=production
    ```
 
 3. **(Optional) Enable Captcha** - protect the login page against bots with [Cloudflare Turnstile](https://www.cloudflare.com/products/turnstile/). The captcha appears automatically when configured, and always passes in local development.
