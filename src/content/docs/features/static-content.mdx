@@ -136,8 +136,9 @@ The shape is enforced by the Zod schema defined in `content/index.ts`. Missing o
 
 `vite.config.ts` ships with prerendering scaffolded and ready to enable. When turned on, TanStack Start generates static HTML for the matched routes at build time, which Cloudflare serves directly with minimal TTFB.
 
-```ts
-// vite.config.ts
+```ts title="vite.config.ts"
+import config from "./packages/config"
+
 tanstackStart({
   prerender: {
     enabled: true,
@@ -153,6 +154,18 @@ tanstackStart({
 })
 ```
 
-- `crawlLinks: true` follows `<a>` tags to discover all routes automatically
-- `filter` controls which paths are prerendered; add any new content area prefix here
-- `sitemap` generates a sitemap at build time covering all prerendered paths
+- `crawlLinks: true` - follows `<a>` tags to discover all routes automatically
+- `filter` - controls which paths are prerendered; add any new content area prefix here
+- `sitemap` - generates a sitemap at build time covering all prerendered paths
+
+## Caveats
+
+**Path aliases do not work in `.mdx` files.** Imports inside `.mdx` files must use relative paths. Aliases like `@/ui/button` will fail at build time.
+
+```mdx
+// This will fail
+import { Button } from "@/ui/button"
+
+// Use a relative path instead
+import { Button } from "../../packages/ui/button"
+```
