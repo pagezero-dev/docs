@@ -15,6 +15,17 @@ MDX files compiled at **build time** into React components, with Zod-validated f
 - Syntax-highlighted code blocks with theme-aware colors
 - Static prerendering and sitemap generation ready to enable
 
+## Built-in Content Areas
+
+**Blog**
+
+Posts live in `apps/blog/content/`. Each `.mdx` file becomes a post at `/blog/<slug>`. See [Blog](/features/blog) for authoring details, frontmatter schema, and post card components.
+
+**Legal**
+
+Legal documents live in `apps/brand/content/legal/`. Each file is served at `/legal/<slug>` — e.g. `/legal/privacy` and `/legal/terms-and-conditions`. 
+
+
 ## Adding a Content Area
 
 <Steps>
@@ -115,16 +126,6 @@ Markdown body starts here.
 ```
 
 The shape is enforced by the Zod schema defined in `content/index.ts`. Missing or malformed fields throw at load time rather than silently producing a broken page.
-
-## Built-in Content Areas
-
-**Blog**
-
-Posts live in `apps/blog/content/`. Each `.mdx` file becomes a post at `/blog/<slug>`. See [Blog](/features/blog) for authoring details, frontmatter schema, and post card components.
-
-**Legal documents**
-
-Legal documents live in `apps/brand/content/legal/`. Each file is served at `/legal/<slug>` — e.g. `/legal/privacy` and `/legal/terms-and-conditions`. 
 
 ## Static Prerendering
 
