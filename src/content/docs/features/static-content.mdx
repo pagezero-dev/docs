@@ -1,0 +1,171 @@
+---
+title: Static Content
+---
+
+import { FileTree, Steps } from '@astrojs/starlight/components'
+
+MDX files compiled at **build time** into React components, with Zod-validated frontmatter, design system typography, and optional static prerendering. Drop a file into a content directory and it is live with no registration step.
+
+**Key features**
+
+- Drop an `.mdx` file into a content directory and it is live, no registration needed
+- Frontmatter as JS exports, supports importing assets and referencing config values
+- Zod-validated frontmatter, missing fields throw at load time rather than silently
+- Design system typography applied to all Markdown elements automatically
+- Syntax-highlighted code blocks with theme-aware colors
+- Static prerendering and sitemap generation ready to enable
+
+## Built-in Content Areas
+
+**Blog**
+
+Posts live in `apps/blog/content/`. Each `.mdx` file becomes a post at `/blog/<slug>`. See [Blog](/features/blog) for authoring details, frontmatter schema, and post card components.
+
+**Legal**
+
+Legal documents live in `apps/brand/content/legal/`. Each file is served at `/legal/<slug>`, e.g. `/legal/privacy` and `/legal/terms-and-conditions`.
+
+
+## Adding a Content Area
+
+<Steps>
+
+1. Create a directory for your content and an `index.ts` that eagerly globs all `.mdx` files and exports a Zod schema:
+
+   ```ts title="apps/docs/content/index.ts"
+   import { z } from "zod"
+   import type { MdxModule } from "@/mdx"
+
+   export const docModules = import.meta.glob<MdxModule>("./*.mdx", {
+     eager: true,
+   })
+
+   export const docFrontmatterSchema = z.object({
+     title: z.string(),
+     date: z.iso.date(),
+   })
+   ```
+
+1. Add a list route that loads all items:
+
+   ```tsx title="apps/docs/routes/index.tsx"
+   import { createFileRoute } from "@tanstack/react-router"
+   import { getMdxFrontmatters } from "@/mdx"
+   import { docModules, docFrontmatterSchema } from "../content"
+
+   export const Route = createFileRoute("/_brand-layout/docs/")({
+     loader: () => ({
+       docs: getMdxFrontmatters(docModules, docFrontmatterSchema),
+     }),
+     component: DocsIndex,
+   })
+   ```
+
+1. Add a detail route that loads a single item by slug:
+
+   ```tsx title="apps/docs/routes/post.tsx"
+   import { createFileRoute, notFound } from "@tanstack/react-router"
+   import { getMdxModuleBySlug, MDXProvider } from "@/mdx"
+   import { docModules, docFrontmatterSchema } from "../content"
+
+   export const Route = createFileRoute("/_brand-layout/docs/$slug")({
+     loader: ({ params }) => {
+       const mod = getMdxModuleBySlug(docModules, docFrontmatterSchema, params.slug)
+       if (!mod) throw notFound()
+       return { doc: mod.frontmatter }
+     },
+     component: DocPage,
+   })
+
+   function DocPage() {
+     const { doc } = Route.useLoaderData()
+     const { slug } = Route.useParams()
+     const mod = getMdxModuleBySlug(docModules, docFrontmatterSchema, slug)
+     const DocComponent = mod?.default
+     if (!DocComponent) throw notFound()
+
+     return (
+       <MDXProvider>
+         <DocComponent />
+       </MDXProvider>
+     )
+   }
+   ```
+
+1. Register the routes in `apps/routes.ts`:
+
+   ```ts title="apps/routes.ts"
+   route("/docs", "docs/routes/index.tsx"),
+   route("/docs/$slug", "docs/routes/post.tsx"),
+   ```
+
+1. Drop `.mdx` files into the content directory. Each file is automatically picked up, no further registration needed.
+
+   ```mdx title="apps/docs/content/getting-started.mdx"
+   export const frontmatter = {
+     title: "Getting Started",
+     date: "2026-06-01",
+   }
+
+   Welcome to the docs. This page is served at `/docs/getting-started`.
+   ```
+
+</Steps>
+
+## Frontmatter
+
+Frontmatter is a named JS export from the `.mdx` file rather than YAML. This allows importing local image assets processed by Vite and referencing the live config object directly in the content.
+
+```mdx
+import cover from "../assets/my-cover.svg"
+import config from "../../../../packages/config"
+
+export const frontmatter = {
+  title: "Page title",
+  date: "2026-06-01",
+  imgSrc: cover,                        // imported Vite asset
+  projectName: config.core.projectName, // live config value
+}
+
+Markdown body starts here.
+```
+
+The shape is enforced by the Zod schema defined in `content/index.ts`. Missing or malformed fields throw at load time rather than silently producing a broken page.
+
+## Static Prerendering
+
+`vite.config.ts` ships with prerendering scaffolded and ready to enable. When turned on, TanStack Start generates static HTML for the matched routes at build time, which Cloudflare serves directly with minimal TTFB.
+
+```ts title="vite.config.ts"
+import config from "./packages/config"
+
+tanstackStart({
+  prerender: {
+    enabled: true,
+    crawlLinks: true,
+    filter: ({ path }) =>
+      ["/", "/payments/success"].includes(path) ||
+      ["/blog", "/legal"].some((prefix) => path.startsWith(prefix)),
+  },
+  sitemap: {
+    enabled: true,
+    host: config.core.websiteUrl,
+  },
+})
+```
+
+- `crawlLinks: true` - follows `<a>` tags to discover all routes automatically
+- `filter` - controls which paths are prerendered; add any new content area prefix here
+- `sitemap` - generates a sitemap at build time covering all prerendered paths
+
+## Caveats
+
+**Path aliases do not work in `.mdx` files.** Imports inside `.mdx` files must use relative paths. Aliases like `@/ui/button` will fail at build time.
+
+```mdx
+// This will fail
+import { Button } from "@/ui/button"
+
+// Use a relative path instead
+import { Button } from "../../packages/ui/button"
+```
