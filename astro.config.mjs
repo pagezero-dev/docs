@@ -1,5 +1,6 @@
 // @ts-check
 
+import { unified } from "@astrojs/markdown-remark"
 import starlight from "@astrojs/starlight"
 import { defineConfig } from "astro/config"
 import rehypeMermaid from "rehype-mermaid"
@@ -15,7 +16,9 @@ export default defineConfig({
       type: "shiki",
       excludeLangs: ["mermaid"],
     },
-    rehypePlugins: [rehypeMermaid],
+    processor: unified({
+      rehypePlugins: [rehypeMermaid],
+    }),
   },
   integrations: [
     starlight({
