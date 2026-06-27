@@ -9,6 +9,7 @@ Develop and document UI components in isolation with **[Storybook](https://story
 **Key features**
 
 - Isolated component development
+- Built-in TanStack Router and TanStack Start server-function mocking
 - Interactive controls for props
 - Automatic documentation generation
 - Dark/light mode toggle
@@ -41,7 +42,7 @@ Stories define the different states and variations of a component. They're co-lo
 **Basic story structure:**
 
 ```tsx
-import type { Meta, StoryObj } from "@storybook/react-vite"
+import type { Meta, StoryObj } from "@storybook/tanstack-react"
 import { Button } from "./button"
 
 const meta = {
@@ -77,6 +78,40 @@ export const Secondary: Story = {
 | `packages/ui/` | `Packages/UI/` | `Packages/UI/Button` |
 | `packages/ui-lite/` | `Packages/UI-Lite/` | `Packages/UI-Lite/Dialog` |
 | `apps/*/components/` | `Apps/ModuleName/` | `Apps/Brand/Hero` |
+
+## TanStack Router in Stories
+
+`@storybook/tanstack-react` wraps every story in an in-memory TanStack Router instance. Components that use `@tanstack/react-router` primitives, such as `Link` or navigation hooks, render without a custom decorator.
+
+For stories that need a specific route, params, or loader data, use `parameters.tanstack.router`:
+
+```tsx
+import type { Meta, StoryObj } from "@storybook/tanstack-react"
+import { BlogPostsList } from "./blog-posts-list"
+
+const meta = {
+  title: "Apps/Blog/BlogPostsList",
+  component: BlogPostsList,
+  parameters: {
+    tanstack: {
+      router: {
+        path: "/blog",
+      },
+    },
+  },
+} satisfies Meta<typeof BlogPostsList>
+
+export default meta
+type Story = StoryObj<typeof meta>
+
+export const Default: Story = {
+  args: {
+    posts: [/* ... */],
+  },
+}
+```
+
+To render a TanStack Route object as the story component, pass it via `parameters.tanstack.router.route` and set `params`, `query`, or `routeOverrides` as needed. See the [Storybook TanStack React docs](https://storybook.js.org/docs/get-started/frameworks/tanstack-react) for the full API.
 
 ## Generating Components
 
