@@ -26,7 +26,9 @@ PageZERO is built on strong foundations that prioritize developer experience and
 
 🥟 **[Bun](https://bun.sh/)** - serves as the package manager and JavaScript runtime. It's significantly faster than npm or yarn for installing dependencies. Bun also provides a built-in test runner and bundler, though PageZERO uses specialized tools for those tasks.
 
-🦷 **[Biome](https://biomejs.dev/)** - handles formatting and linting in a single tool. It's a fast, Rust-based alternative to ESLint and Prettier. Biome provides consistent code style with minimal configuration.
+🧹 **[Oxlint](https://oxc.rs/docs/guide/usage/linter)** - lints JavaScript and TypeScript with a fast, Rust-based engine from the Oxc project. It covers correctness and React hooks checks with minimal configuration.
+
+✨ **[Oxfmt](https://oxc.rs/docs/guide/usage/formatter)** - formats the codebase with Prettier-compatible output at high speed. Used alongside Oxlint for consistent style and quality gates in CI.
 
 🔄 **[GitHub Actions](https://github.com/features/actions)** - automates CI/CD workflows. It runs tests, checks formatting, and deploys to Cloudflare on every push. The tight GitHub integration makes it easy to enforce quality gates on pull requests.
 
