@@ -9,7 +9,7 @@ PageZERO includes a pre-configured pipeline using **GitHub Actions** and **Cloud
 **How it works**
 
 1. You push code to GitHub
-2. Pipeline runs linting, type checking, and unit tests in parallel
+2. Pipeline runs quality checks (format, lint, types) and unit tests in parallel
 3. E2E tests verify the app works end-to-end
 4. Database migrations run automatically
 5. Code deploys to Cloudflare Workers
@@ -22,7 +22,6 @@ flowchart LR
     subgraph parallel[Parallel]
         direction TB
         Q[Quality Check]
-        T[Type Check]
         U[Unit Tests]
     end
     
@@ -39,7 +38,7 @@ flowchart LR
 | `main` | Production | Production D1 | Your custom domain |
 | PR branches | Preview | Preview D1 | `*.workers.dev` |
 
-Draft PRs only run quality checks, type checks, and tests. Database migrations and deployments are skipped until the PR is marked as ready for review.
+Draft PRs only run quality checks and tests. Database migrations and deployments are skipped until the PR is marked as ready for review.
 
 ## Setup
 
