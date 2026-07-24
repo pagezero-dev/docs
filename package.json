@@ -3,8 +3,8 @@
   "type": "module",
   "version": "0.0.1",
   "scripts": {
-    "check": "astro check && biome check",
-    "check:fix": "biome check --write",
+    "check": "astro check && oxlint && oxfmt --check",
+    "check:fix": "oxlint --fix && oxfmt",
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
@@ -27,8 +27,9 @@
     "typescript": "5.9.3"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.3.8",
     "@playwright/test": "1.57.0",
+    "oxfmt": "0.60.0",
+    "oxlint": "1.75.0",
     "wrangler": "4.59.1"
   }
 }
