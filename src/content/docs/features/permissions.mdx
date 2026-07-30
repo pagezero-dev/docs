@@ -2,48 +2,57 @@
 title: Permissions
 ---
 
-A simple RBAC (Role-Based Access Control) system with a twist: roles live in the database, while permissions are defined in config.
-This hybrid approach keeps role assignments flexible (database) while keeping permission definitions simple and version-controlled (config).
+Role-based access control built on **Better Auth's admin plugin**. Roles are stored on the user record; permissions are defined in code via Better Auth access control.
 
 **How it works**
 
 ```mermaid
 flowchart LR
-    User --> Roles["Roles (DB)"] --> Permissions["Permissions (Config)"]
+    User --> Roles["Roles (DB)"] --> Permissions["Permissions (access.ts)"]
 ```
 
-- **Users** are assigned **roles** (stored in `user_roles` database table)
-- **Roles** map to **permissions** (defined in `packages/config/index.ts`)
+- **Users** are assigned **roles** (stored as a comma-separated `role` field on the Better Auth `user` table)
+- **Roles** map to **permissions** (defined in `apps/auth/access.ts`)
 
+Built-in roles:
 
+| Role | Permissions |
+|------|-------------|
+| `user` | (none beyond default access) |
+| `admin` | Better Auth admin statements |
+| `premium` | `viewPremium` |
+| `elite` | `viewPremium`, `viewElite` |
 
 ## Configuration
 
-Define roles and their permissions in `packages/config/index.ts`:
+Define roles and content permissions in `apps/auth/access.ts`:
 
 ```ts
-const config = {
-  permissions: {
-    roleToPermissions: {
-      premium: {
-        viewPremiumContent: true,
-      },
-      elite: {
-        viewPremiumContent: true,
-        viewEliteContent: true,
-      },
-    },
-  },
-}
+import { createAccessControl } from "better-auth/plugins/access"
+import { adminAc, defaultStatements } from "better-auth/plugins/admin/access"
+
+const statement = {
+  ...defaultStatements,
+  content: ["viewPremium", "viewElite"],
+} as const
+
+export const ac = createAccessControl(statement)
+
+export const user = ac.newRole({})
+export const admin = ac.newRole({ ...adminAc.statements })
+export const premium = ac.newRole({ content: ["viewPremium"] })
+export const elite = ac.newRole({ content: ["viewPremium", "viewElite"] })
 ```
+
+These roles are registered on both the Better Auth server (`apps/auth/auth.server.ts`) and client (`apps/auth/auth.ts`).
 
 ## API
 
-All functions are exported from `@/permissions`.
+All functions are exported from `@/auth`.
 
 | Function | Purpose |
 |----------|---------|
-| `requireUserPermissions({ data: { userId, permissions } })` | Server function - throws if user lacks **any** of the specified permissions |
+| `requireUserPermissions({ data: { userId, permissions } })` | Server function - throws if user lacks the specified permissions |
 | `requireUserRole({ data: { userId, roleName } })` | Server function - throws if user doesn't have the role |
 | `hasUserRole(userId, roleName)` | Returns `boolean` - use when you need to check without throwing |
 | `grantUserRole(userId, roleName)` | Assigns a role to user |
@@ -55,13 +64,12 @@ Use `requireUserPermissions` in `beforeLoad` to restrict access by permission:
 
 ```tsx
 import { createFileRoute } from "@tanstack/react-router"
-import { requireUserId } from "@/auth"
-import { requireUserPermissions } from "@/permissions"
+import { requireUserId, requireUserPermissions } from "@/auth"
 
 export const Route = createFileRoute("/premium")({
   beforeLoad: async () => {
     const userId = await requireUserId()
-    await requireUserPermissions({ data: { userId, permissions: ["viewPremiumContent"] } })
+    await requireUserPermissions({ data: { userId, permissions: ["viewPremium"] } })
     // User has permission, continue...
   },
 })
@@ -71,8 +79,7 @@ Or `requireUserRole` to restrict access by role:
 
 ```tsx
 import { createFileRoute } from "@tanstack/react-router"
-import { requireUserId } from "@/auth"
-import { requireUserRole } from "@/permissions"
+import { requireUserId, requireUserRole } from "@/auth"
 
 export const Route = createFileRoute("/elite")({
   beforeLoad: async () => {
@@ -86,7 +93,7 @@ export const Route = createFileRoute("/elite")({
 For conditional checks without throwing:
 
 ```tsx
-import { hasUserRole } from "@/permissions"
+import { hasUserRole } from "@/auth"
 
 const isElite = await hasUserRole(userId, "elite")
 ```
@@ -96,7 +103,7 @@ const isElite = await hasUserRole(userId, "elite")
 Assign or remove roles from users:
 
 ```tsx
-import { grantUserRole, revokeUserRole } from "@/permissions"
+import { grantUserRole, revokeUserRole } from "@/auth"
 
 // After a purchase
 await grantUserRole(userId, "premium")
