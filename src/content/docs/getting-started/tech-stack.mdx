@@ -22,6 +22,8 @@ PageZERO is built on strong foundations that prioritize developer experience and
 
 💧 **[Drizzle ORM](https://orm.drizzle.team/)** - provides type-safe database access. It generates TypeScript types from your schema, supports migrations, and produces efficient SQL queries. Drizzle is lightweight and works seamlessly with D1.
 
+🔐 **[Better Auth](https://www.better-auth.com/)** - handles authentication, sessions, and access control. PageZERO uses email OTP sign-in, the admin plugin for roles/permissions, and Polar's Better Auth plugin for payments - all through a shared `/api/auth` surface.
+
 ## Tooling
 
 🥟 **[Bun](https://bun.sh/)** - serves as the package manager and JavaScript runtime. It's significantly faster than npm or yarn for installing dependencies. Bun also provides a built-in test runner and bundler, though PageZERO uses specialized tools for those tasks.
@@ -42,7 +44,7 @@ PageZERO is built on strong foundations that prioritize developer experience and
 
 ## 3rd Party Services
 
-💳 **[Polar.sh](https://polar.sh/)** - handles payments and subscriptions. Polar provides a developer-friendly API for managing one-time purchases and recurring billing. It supports multiple payment methods and handles all the complexity of subscription management, invoicing, and tax compliance.
+💳 **[Polar.sh](https://polar.sh/)** - handles payments and subscriptions via the Better Auth Polar plugin. Polar provides a developer-friendly API for managing one-time purchases and recurring billing. Checkout, portal, and webhooks integrate through Better Auth's `/api/auth` endpoints.
 
 📧 **[Resend](https://resend.com/)** - delivers transactional emails. Resend offers a modern email API with excellent deliverability and a clean developer experience. It supports React email templates, making it easy to build and maintain beautiful emails using familiar tools.
 
