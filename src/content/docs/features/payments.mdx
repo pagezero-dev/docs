@@ -4,7 +4,7 @@ title: Payments
 
 import { Steps } from '@astrojs/starlight/components';
 
-Payment integration powered by **[Polar.sh](https://polar.sh/)**. Sell digital products, subscriptions, or one-time purchases. Payments are handled entirely by Polar-no Stripe setup, webhook complexity, or compliance headaches.
+Payment integration powered by **[Polar.sh](https://polar.sh/)** via the **Better Auth Polar plugin**. Sell digital products, subscriptions, or one-time purchases. Checkout, customer portal, and webhooks are wired through Better Auth's `/api/auth` endpoints.
 
 **Key features**
 
@@ -12,7 +12,7 @@ Payment integration powered by **[Polar.sh](https://polar.sh/)**. Sell digital p
 - Automatic role assignment on purchase
 - Email notifications for access changes
 - Ready-to-use checkout button component
-- Webhook handling for payment events
+- Webhook handling via `@polar-sh/better-auth`
 
 ## Setup
 
@@ -22,11 +22,19 @@ Payment integration powered by **[Polar.sh](https://polar.sh/)**. Sell digital p
 
 2. **Create products** - set up your products in the Polar dashboard
 
-3. **Generate checkout links** - create checkout links for each product
+3. **Create an Organization Access Token** - generate a Polar access token and add it as a secret:
 
-4. **Configure webhooks** - create a webhook endpoint pointing to `/payments/webhook` and enable these events: `order.paid`, `order.refunded`, `subscription.active`, `subscription.revoked`
+   ```sh
+   bunx wrangler secret put POLAR_ACCESS_TOKEN --env=preview
+   ```
 
-5. **Add the secret** - add `POLAR_WEBHOOK_SECRET` as a secret in Cloudflare for _preview_ and _production_ environments:
+   ```sh
+   bunx wrangler secret put POLAR_ACCESS_TOKEN --env=production
+   ```
+
+4. **Configure webhooks** - create a webhook endpoint pointing to `/api/auth/polar/webhooks` and enable these events: `order.paid`, `order.refunded`, `subscription.active`, `subscription.revoked`
+
+5. **Add the webhook secret** - add `POLAR_WEBHOOK_SECRET` as a secret in Cloudflare for _preview_ and _production_ environments:
 
    ```sh
    bunx wrangler secret put POLAR_WEBHOOK_SECRET --env=preview
@@ -48,10 +56,6 @@ Payment integration powered by **[Polar.sh](https://polar.sh/)**. Sell digital p
            preview: "your-preview-product-id",
            production: "your-production-product-id",
          },
-         checkoutLink: {
-           preview: "https://sandbox-api.polar.sh/v1/checkout-links/.../redirect",
-           production: "https://api.polar.sh/v1/checkout-links/.../redirect",
-         },
        },
      },
    }
@@ -63,7 +67,7 @@ Each product maps to a user role via `userRoleToGrant`. When a customer complete
 
 ## CheckoutButton
 
-A styled button that links to the Polar checkout page. Automatically pre-fills the customer's email if they're logged in.
+A styled button that starts Polar checkout through the Better Auth client. Uses the product config slug.
 
 ```tsx
 import { CheckoutButton } from "@/payments/components/checkout-button"
@@ -78,8 +82,8 @@ The `productId` must match a key in your `payments.products` config.
 ## Purchase Flow
 
 1. User clicks a `CheckoutButton`
-2. User is redirected to Polar's hosted checkout
-3. After payment, Polar sends a webhook to `/payments/webhook`
+2. Better Auth Polar checkout opens Polar's hosted checkout
+3. After payment, Polar sends a webhook to `/api/auth/polar/webhooks`
 4. The webhook handler grants the user role and sends a confirmation email
 5. User is redirected to `/payments/success`
 
