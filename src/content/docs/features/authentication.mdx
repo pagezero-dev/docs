@@ -17,7 +17,7 @@ Built-in authentication powered by **[Better Auth](https://www.better-auth.com/)
 
 ## Setup
 
-For local development, all required variables are already configured in the `.env` file.
+For local development, required values are already set in `.env` and `wrangler.json`.
 
 For production and preview environments:
 
@@ -35,14 +35,26 @@ For production and preview environments:
    bun generate:secret | bunx wrangler secret put BETTER_AUTH_SECRET --env=production
    ```
 
-3. **Add `BETTER_AUTH_URL`** - set this to your app's public URL for each environment (for example `https://your-app.workers.dev` or your custom domain):
+3. **Add `BETTER_AUTH_URL`** - add it to the `vars` section in `wrangler.json`. Local development already uses `http://localhost:3000` at the top level; set your app's public URL per environment for production and preview:
 
-   ```sh
-   bunx wrangler secret put BETTER_AUTH_URL --env=preview
-   ```
-
-   ```sh
-   bunx wrangler secret put BETTER_AUTH_URL --env=production
+   ```json
+   {
+     "vars": {
+       "BETTER_AUTH_URL": "http://localhost:3000"
+     },
+     "env": {
+       "production": {
+         "vars": {
+           "BETTER_AUTH_URL": "https://your-production-url"
+         }
+       },
+       "preview": {
+         "vars": {
+           "BETTER_AUTH_URL": "https://your-preview-url"
+         }
+       }
+     }
+   }
    ```
 
 4. **(Optional) Enable Captcha** - protect the login page against bots with [Cloudflare Turnstile](https://www.cloudflare.com/products/turnstile/). The captcha appears automatically when configured, and always passes in local development.
