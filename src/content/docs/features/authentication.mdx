@@ -4,16 +4,16 @@ title: Authentication
 
 import { Steps } from '@astrojs/starlight/components';
 
-Built-in authentication using **OTP (One-Time Password)** via email. No third-party auth services required. No passwords to store or reset. Users don't need to remember credentials. Simple, secure by design, and works for most applications.
+Built-in authentication powered by **[Better Auth](https://www.better-auth.com/)**, using **OTP (One-Time Password)** via email. No passwords to store or reset. Users don't need to remember credentials. Sessions, cookies, and access control are handled by Better Auth with a TanStack Start integration.
 
 
 **How it works**
 
 1. User clicks on "Login" button
 1. User enters email on `/login`
-1. System sends a 6-digit code to their email
+1. System sends a 6-digit code to their email (via Better Auth email OTP)
 1. User enters the code
-1. Session is created
+1. Better Auth creates a session and sets cookies
 
 ## Setup
 
@@ -25,24 +25,24 @@ For production and preview environments:
 
 1. **Set up email delivery** - OTP codes are sent via email, so email delivery must be configured for authentication to work in production. Follow the [Email setup guide](/features/email#setup) first.
 
-2. **Add `SESSION_COOKIE_SECRET`**:
+2. **Add `BETTER_AUTH_SECRET`**:
 
    ```sh
-   bun generate:secret | bunx wrangler secret put SESSION_COOKIE_SECRET --env=preview
+   bun generate:secret | bunx wrangler secret put BETTER_AUTH_SECRET --env=preview
    ```
 
    ```sh
-   bun generate:secret | bunx wrangler secret put SESSION_COOKIE_SECRET --env=production
+   bun generate:secret | bunx wrangler secret put BETTER_AUTH_SECRET --env=production
    ```
 
-3. **Add `OTP_SECRET`**:
+3. **Add `BETTER_AUTH_URL`** - set this to your app's public URL for each environment (for example `https://your-app.workers.dev` or your custom domain):
 
    ```sh
-   bun generate:secret | bunx wrangler secret put OTP_SECRET --env=preview
+   bunx wrangler secret put BETTER_AUTH_URL --env=preview
    ```
 
    ```sh
-   bun generate:secret | bunx wrangler secret put OTP_SECRET --env=production
+   bunx wrangler secret put BETTER_AUTH_URL --env=production
    ```
 
 4. **(Optional) Enable Captcha** - protect the login page against bots with [Cloudflare Turnstile](https://www.cloudflare.com/products/turnstile/). The captcha appears automatically when configured, and always passes in local development.
@@ -61,12 +61,20 @@ For production and preview environments:
 
 </Steps>
 
+## Architecture
+
+| Piece | Location | Purpose |
+|-------|----------|---------|
+| Server instance | `apps/auth/auth.server.ts` | Better Auth config (email OTP, admin AC, Polar plugins, TanStack Start cookies) |
+| Client | `apps/auth/auth.ts` | Better Auth React client (email OTP, admin, Polar) |
+| Access control | `apps/auth/access.ts` | Roles and content permissions (`user`, `admin`, `premium`, `elite`) |
+| API catch-all | `/api/auth/$` | Handles Better Auth HTTP endpoints (sessions, OTP, Polar webhooks, checkout) |
+
 ## API
 
 | Function | Module | Purpose |
 |----------|--------|---------|
 | `requireUserId()` | `@/auth` | Server function - returns user ID or redirects to `/login` |
-| `getUserId(session)` | `@/auth` | Returns user ID from session (no redirect) |
 | `getUserById(userId)` | `@/auth` | Returns user record from database |
 | `useUser()` | `@/auth` | Client-side hook to access current user |
 | `useLogout()` | `@/auth` | Client-side hook that returns an async logout function |
@@ -147,9 +155,3 @@ const getPageData = createServerFn({ method: "GET" }).handler(async () => {
   // ...
 })
 ```
-
-## Session Details
-
-- **Duration:** 7 days
-- **OTP expiration:** 5 minutes
-- **Cookie:** `httpOnly`, `secure`, `sameSite: strict`
