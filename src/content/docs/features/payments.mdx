@@ -2,7 +2,7 @@
 title: Payments
 ---
 
-import { Steps } from '@astrojs/starlight/components';
+import { Aside, Steps } from '@astrojs/starlight/components';
 
 Payment integration powered by **[Polar.sh](https://polar.sh/)** via the **Better Auth Polar plugin**. Sell digital products, subscriptions, or one-time purchases. Checkout, customer portal, and webhooks are wired through Better Auth's `/api/auth` endpoints.
 
@@ -23,6 +23,10 @@ Payment integration powered by **[Polar.sh](https://polar.sh/)** via the **Bette
 2. **Create products** - set up your products in the Polar dashboard
 
 3. **Create an Organization Access Token** - generate a Polar access token and add it as a secret:
+
+   <Aside type="note">
+   The token requires the `checkouts:read` and `checkouts:write` scopes.
+   </Aside>
 
    ```sh
    bunx wrangler secret put POLAR_ACCESS_TOKEN --env=preview
