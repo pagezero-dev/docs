@@ -30,11 +30,11 @@ Use `getMainDb()` from `@/db/main` to access the Drizzle ORM instance. Call it i
 ```tsx
 import { createServerFn } from "@tanstack/react-start"
 import { getMainDb } from "@/db/main"
-import { users } from "@/db/main/schema"
+import { user } from "@/db/main/schema"
 
 const listUsers = createServerFn({ method: "GET" }).handler(async () => {
   const db = getMainDb()
-  return db.select().from(users).all()
+  return db.select().from(user).all()
 })
 ```
 
@@ -47,9 +47,8 @@ Database schemas are defined in feature modules and then aggregated at `packages
 <FileTree>
 
 - apps/
-  - user/db/schema.ts User tables
-  - permissions/db/schema.ts Permission tables
-  - payments/db/schema.ts Payment tables
+  - auth/db/schema.ts Better Auth tables (user, session, account, verification)
+  - newsletter/db/schema.ts Newsletter tables
 - packages/db/
   - main/
     - schema.ts Main database schema
@@ -60,11 +59,14 @@ Database schemas are defined in feature modules and then aggregated at `packages
 **Example schema:**
 
 ```tsx
-import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core"
+import { sqliteTable, text, integer } from "drizzle-orm/sqlite-core"
 
-export const users = sqliteTable("users", {
-  id: integer("id").primaryKey(),
-  email: text("email").notNull(),
+export const user = sqliteTable("user", {
+  id: text("id").primaryKey(),
+  name: text("name").notNull(),
+  email: text("email").notNull().unique(),
+  emailVerified: integer("email_verified", { mode: "boolean" }).default(false).notNull(),
+  role: text("role").default("user"),
 })
 ```
 
