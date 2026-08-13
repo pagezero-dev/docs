@@ -16,12 +16,12 @@ flowchart LR
 
 Built-in roles:
 
-| Role | Permissions |
-|------|-------------|
-| `user` | (none beyond default access) |
-| `admin` | Better Auth admin statements |
-| `premium` | `viewPremium` |
-| `elite` | `viewPremium`, `viewElite` |
+| Role      | Permissions                  |
+| --------- | ---------------------------- |
+| `user`    | (none beyond default access) |
+| `admin`   | Better Auth admin statements |
+| `premium` | `viewPremium`                |
+| `elite`   | `viewPremium`, `viewElite`   |
 
 ## Configuration
 
@@ -50,13 +50,13 @@ These roles are registered on both the Better Auth server (`apps/auth/auth.serve
 
 All functions are exported from `@/auth`.
 
-| Function | Purpose |
-|----------|---------|
+| Function                                                    | Purpose                                                          |
+| ----------------------------------------------------------- | ---------------------------------------------------------------- |
 | `requireUserPermissions({ data: { userId, permissions } })` | Server function - throws if user lacks the specified permissions |
-| `requireUserRole({ data: { userId, roleName } })` | Server function - throws if user doesn't have the role |
-| `hasUserRole(userId, roleName)` | Returns `boolean` - use when you need to check without throwing |
-| `grantUserRole(userId, roleName)` | Assigns a role to user |
-| `revokeUserRole(userId, roleName)` | Removes a role from user |
+| `requireUserRole({ data: { userId, roleName } })`           | Server function - throws if user doesn't have the role           |
+| `hasUserRole(userId, roleName)`                             | Returns `boolean` - use when you need to check without throwing  |
+| `grantUserRole(userId, roleName)`                           | Assigns a role to user                                           |
+| `revokeUserRole(userId, roleName)`                          | Removes a role from user                                         |
 
 ## Protecting Pages
 

@@ -2,7 +2,7 @@
 title: Payments
 ---
 
-import { Aside, Steps } from '@astrojs/starlight/components';
+import { Aside, Steps } from "@astrojs/starlight/components"
 
 Payment integration powered by **[Polar.sh](https://polar.sh/)** via the **Better Auth Polar plugin**. Sell digital products, subscriptions, or one-time purchases. Checkout, customer portal, and webhooks are wired through Better Auth's `/api/auth` endpoints.
 
@@ -24,9 +24,7 @@ Payment integration powered by **[Polar.sh](https://polar.sh/)** via the **Bette
 
 3. **Create an Organization Access Token** - generate a Polar access token and add it as a secret:
 
-   <Aside type="note">
-   The token requires the `checkouts:read` and `checkouts:write` scopes.
-   </Aside>
+   <Aside type="note">The token requires the `checkouts:read` and `checkouts:write` scopes.</Aside>
 
    ```sh
    bunx wrangler secret put POLAR_ACCESS_TOKEN --env=preview
@@ -76,9 +74,7 @@ A styled button that starts Polar checkout through the Better Auth client. Uses 
 ```tsx
 import { CheckoutButton } from "@/payments/components/checkout-button"
 
-<CheckoutButton productId="premium">
-  Get Premium Access
-</CheckoutButton>
+;<CheckoutButton productId="premium">Get Premium Access</CheckoutButton>
 ```
 
 The `productId` must match a key in your `payments.products` config.
@@ -93,9 +89,9 @@ The `productId` must match a key in your `payments.products` config.
 
 **Webhook events handled:**
 
-| Event | Action |
-|-------|--------|
-| `order.paid` | Grant role, send access granted email |
-| `subscription.active` | Grant role, send access granted email |
-| `order.refunded` | Revoke role, send access revoked email |
+| Event                  | Action                                 |
+| ---------------------- | -------------------------------------- |
+| `order.paid`           | Grant role, send access granted email  |
+| `subscription.active`  | Grant role, send access granted email  |
+| `order.refunded`       | Revoke role, send access revoked email |
 | `subscription.revoked` | Revoke role, send access revoked email |

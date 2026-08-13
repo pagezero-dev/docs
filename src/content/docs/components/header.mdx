@@ -2,24 +2,30 @@
 title: Header
 ---
 
-import { LinkButton } from '@astrojs/starlight/components'
+import { LinkButton } from "@astrojs/starlight/components"
 
 ![Header component](../../../assets/components/header.png)
 
-<LinkButton href="http://localhost:6006/?path=/story/apps-brand-header--default" variant="secondary" icon="external">Storybook</LinkButton>
+<LinkButton
+  href="http://localhost:6006/?path=/story/apps-brand-header--default"
+  variant="secondary"
+  icon="external"
+>
+  Storybook
+</LinkButton>
 
 ## Import
 
 ```js
-import { Header } from '@/brand/components/header'
+import { Header } from "@/brand/components/header"
 ```
 
 ## Usage
 
 ```js
-import { Button } from '@/ui/button'
+import { Button } from "@/ui/button"
 
-<Header
+;<Header
   logo={
     <a href="/" className="font-bold text-lg">
       Logo
@@ -43,4 +49,3 @@ import { Button } from '@/ui/button'
   </Button>
 </Header>
 ```
-

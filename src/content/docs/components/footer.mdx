@@ -2,16 +2,22 @@
 title: Footer
 ---
 
-import { LinkButton } from '@astrojs/starlight/components'
+import { LinkButton } from "@astrojs/starlight/components"
 
 ![Footer component](../../../assets/components/footer.png)
 
-<LinkButton href="http://localhost:6006/?path=/story/apps-brand-footer--default" variant="secondary" icon="external">Storybook</LinkButton>
+<LinkButton
+  href="http://localhost:6006/?path=/story/apps-brand-footer--default"
+  variant="secondary"
+  icon="external"
+>
+  Storybook
+</LinkButton>
 
 ## Import
 
 ```js
-import { Footer } from '@/brand/components/footer'
+import { Footer } from "@/brand/components/footer"
 ```
 
 ## Usage
@@ -20,45 +26,44 @@ import { Footer } from '@/brand/components/footer'
 <Footer
   navigation={[
     {
-      heading: 'Lorem',
+      heading: "Lorem",
       children: [
-        { label: 'Ipsum', href: '/' },
-        { label: 'Dolor', href: '/' },
-        { label: 'Sit', href: '/' }
-      ]
+        { label: "Ipsum", href: "/" },
+        { label: "Dolor", href: "/" },
+        { label: "Sit", href: "/" },
+      ],
     },
     {
-      heading: 'Amet',
+      heading: "Amet",
       children: [
-        { label: 'Consectetur', href: '/' },
-        { label: 'Adipiscing', href: '/' },
-        { label: 'Elit', href: '/' }
-      ]
+        { label: "Consectetur", href: "/" },
+        { label: "Adipiscing", href: "/" },
+        { label: "Elit", href: "/" },
+      ],
     },
     {
-      heading: 'Sed',
+      heading: "Sed",
       children: [
-        { label: 'Eiusmod', href: '/' },
-        { label: 'Tempor', href: '/' },
-        { label: 'Incididunt', href: '/' }
-      ]
+        { label: "Eiusmod", href: "/" },
+        { label: "Tempor", href: "/" },
+        { label: "Incididunt", href: "/" },
+      ],
     },
     {
-      heading: 'Labore',
+      heading: "Labore",
       children: [
-        { label: 'Dolore', href: '/' },
-        { label: 'Magna', href: '/' },
-        { label: 'Aliqua', href: '/' }
-      ]
-    }
+        { label: "Dolore", href: "/" },
+        { label: "Magna", href: "/" },
+        { label: "Aliqua", href: "/" },
+      ],
+    },
   ]}
   socialMediaUrls={{
-    facebookUrl: 'https://www.facebook.com',
-    instagramUrl: 'https://www.instagram.com',
-    twitterUrl: 'https://www.twitter.com',
-    githubUrl: 'https://www.github.com',
-    youtubeUrl: 'https://www.youtube.com'
+    facebookUrl: "https://www.facebook.com",
+    instagramUrl: "https://www.instagram.com",
+    twitterUrl: "https://www.twitter.com",
+    githubUrl: "https://www.github.com",
+    youtubeUrl: "https://www.youtube.com",
   }}
 />
 ```
-

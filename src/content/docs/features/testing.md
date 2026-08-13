@@ -27,10 +27,10 @@ bun run test:smoke        # Run smoke tests against deployed URL
 
 Unit tests verify individual functions, components, and modules in isolation. They run fast and catch bugs early in development. Vitest is configured with two separate environments:
 
-| Environment | File Pattern | Use Case |
-|-------------|--------------|----------|
-| Node | `*.test.ts` | Server-side logic, utilities, API handlers |
-| DOM (happy-dom) | `*.test.tsx` | React components, hooks, client-side code |
+| Environment     | File Pattern | Use Case                                   |
+| --------------- | ------------ | ------------------------------------------ |
+| Node            | `*.test.ts`  | Server-side logic, utilities, API handlers |
+| DOM (happy-dom) | `*.test.tsx` | React components, hooks, client-side code  |
 
 Tests are co-located with their source files. Component tests use [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/) for rendering and interacting with components.
 

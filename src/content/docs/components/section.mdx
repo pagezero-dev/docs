@@ -2,16 +2,22 @@
 title: Section
 ---
 
-import { LinkButton } from '@astrojs/starlight/components'
+import { LinkButton } from "@astrojs/starlight/components"
 
 ![Section component](../../../assets/components/section.png)
 
-<LinkButton href="http://localhost:6006/?path=/story/apps-brand-section--default" variant="secondary" icon="external">Storybook</LinkButton>
+<LinkButton
+  href="http://localhost:6006/?path=/story/apps-brand-section--default"
+  variant="secondary"
+  icon="external"
+>
+  Storybook
+</LinkButton>
 
 ## Import
 
 ```js
-import { Section } from '@/brand/components/section'
+import { Section } from "@/brand/components/section"
 ```
 
 ## Usage
@@ -31,9 +37,9 @@ import { Section } from '@/brand/components/section'
 **With badge:**
 
 ```js
-import { Badge } from '@/ui/badge'
+import { Badge } from "@/ui/badge"
 
-<Section
+;<Section
   id="cloudflare"
   title="Lorem ipsum dolor sit amet"
   description="Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."

@@ -1,17 +1,23 @@
 ---
 title: Error Page
 ---
-import { LinkButton } from '@astrojs/starlight/components'
 
+import { LinkButton } from "@astrojs/starlight/components"
 
 ![Error Page component](../../../assets/components/error-page.png)
 
-<LinkButton href="http://localhost:6006/?path=/story/apps-core-errorpage--default" variant="secondary" icon="external">Storybook</LinkButton>
+<LinkButton
+  href="http://localhost:6006/?path=/story/apps-core-errorpage--default"
+  variant="secondary"
+  icon="external"
+>
+  Storybook
+</LinkButton>
 
 ## Import
 
 ```js
-import { ErrorPage } from '@/core/components/error-page'
+import { ErrorPage } from "@/core/components/error-page"
 ```
 
 ## Usage
@@ -20,9 +26,8 @@ import { ErrorPage } from '@/core/components/error-page'
 <ErrorPage
   error={{
     name: "Server Error",
-    message: "Failed to load data"
+    message: "Failed to load data",
   }}
   details="@http://localhost:6006/apps/core/components/error-page/error-page.stories.tsx:16:21"
 />
 ```
-

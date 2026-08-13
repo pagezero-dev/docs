@@ -2,24 +2,30 @@
 title: Hero
 ---
 
-import { LinkButton } from '@astrojs/starlight/components'
+import { LinkButton } from "@astrojs/starlight/components"
 
 ![Hero component](../../../assets/components/hero.png)
 
-<LinkButton href="http://localhost:6006/?path=/story/apps-brand-hero--default" variant="secondary" icon="external">Storybook</LinkButton>
+<LinkButton
+  href="http://localhost:6006/?path=/story/apps-brand-hero--default"
+  variant="secondary"
+  icon="external"
+>
+  Storybook
+</LinkButton>
 
 ## Import
 
 ```js
-import { Hero } from '@/brand/components/hero'
+import { Hero } from "@/brand/components/hero"
 ```
 
 ## Usage
 
 ```js
-import { Button } from '@/ui/button'
+import { Button } from "@/ui/button"
 
-<Hero
+;<Hero
   title="Lorem ipsum dolor sit amet"
   description="Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris."
   cta={
@@ -34,4 +40,3 @@ import { Button } from '@/ui/button'
   }
 />
 ```
-

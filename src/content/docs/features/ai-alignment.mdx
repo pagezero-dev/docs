@@ -1,7 +1,8 @@
 ---
 title: AI-alignment
 ---
-import { FileTree } from '@astrojs/starlight/components';
+
+import { FileTree } from "@astrojs/starlight/components"
 
 PageZERO architecture is designed from the ground up for AI-assisted development. Every structure, pattern, and convention exists to help AI coding assistants like Cursor, Copilot, and Claude understand, navigate, and modify code effectively.
 
@@ -74,12 +75,12 @@ When an AI agent opens the project, it reads `AGENTS.md` and immediately underst
 
 The repo ships [Agent Skills](https://cursor.com/docs/context/skills) under `.agents/skills/`. The folder is the only content under `.agents` today: each skill is a subdirectory with a `SKILL.md` file (YAML frontmatter plus instructions) that the AI applies when your task matches the skill’s description, or when you invoke the workflow explicitly.
 
-| Skill | Description |
-|-------|-------------|
+| Skill              | Description                                                                                                                                                               |
+| ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `create-component` | Scaffolds a UI component with implementation, `index`, tests, and Storybook stories following PageZERO conventions (`packages/ui` or feature `apps/{feature}/components`) |
-| `change-theme` | Updates the shadcn/ui theme by editing OKLCH CSS custom properties in `apps/core/styles/tailwind.css` |
-| `create-pr` | Opens a GitHub pull request with conventional branch naming, creating a branch from `main`/`master` when needed, then pushing and creating the PR |
-| `merge-pr` | Squash-merges the **open** PR for the **current branch** after checks pass, then cleans up the branch (no PR number—the skill uses the branch context only) |
+| `change-theme`     | Updates the shadcn/ui theme by editing OKLCH CSS custom properties in `apps/core/styles/tailwind.css`                                                                     |
+| `create-pr`        | Opens a GitHub pull request with conventional branch naming, creating a branch from `main`/`master` when needed, then pushing and creating the PR                         |
+| `merge-pr`         | Squash-merges the **open** PR for the **current branch** after checks pass, then cleans up the branch (no PR number—the skill uses the branch context only)               |
 
 **How to use them:**
 

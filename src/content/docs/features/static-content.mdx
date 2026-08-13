@@ -2,7 +2,7 @@
 title: Static Content
 ---
 
-import { FileTree, Steps } from '@astrojs/starlight/components'
+import { FileTree, Steps } from "@astrojs/starlight/components"
 
 MDX files compiled at **build time** into React components, with Zod-validated frontmatter, design system typography, and optional static prerendering. Drop a file into a content directory and it is live with no registration step.
 
@@ -24,7 +24,6 @@ Posts live in `apps/blog/content/`. Each `.mdx` file becomes a post at `/blog/<s
 **Legal**
 
 Legal documents live in `apps/brand/content/legal/`. Each file is served at `/legal/<slug>`, e.g. `/legal/privacy` and `/legal/terms-and-conditions`.
-
 
 ## Adding a Content Area
 
@@ -123,7 +122,7 @@ import config from "../../../../packages/config"
 export const frontmatter = {
   title: "Page title",
   date: "2026-06-01",
-  imgSrc: cover,                        // imported Vite asset
+  imgSrc: cover, // imported Vite asset
   projectName: config.core.projectName, // live config value
 }
 

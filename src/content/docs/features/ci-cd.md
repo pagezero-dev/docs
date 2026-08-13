@@ -24,7 +24,7 @@ flowchart LR
         Q[Quality Check]
         U[Unit Tests]
     end
-    
+
     parallel --> E[E2E Tests]
     E --> D[Database Migration]
     D --> DP[Deploy]
@@ -33,10 +33,10 @@ flowchart LR
 
 **Environments**
 
-| Branch | Environment | Database | URL |
-|--------|-------------|----------|-----|
-| `main` | Production | Production D1 | Your custom domain |
-| PR branches | Preview | Preview D1 | `*.workers.dev` |
+| Branch      | Environment | Database      | URL                |
+| ----------- | ----------- | ------------- | ------------------ |
+| `main`      | Production  | Production D1 | Your custom domain |
+| PR branches | Preview     | Preview D1    | `*.workers.dev`    |
 
 Draft PRs only run quality checks and tests. Database migrations and deployments are skipped until the PR is marked as ready for review.
 

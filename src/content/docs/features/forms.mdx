@@ -2,7 +2,7 @@
 title: Forms
 ---
 
-import { Steps } from '@astrojs/starlight/components';
+import { Steps } from "@astrojs/starlight/components"
 
 Type-safe form handling that ties together **[TanStack Start](https://tanstack.com/start)** server functions, **[TanStack Query](https://tanstack.com/query)** mutations, and **[Zod](https://zod.dev/)** validation. The `@/form` package lets you share a single schema between client and server, submit native `FormData`, and surface per-field validation errors with full TypeScript inference.
 
@@ -16,10 +16,10 @@ Type-safe form handling that ties together **[TanStack Start](https://tanstack.c
 
 ## API
 
-| Export | Module | Purpose |
-|--------|--------|---------|
-| `parseFormData(schema, data)` | `@/form` | Server-side: validate `FormData` against a Zod schema, throwing a structured `FormError` on failure |
-| `useFormAction(schema, serverFn, options?)` | `@/form` | Client-side hook: wraps a server function in a mutation and exposes `onSubmit` plus typed `fields` |
+| Export                                      | Module   | Purpose                                                                                             |
+| ------------------------------------------- | -------- | --------------------------------------------------------------------------------------------------- |
+| `parseFormData(schema, data)`               | `@/form` | Server-side: validate `FormData` against a Zod schema, throwing a structured `FormError` on failure |
+| `useFormAction(schema, serverFn, options?)` | `@/form` | Client-side hook: wraps a server function in a mutation and exposes `onSubmit` plus typed `fields`  |
 
 ## Building a Form
 

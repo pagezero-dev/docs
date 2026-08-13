@@ -2,7 +2,7 @@
 title: Blog
 ---
 
-import { FileTree, Steps } from '@astrojs/starlight/components'
+import { FileTree, Steps } from "@astrojs/starlight/components"
 
 A file-based **MDX blog** with dynamic routing, frontmatter validation, and styled typography. Posts live as `.mdx` files - drop one in and it appears on the blog index automatically.
 
@@ -84,19 +84,19 @@ Frontmatter is validated with Zod at load time. Missing required fields throw an
 
 Post body content is rendered inside an `MDXProvider` that maps standard Markdown elements to design system components (from `@/ui/typography` and `@/ui/link`) automatically:
 
-| Markdown | Rendered as |
-|----------|-------------|
-| Headings `#` `##` `###` | Styled `Heading` component |
-| Paragraph | `P` component |
-| `**bold**`, `_italic_` | Standard HTML |
-| `` `inline code` `` | `InlineCode` component |
-| Fenced code blocks | Syntax-highlighted `pre`/`code` with `rehype-highlight` |
-| `> blockquote` | `Blockquote` component |
-| Unordered/ordered lists | `List` / styled `ol` |
-| `[links](url)` | `Link` component |
-| `---` horizontal rule | Styled `hr` |
-| Images | Rounded, bordered `img` |
-| Tables | `Table` / `TableHeader` / `TableRow` / `TableCell` components |
+| Markdown                | Rendered as                                                   |
+| ----------------------- | ------------------------------------------------------------- |
+| Headings `#` `##` `###` | Styled `Heading` component                                    |
+| Paragraph               | `P` component                                                 |
+| `**bold**`, `_italic_`  | Standard HTML                                                 |
+| `` `inline code` ``     | `InlineCode` component                                        |
+| Fenced code blocks      | Syntax-highlighted `pre`/`code` with `rehype-highlight`       |
+| `> blockquote`          | `Blockquote` component                                        |
+| Unordered/ordered lists | `List` / styled `ol`                                          |
+| `[links](url)`          | `Link` component                                              |
+| `---` horizontal rule   | Styled `hr`                                                   |
+| Images                  | Rounded, bordered `img`                                       |
+| Tables                  | `Table` / `TableHeader` / `TableRow` / `TableCell` components |
 
 You can also import and use any React component directly inside an `.mdx` file:
 

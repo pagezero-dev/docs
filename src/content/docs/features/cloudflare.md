@@ -23,16 +23,16 @@ flowchart TB
         A[Assets<br/>CDN]
         W <--> D
     end
-    
+
     U((User)) --> edge
 ```
 
-| Component | Purpose | Cloudflare Service |
-|-----------|---------|-------------------|
-| Compute | Server-side rendering, API routes | [Workers](https://developers.cloudflare.com/workers/) |
-| Database | Data persistence | [D1](https://developers.cloudflare.com/d1/) (SQLite) |
-| Static files | JS, CSS, images | [Assets](https://developers.cloudflare.com/workers/static-assets/) (CDN) |
-| Bot protection | Form spam prevention | [Turnstile](https://developers.cloudflare.com/turnstile/) |
+| Component      | Purpose                           | Cloudflare Service                                                       |
+| -------------- | --------------------------------- | ------------------------------------------------------------------------ |
+| Compute        | Server-side rendering, API routes | [Workers](https://developers.cloudflare.com/workers/)                    |
+| Database       | Data persistence                  | [D1](https://developers.cloudflare.com/d1/) (SQLite)                     |
+| Static files   | JS, CSS, images                   | [Assets](https://developers.cloudflare.com/workers/static-assets/) (CDN) |
+| Bot protection | Form spam prevention              | [Turnstile](https://developers.cloudflare.com/turnstile/)                |
 
 ## Why Cloudflare?
 
