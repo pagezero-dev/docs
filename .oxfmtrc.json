@@ -1,12 +1,5 @@
 {
   "$schema": "./node_modules/oxfmt/configuration_schema.json",
-  "printWidth": 80,
   "semi": false,
-  "sortPackageJson": false,
-  "ignorePatterns": [
-    "**/*.{md,mdx,yml,yaml}",
-    "src/styles/fonts.css",
-    "src/styles/custom.css",
-    "wrangler.jsonc"
-  ]
+  "sortImports": true
 }
