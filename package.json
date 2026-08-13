@@ -1,10 +1,10 @@
 {
   "name": "docs",
-  "type": "module",
   "version": "0.0.1",
+  "type": "module",
   "scripts": {
-    "check": "astro check && oxlint && oxfmt --check",
-    "check:fix": "oxlint --fix && oxfmt",
+    "check": "astro check && oxfmt --check && oxlint",
+    "check:fix": "oxfmt && oxlint --fix",
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",

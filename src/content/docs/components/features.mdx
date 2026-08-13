@@ -2,25 +2,31 @@
 title: Features
 ---
 
-import { LinkButton } from '@astrojs/starlight/components'
+import { LinkButton } from "@astrojs/starlight/components"
 
 ![Features component](../../../assets/components/features.png)
 
-<LinkButton href="http://localhost:6006/?path=/story/apps-brand-features--default" variant="secondary" icon="external">Storybook</LinkButton>
+<LinkButton
+  href="http://localhost:6006/?path=/story/apps-brand-features--default"
+  variant="secondary"
+  icon="external"
+>
+  Storybook
+</LinkButton>
 
 ## Import
 
 ```js
-import { Features } from '@/brand/components/features'
+import { Features } from "@/brand/components/features"
 ```
 
 ## Usage
 
 ```js
-import { Building2, Archive, ArrowRightCircle, RefreshCw, TestTube, Zap } from 'lucide-react'
-import { Link } from '@/ui/link'
+import { Building2, Archive, ArrowRightCircle, RefreshCw, TestTube, Zap } from "lucide-react"
+import { Link } from "@/ui/link"
 
-<Features>
+;<Features>
   <Features.Item
     title="Lorem"
     icon={<Building2 />}
@@ -41,7 +47,8 @@ import { Link } from '@/ui/link'
       </Link>
     }
   >
-    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.
+    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+    commodo.
   </Features.Item>
   <Features.Item
     title="Dolor"
@@ -74,7 +81,8 @@ import { Link } from '@/ui/link'
       </Link>
     }
   >
-    Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.
+    Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
+    laudantium.
   </Features.Item>
   <Features.Item
     title="Consectetur"
@@ -85,8 +93,8 @@ import { Link } from '@/ui/link'
       </Link>
     }
   >
-    Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur.
+    Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia
+    consequuntur.
   </Features.Item>
 </Features>
 ```
-

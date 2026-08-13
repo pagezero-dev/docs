@@ -2,7 +2,7 @@
 title: Newsletter
 ---
 
-import { Steps } from '@astrojs/starlight/components';
+import { Steps } from "@astrojs/starlight/components"
 
 Newsletter subscription powered by **[Resend](https://resend.com/)**. Collect email addresses with a double opt-in flow-subscribers confirm their address before being added to your audience, keeping your list clean and compliant.
 
@@ -55,7 +55,7 @@ Drop the signup form anywhere in your app. It handles Turnstile, form state, loa
 ```tsx
 import { NewsletterSignup } from "@/newsletter/components/newsletter-signup"
 
-<NewsletterSignup cloudflareTurnstilePublicKey={cloudflareTurnstilePublicKey} />
+;<NewsletterSignup cloudflareTurnstilePublicKey={cloudflareTurnstilePublicKey} />
 ```
 
 If `cloudflareTurnstilePublicKey` is not provided, bot protection is disabled.

@@ -2,10 +2,9 @@
 title: Authentication
 ---
 
-import { Steps } from '@astrojs/starlight/components';
+import { Steps } from "@astrojs/starlight/components"
 
 Built-in authentication powered by **[Better Auth](https://www.better-auth.com/)**, using **OTP (One-Time Password)** via email. No passwords to store or reset. Users don't need to remember credentials. Sessions, cookies, and access control are handled by Better Auth with a TanStack Start integration.
-
 
 **How it works**
 
@@ -53,21 +52,21 @@ For production and preview environments:
 
 ## Architecture
 
-| Piece | Location | Purpose |
-|-------|----------|---------|
+| Piece           | Location                   | Purpose                                                                         |
+| --------------- | -------------------------- | ------------------------------------------------------------------------------- |
 | Server instance | `apps/auth/auth.server.ts` | Better Auth config (email OTP, admin AC, Polar plugins, TanStack Start cookies) |
-| Client | `apps/auth/auth.ts` | Better Auth React client (email OTP, admin, Polar) |
-| Access control | `apps/auth/access.ts` | Roles and content permissions (`user`, `admin`, `premium`, `elite`) |
-| API catch-all | `/api/auth/$` | Handles Better Auth HTTP endpoints (sessions, OTP, Polar webhooks, checkout) |
+| Client          | `apps/auth/auth.ts`        | Better Auth React client (email OTP, admin, Polar)                              |
+| Access control  | `apps/auth/access.ts`      | Roles and content permissions (`user`, `admin`, `premium`, `elite`)             |
+| API catch-all   | `/api/auth/$`              | Handles Better Auth HTTP endpoints (sessions, OTP, Polar webhooks, checkout)    |
 
 ## API
 
-| Function | Module | Purpose |
-|----------|--------|---------|
-| `requireUserId()` | `@/auth` | Server function - returns user ID or redirects to `/login` |
-| `getUserById(userId)` | `@/auth` | Returns user record from database |
-| `useUser()` | `@/auth` | Client-side hook to access current user |
-| `useLogout()` | `@/auth` | Client-side hook that returns an async logout function |
+| Function              | Module   | Purpose                                                    |
+| --------------------- | -------- | ---------------------------------------------------------- |
+| `requireUserId()`     | `@/auth` | Server function - returns user ID or redirects to `/login` |
+| `getUserById(userId)` | `@/auth` | Returns user record from database                          |
+| `useUser()`           | `@/auth` | Client-side hook to access current user                    |
+| `useLogout()`         | `@/auth` | Client-side hook that returns an async logout function     |
 
 ## Login & Logout
 
@@ -123,11 +122,11 @@ import { useUser } from "@/auth"
 
 function MyComponent() {
   const { data } = useUser()
-  
+
   if (data?.user) {
     return <p>Hello, {data.user.email}</p>
   }
-  
+
   return <p>Not signed in</p>
 }
 ```

@@ -2,7 +2,7 @@
 title: SEO
 ---
 
-import { FileTree } from '@astrojs/starlight/components';
+import { FileTree } from "@astrojs/starlight/components"
 
 Built-in **SEO (Search Engine Optimization)** with centralized configuration. Manage your site's title, description, keywords, and canonical URL from a single config file.
 
@@ -17,7 +17,6 @@ Built-in **SEO (Search Engine Optimization)** with centralized configuration. Ma
 
 Good SEO helps search engines understand and rank your content. Proper meta tags improve click-through rates from search results, while canonical URLs prevent duplicate content penalties.
 
-
 ## Configuration
 
 Global SEO settings are defined in `packages/config/index.ts`:
@@ -29,16 +28,16 @@ const config: Config = {
     appTitle: "My App - A description of what it does",
     appDescription: "A longer description for search engines",
     appKeywords: ["keyword1", "keyword2", "keyword3"],
-  }
+  },
 }
 ```
 
-| Property | Purpose | Required |
-|----------|---------|----------|
-| `websiteUrl` | Canonical URL for the site | Yes |
-| `appTitle` | Page title shown in browser tab and search results | Yes |
-| `appDescription` | Meta description for search engines | No |
-| `appKeywords` | Keywords meta tag (array of strings) | No |
+| Property         | Purpose                                            | Required |
+| ---------------- | -------------------------------------------------- | -------- |
+| `websiteUrl`     | Canonical URL for the site                         | Yes      |
+| `appTitle`       | Page title shown in browser tab and search results | Yes      |
+| `appDescription` | Meta description for search engines                | No       |
+| `appKeywords`    | Keywords meta tag (array of strings)               | No       |
 
 ## Best Practices
 

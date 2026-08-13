@@ -4,13 +4,13 @@ description: Learn how to deploy your PageZero application to production
 sidebar:
   order: 2
 ---
-import { Aside, Steps, Badge, Tabs, TabItem } from '@astrojs/starlight/components';
 
-PageZERO is built specifically for Cloudflare's infrastructure, leveraging Cloudflare Workers for compute and Cloudflare D1 for database storage. 
+import { Aside, Steps, Badge, Tabs, TabItem } from "@astrojs/starlight/components"
 
-The deployment process involves setting up D1 databases and deploying your application as Cloudflare Workers. 
+PageZERO is built specifically for Cloudflare's infrastructure, leveraging Cloudflare Workers for compute and Cloudflare D1 for database storage.
+
+The deployment process involves setting up D1 databases and deploying your application as Cloudflare Workers.
 You can deploy manually or set up automated deployments through a GitHub Actions CI/CD pipeline.
-
 
 ## First deployment
 
@@ -25,13 +25,18 @@ You can deploy manually or set up automated deployments through a GitHub Actions
    ```
 
 1. **Reset your `wrangler.json` config** - initialise the config for your project:
+
    ```sh
    bun setup:wrangler
    ```
 
-   <Aside type="note">Skip this step if you initialised your project via `bunx pagezero@latest init` - the CLI already ran this for you.</Aside>
+   <Aside type="note">
+     Skip this step if you initialised your project via `bunx pagezero@latest init` - the CLI
+     already ran this for you.
+   </Aside>
 
 1. **Deploy your app** - deploy for _preview_ and _production_ environments:
+
    ```sh
    bun run deploy:preview
    ```
@@ -41,10 +46,14 @@ You can deploy manually or set up automated deployments through a GitHub Actions
    ```
 
    <Aside type="note">
-   Wrangler automatically provisions resources defined in `wrangler.json` (such as D1 databases) on first deploy. No separate database creation step is needed. See [Automatic Provisioning](https://developers.cloudflare.com/workers/wrangler/configuration/#automatic-provisioning) for details.
+     Wrangler automatically provisions resources defined in `wrangler.json` (such as D1 databases)
+     on first deploy. No separate database creation step is needed. See [Automatic
+     Provisioning](https://developers.cloudflare.com/workers/wrangler/configuration/#automatic-provisioning)
+     for details.
    </Aside>
 
 1. **Migrate your database** - run migrations for _preview_ and _production_ environments:
+
    ```sh
    bun run db:migrate --env preview --remote
    ```
@@ -63,11 +72,11 @@ You can deploy manually or set up automated deployments through a GitHub Actions
 
 Automatic deployment happens through the GitHub Actions CI/CD pipeline. Once the pipeline is set up,
 every merge to the `main` branch will automatically trigger deployment to Cloudflare Workers and a database
-migration for Cloudflare D1. Additionally, every PR will trigger a preview deployment, allowing you to access a 
+migration for Cloudflare D1. Additionally, every PR will trigger a preview deployment, allowing you to access a
 specific version of your app for each PR.
 
 <Aside type="note" title="Prerequisites">
-Steps below require [GitHub CLI](https://cli.github.com/).
+  Steps below require [GitHub CLI](https://cli.github.com/).
 </Aside>
 
 <Steps>
@@ -85,17 +94,16 @@ Steps below require [GitHub CLI](https://cli.github.com/).
     gh repo create <project-name> --private --source=. --remote=origin --push
     ```
 
-    <Aside type="note">
-    Skip this step if your project is already hosted on GitHub.
-    </Aside>
+    <Aside type="note">Skip this step if your project is already hosted on GitHub.</Aside>
 
 1.  **Add repository variable** - set your Cloudflare account ID:
 
     ```sh
     gh variable set CLOUDFLARE_ACCOUNT_ID --body "<your-cloudflare-account-id>"
     ```
+
     <Aside type="note">
-    `CLOUDFLARE_ACCOUNT_ID` value can be obtained through `bunx wrangler whoami` command.
+      `CLOUDFLARE_ACCOUNT_ID` value can be obtained through `bunx wrangler whoami` command.
     </Aside>
 
 1.  **Add repository secret** - set your Cloudflare API token:
@@ -109,10 +117,11 @@ Steps below require [GitHub CLI](https://cli.github.com/).
     ```
 
     <Aside type="note">
-      `CLOUDFLARE_API_TOKEN` value can be obtained through the Cloudflare dashboard under "Manage account / Account API Tokens". 
-      You will need to create a new token there. The token will require the following permissions: `D1:Edit`, `Workers Scripts:Edit`.
-      
-      The secret for Dependabot needs to be set separately; otherwise, Dependabot PRs will not perform preview deployments.
+      `CLOUDFLARE_API_TOKEN` value can be obtained through the Cloudflare dashboard under "Manage
+      account / Account API Tokens". You will need to create a new token there. The token will
+      require the following permissions: `D1:Edit`, `Workers Scripts:Edit`. The secret for
+      Dependabot needs to be set separately; otherwise, Dependabot PRs will not perform preview
+      deployments.
     </Aside>
 
 1.  **Done! 🎉**
