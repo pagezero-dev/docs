@@ -73,18 +73,18 @@ When an AI agent opens the project, it reads `AGENTS.md` and immediately underst
 
 ## Agent Skills
 
-The repo ships [Agent Skills](https://cursor.com/docs/context/skills) under `.agents/skills/`. The folder is the only content under `.agents` today: each skill is a subdirectory with a `SKILL.md` file (YAML frontmatter plus instructions) that the AI applies when your task matches the skill’s description, or when you invoke the workflow explicitly.
+The repo ships [Agent Skills](https://cursor.com/docs/context/skills) under `.agents/skills/`. The folder is the only content under `.agents` today: each skill is a subdirectory with a `SKILL.md` file (YAML frontmatter plus instructions). Skills are not applied from ambient context - invoke them by name in Agent chat.
 
 | Skill              | Description                                                                                                                                                               |
 | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `pagezero-upgrade` | Syncs the project to the latest starter with `bunx pagezero@latest upgrade -y`, then restores project-specific copy, config, and business logic.                          |
 | `create-component` | Scaffolds a UI component with implementation, `index`, tests, and Storybook stories following PageZERO conventions (`packages/ui` or feature `apps/{feature}/components`) |
 | `change-theme`     | Updates the shadcn/ui theme by editing OKLCH CSS custom properties in `apps/core/styles/tailwind.css`                                                                     |
 | `create-pr`        | Opens a GitHub pull request with conventional branch naming, creating a branch from `main`/`master` when needed, then pushing and creating the PR                         |
-| `merge-pr`         | Squash-merges the **open** PR for the **current branch** after checks pass, then cleans up the branch (no PR number—the skill uses the branch context only)               |
+| `merge-pr`         | Squash-merges the **open** PR for the **current branch** after checks pass, then cleans up the branch (no PR number - the skill uses the branch context only)             |
 
 **How to use them:**
 
-- **Ask in plain language.** For example: add a component in `packages/ui`, tweak light/dark primary colors, open a PR for your changes, or merge the PR for the branch you have checked out. Cursor loads project skills when the workspace opens; the agent picks a skill when your request matches its description.
-- **Invoke by name.** In Agent chat, type `/`, then search for the skill (e.g. `/create-component`, `/merge-pr`) to run that workflow explicitly.
+- **Invoke by name.** In Agent chat, type `/`, then search for the skill (e.g. `/pagezero-upgrade`, `/create-component`, `/merge-pr`).
 
 Skills encode structured workflows: gather requirements, follow repo conventions, and produce consistent output.
