@@ -2,7 +2,7 @@
 title: CLI
 ---
 
-import { Tabs, TabItem, Aside } from "@astrojs/starlight/components"
+import { Aside } from "@astrojs/starlight/components"
 
 Command-line tool for scaffolding and upgrading PageZERO projects. Initialize new projects with a single command or upgrade existing ones to the latest version.
 
@@ -46,9 +46,16 @@ Upgrade an existing PageZERO project to the latest version of PageZERO:
 bunx pagezero@latest upgrade
 ```
 
+`-y` / `--yes` skips the confirmation prompt.
+
 <Aside type="caution">
   The upgrade command overwrites existing files. After upgrading, review the changes using `git
   diff` to ensure your customizations are preserved.
+</Aside>
+
+<Aside type="note">
+  In Agent chat, `/pagezero-upgrade` runs `upgrade -y` and then restores project-specific copy,
+  config, and business logic. See [Agent Skills](/features/ai-alignment#agent-skills).
 </Aside>
 
 **Requirements:**
