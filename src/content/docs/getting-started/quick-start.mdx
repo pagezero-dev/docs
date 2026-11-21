@@ -50,15 +50,13 @@ If you're in a rush, already have Node.js installed, and want to quickly set up 
 npm install -g bun
 ```
 
-For a more robust setup, the recommendation in PageZERO is to use the [asdf](https://asdf-vm.com/) runtime version manager.
+For a more robust setup, the recommendation in PageZERO is to use the [mise](https://mise.jdx.dev/) runtime version manager.
 
-After installing asdf, run the following commands to install Node.js and Bun:
+After installing mise, run the following commands to install Node.js and Bun:
 
 ```sh
-asdf plugin add nodejs
-asdf plugin add bun
 cd <your-project-name>
-asdf install
+mise install
 ```
 
 This will read the `.tool-versions` file from your project root and automatically install the recommended versions of Node.js and Bun.
