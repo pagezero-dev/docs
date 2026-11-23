@@ -73,7 +73,7 @@ When an AI agent opens the project, it reads `AGENTS.md` and immediately underst
 
 ## Agent Skills
 
-PageZERO installs five published [Agent Skills](https://cursor.com/docs/context/skills) from [pagezero-dev/skills](https://github.com/pagezero-dev/skills). Canonical copies live under `.agents/skills/` (each skill is a subdirectory with a `SKILL.md` file) and are pinned in `skills-lock.json`. Skills are not applied from ambient context - invoke them by name in Agent chat.
+PageZERO installs five published [Agent Skills](https://cursor.com/docs/context/skills) from [pagezero-dev/skills](https://github.com/pagezero-dev/skills). Canonical copies live under `.agents/skills/` (each skill is a subdirectory with a `SKILL.md` file) and are pinned in `skills-lock.json`. Agents apply a matching skill from its description when the task fits; you can also invoke one by name in Agent chat.
 
 | Skill              | Description                                                                                                                                                       |
 | ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -85,6 +85,6 @@ PageZERO installs five published [Agent Skills](https://cursor.com/docs/context/
 
 **How to use them:**
 
-- **Invoke by name.** In Agent chat, type `/`, then search for the skill (e.g. `/pagezero-upgrade`, `/component-create`, `/pr-merge`).
+- **Invoke by name.** To run a skill directly, type `/` in Agent chat, then search (e.g. `/pagezero-upgrade`, `/component-create`, `/pr-merge`).
 
 Skills encode structured workflows: gather requirements, follow repo conventions, and produce consistent output.
