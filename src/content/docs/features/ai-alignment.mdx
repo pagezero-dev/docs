@@ -73,18 +73,18 @@ When an AI agent opens the project, it reads `AGENTS.md` and immediately underst
 
 ## Agent Skills
 
-The repo ships [Agent Skills](https://cursor.com/docs/context/skills) under `.agents/skills/`. The folder is the only content under `.agents` today: each skill is a subdirectory with a `SKILL.md` file (YAML frontmatter plus instructions). Skills are not applied from ambient context - invoke them by name in Agent chat.
+PageZERO installs five published [Agent Skills](https://cursor.com/docs/context/skills) from [pagezero-dev/skills](https://github.com/pagezero-dev/skills). Canonical copies live under `.agents/skills/` (each skill is a subdirectory with a `SKILL.md` file) and are pinned in `skills-lock.json`. Agents apply a matching skill from its description when the task fits; you can also invoke one by name in Agent chat.
 
-| Skill              | Description                                                                                                                                                               |
-| ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `pagezero-upgrade` | Syncs the project to the latest starter with `bunx pagezero@latest upgrade -y`, then restores project-specific copy, config, and business logic.                          |
-| `create-component` | Scaffolds a UI component with implementation, `index`, tests, and Storybook stories following PageZERO conventions (`packages/ui` or feature `apps/{feature}/components`) |
-| `change-theme`     | Updates the shadcn/ui theme by editing OKLCH CSS custom properties in `apps/core/styles/tailwind.css`                                                                     |
-| `create-pr`        | Opens a GitHub pull request with conventional branch naming, creating a branch from `main`/`master` when needed, then pushing and creating the PR                         |
-| `merge-pr`         | Squash-merges the **open** PR for the **current branch** after checks pass, then cleans up the branch (no PR number - the skill uses the branch context only)             |
+| Skill              | Description                                                                                                                                                       |
+| ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `pagezero-upgrade` | Upgrades a PageZERO-based project to the latest starter while keeping project-specific business logic and marketing content. Invoke via `/pagezero-upgrade`.      |
+| `component-create` | Creates a new UI component with implementation, index, tests, and Storybook stories following PageZERO conventions (`packages/ui` or feature `apps`)              |
+| `theme-change`     | Updates the shadcn/ui theme by editing OKLCH CSS custom properties in `apps/core/styles/tailwind.css`                                                             |
+| `pr-create`        | Creates GitHub pull requests following conventional naming patterns, creating a branch if needed                                                                  |
+| `pr-merge`         | Squash-merges the open pull request for the current branch and cleans up the branch, only when that PR exists and all checks pass (no PR number - branch context) |
 
 **How to use them:**
 
-- **Invoke by name.** In Agent chat, type `/`, then search for the skill (e.g. `/pagezero-upgrade`, `/create-component`, `/merge-pr`).
+- **Invoke by name.** To run a skill directly, type `/` in Agent chat, then search (e.g. `/pagezero-upgrade`, `/component-create`, `/pr-merge`).
 
 Skills encode structured workflows: gather requirements, follow repo conventions, and produce consistent output.
