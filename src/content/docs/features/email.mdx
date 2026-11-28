@@ -37,7 +37,7 @@ For production and preview environments:
    bunx wrangler secret put RESEND_API_KEY --env=production
    ```
 
-5. **Configure the sender address** - set `email.from` in `packages/config/index.ts`:
+5. **Configure the sender address** - set `email.from` in `packages/config/production.ts`:
 
    ```ts
    email: {

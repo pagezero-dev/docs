@@ -19,16 +19,14 @@ Good SEO helps search engines understand and rank your content. Proper meta tags
 
 ## Configuration
 
-Global SEO settings are defined in `packages/config/index.ts`:
+Global SEO settings are defined in `packages/config/production.ts`:
 
 ```ts
-const config: Config = {
-  core: {
-    websiteUrl: "https://www.example.com",
-    appTitle: "My App - A description of what it does",
-    appDescription: "A longer description for search engines",
-    appKeywords: ["keyword1", "keyword2", "keyword3"],
-  },
+core: {
+  websiteUrl: "https://www.example.com",
+  appTitle: "My App - A description of what it does",
+  appDescription: "A longer description for search engines",
+  appKeywords: ["keyword1", "keyword2", "keyword3"],
 }
 ```
 
