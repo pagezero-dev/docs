@@ -85,12 +85,18 @@ than workspaces. This allows for a simpler yet modular setup.
   - ui/
   - ui-lite/
   - config/
+    - production.ts Canonical app values (`core`, `email`, `payments`)
+    - preview.ts Spreads production; Polar sandbox IDs
+    - development.ts Spreads production; uses preview payments
+    - e2e.ts Re-exports preview
+    - index.ts `getConfig` / `detectMode` (Vite `--mode`)
   - crypto/
   - cloudflare/
   - date/
   - mdx/
   - test/
 - e2e/
+- wrangler.json Worker identity (`env.production` / `env.preview` / `env.e2e`)
 - package.json
 
 </FileTree>
@@ -98,6 +104,8 @@ than workspaces. This allows for a simpler yet modular setup.
 An **app** is a module that owns routes, DB schema or components specific to the app domain.
 
 A **package** is a module that owns utilities or UI components shared across multiple apps or other packages.
+
+App values live in `packages/config/{production,preview,development,e2e}.ts`. `getConfig(mode)` (and the default export via `detectMode()`) selects among them from Vite `import.meta.env.MODE`. Worker identity stays in `wrangler.json` and `CLOUDFLARE_ENV`. Vite `--mode test` is reserved by Vitest; use `--mode e2e` for Playwright.
 
 ## Essential scripts
 

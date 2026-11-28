@@ -46,7 +46,7 @@ Payment integration powered by **[Polar.sh](https://polar.sh/)** via the **Bette
    bunx wrangler secret put POLAR_WEBHOOK_SECRET --env=production
    ```
 
-6. **Configure your products** - add them to `packages/config/index.ts`:
+6. **Configure your products** - add them to `packages/config/production.ts`. `polarProductId` is a string per environment file:
 
    ```ts
    payments: {
@@ -54,14 +54,20 @@ Payment integration powered by **[Polar.sh](https://polar.sh/)** via the **Bette
        premium: {
          name: "Premium",
          userRoleToGrant: "premium",
-         polarProductId: {
-           preview: "your-preview-product-id",
-           production: "your-production-product-id",
-         },
+         polarProductId: "your-production-product-id",
        },
      },
    }
    ```
+
+   Override Polar sandbox IDs in `packages/config/preview.ts`. Development (`packages/config/development.ts`) reuses `preview.payments`. E2E (`packages/config/e2e.ts`) re-exports preview.
+
+   Starter Polar sandbox IDs:
+
+   - elite: `7b7f14e6-06c2-4779-b61d-ad622e111d4a`
+   - premium: `44a8395f-4b29-4aba-9de3-24858fac87ff`
+
+   `getConfig(mode)` in `packages/config/index.ts` selects the bundle from Vite `--mode` (`production` | `preview` | `development` | `e2e`; default is development). Payment handlers read `product.polarProductId` as a string.
 
 </Steps>
 

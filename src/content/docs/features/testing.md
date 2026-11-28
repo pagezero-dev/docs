@@ -36,7 +36,16 @@ Tests are co-located with their source files. Component tests use [React Testing
 
 ## End-to-End Tests
 
-End-to-end tests verify complete user flows by automating a real browser. They test the full application stack-frontend, backend, and database-ensuring everything works together correctly. E2E tests are located in the `e2e/` directory and use Playwright. Tests automatically start the development server when running locally.
+End-to-end tests verify complete user flows by automating a real browser. They test the full application stack-frontend, backend, and database-ensuring everything works together correctly. E2E tests are located in the `e2e/` directory and use Playwright.
+
+Playwright starts the app with Vite `--mode e2e` and `CLOUDFLARE_ENV=e2e` (Wrangler `env.e2e`):
+
+- Local: `bun run dev --mode e2e`
+- CI: `CLOUDFLARE_ENV=e2e NODE_ENV=test bun run build`, then `vite preview --mode e2e`
+
+Vite `--mode test` is reserved by Vitest; TanStack Start skips `configureServer` on `--mode test`. Use `e2e`. `getAppMode()` includes `"e2e"` (not `"test"`).
+
+`bun run setup:env` copies `.init.env` → `.env` and `.init.env.e2e` → `.env.e2e`. Do not commit `.env` or `.env.e2e`. `bun run generate:types` still runs `wrangler types` → `worker-configuration.d.ts` (`Cloudflare.E2eEnv`).
 
 ## Smoke Tests
 

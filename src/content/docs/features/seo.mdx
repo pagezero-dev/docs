@@ -4,7 +4,7 @@ title: SEO
 
 import { FileTree } from "@astrojs/starlight/components"
 
-Built-in **SEO (Search Engine Optimization)** with centralized configuration. Manage your site's title, description, keywords, and canonical URL from a single config file.
+Built-in **SEO (Search Engine Optimization)** with centralized configuration. Manage your site's title, description, keywords, and canonical URL from env-specific files in `packages/config`.
 
 **Key features**
 
@@ -19,16 +19,14 @@ Good SEO helps search engines understand and rank your content. Proper meta tags
 
 ## Configuration
 
-Global SEO settings are defined in `packages/config/index.ts`:
+Global SEO settings live in `packages/config/production.ts` under `core`. Preview, development, and e2e spread production and only override what differs. `packages/config/index.ts` exports `getConfig(mode)` and `detectMode()` (Vite `import.meta.env.MODE`); the default export is `getConfig(detectMode())`.
 
 ```ts
-const config: Config = {
-  core: {
-    websiteUrl: "https://www.example.com",
-    appTitle: "My App - A description of what it does",
-    appDescription: "A longer description for search engines",
-    appKeywords: ["keyword1", "keyword2", "keyword3"],
-  },
+core: {
+  websiteUrl: "https://www.example.com",
+  appTitle: "My App - A description of what it does",
+  appDescription: "A longer description for search engines",
+  appKeywords: ["keyword1", "keyword2", "keyword3"],
 }
 ```
 

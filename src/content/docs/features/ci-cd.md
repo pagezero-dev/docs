@@ -10,7 +10,7 @@ PageZERO includes a pre-configured pipeline using **GitHub Actions** and **Cloud
 
 1. You push code to GitHub
 2. Pipeline runs quality checks (format, lint, types) and unit tests in parallel
-3. E2E tests verify the app works end-to-end
+3. E2E tests verify the app works end-to-end (`CLOUDFLARE_ENV=e2e`, Vite `--mode e2e`; keep `NODE_ENV=test` as Node)
 4. Database migrations run automatically
 5. Code deploys to Cloudflare Workers
 6. Smoke tests verify the deployment succeeded (optional)
