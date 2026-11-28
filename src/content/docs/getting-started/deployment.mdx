@@ -65,7 +65,7 @@ Worker name, D1, and text vars live in `packages/config/cloudflare/`. App values
 
    ```sh
    bun run build --mode preview
-   bunx cf previews deploy --prebuilt --mode preview
+   bun run deploy --mode preview
    ```
 
 1. **Migrate your database** - apply migrations to the remote preview and production databases:
