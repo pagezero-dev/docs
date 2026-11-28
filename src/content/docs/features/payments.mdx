@@ -46,7 +46,7 @@ Payment integration powered by **[Polar.sh](https://polar.sh/)** via the **Bette
    bunx wrangler secret put POLAR_WEBHOOK_SECRET --env=production
    ```
 
-6. **Configure your products** - add them to `packages/config/production.ts`:
+6. **Configure your products** - add them to `packages/config/production.ts` and `packages/config/preview.ts`:
 
    ```ts
    payments: {
@@ -59,8 +59,6 @@ Payment integration powered by **[Polar.sh](https://polar.sh/)** via the **Bette
      },
    }
    ```
-
-   Put Polar sandbox IDs in `packages/config/preview.ts`. Starter sandbox IDs: elite `7b7f14e6-06c2-4779-b61d-ad622e111d4a`, premium `44a8395f-4b29-4aba-9de3-24858fac87ff`.
 
 </Steps>
 
