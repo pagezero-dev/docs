@@ -26,18 +26,9 @@ Worker name, D1, and text vars live in `packages/config/cloudflare/`. App values
    bunx cf auth login
    ```
 
-1. **Reset Cloudflare identity** - set the Worker name from your project directory and clear starter D1 ids, Turnstile, and newsletter values:
+1. **Set Worker name and text vars** - edit `packages/config/cloudflare/production.ts` and `packages/config/cloudflare/preview.ts`. Set `workerName` and, when you have them, `CLOUDFLARE_TURNSTILE_PUBLIC_KEY` and `NEWSLETTER_SEGMENT_ID` on `vars` (preview spreads production and can override).
 
-   ```sh
-   bun run setup:cloudflare
-   ```
-
-   <Aside type="note">
-     Skip this step if you initialised your project via `bunx pagezero@latest init` - the CLI
-     already ran this for you.
-   </Aside>
-
-1. **Create D1 databases** - create production and preview databases, then put each returned UUID on the matching `d1[].id` in `packages/config/cloudflare/production.ts` and `packages/config/cloudflare/preview.ts`:
+1. **Create D1 databases** - create production and preview databases, then put each returned UUID on the matching `d1[].id` in those files:
 
    ```sh
    bunx cf d1 create --name <project-name>-production
@@ -47,12 +38,12 @@ Worker name, D1, and text vars live in `packages/config/cloudflare/`. App values
    bunx cf d1 create --name <project-name>-preview
    ```
 
-   Use the `d1[].name` values from those config files (typically `<project-name>-production` and `<project-name>-preview` after `setup:cloudflare`).
+   Use the `d1[].name` values from the config files (typically `<workerName>-production` and `<workerName>-preview`).
 
    <Aside type="note">
-     `cf deploy` can provision D1 databases when `id` is omitted (`--provision` defaults to true). It
-     does not write UUIDs back to `packages/config/cloudflare`, and `bun run db:migrate` needs those
-     IDs. Create the databases and add them here. See [Develop, build, and
+     `cf deploy` can provision D1 databases when `id` is omitted (`--provision` defaults to true).
+     It does not write UUIDs back to `packages/config/cloudflare`, and `bun run db:migrate` needs
+     those IDs. Create the databases and add them here. See [Develop, build, and
      deploy](https://developers.cloudflare.com/cf/projects/).
    </Aside>
 
