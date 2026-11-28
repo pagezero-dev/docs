@@ -49,6 +49,13 @@ Worker name, D1, and text vars live in `packages/config/cloudflare/`. App values
 
    Use the `d1[].name` values from those config files (typically `<project-name>-production` and `<project-name>-preview` after `setup:cloudflare`).
 
+   <Aside type="note">
+     `cf deploy` can provision D1 databases when `id` is omitted (`--provision` defaults to true). It
+     does not write UUIDs back to `packages/config/cloudflare`, and `bun run db:migrate` needs those
+     IDs. Create the databases and add them here. See [Develop, build, and
+     deploy](https://developers.cloudflare.com/cf/projects/).
+   </Aside>
+
 1. **Deploy your app** - Vite-build, then deploy for _production_ and _preview_:
 
    ```sh
