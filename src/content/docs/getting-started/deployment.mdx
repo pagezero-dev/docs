@@ -78,11 +78,6 @@ Worker name, D1, and text vars live in `packages/config/cloudflare/`. App values
    bun run db:migrate --mode production
    ```
 
-   <Aside type="caution">
-     `bun run db:migrate` without `--local` applies to the remote database. Use `bun run db:migrate
-     --local` only for the local D1.
-   </Aside>
-
 1. **Your app is now ready! 🎉** - with its core functionality.
 
    To enable additional features such as authentication, email delivery, and payments, follow the setup sections in the [Authentication](/features/authentication#setup), [E-mail](/features/email#setup), and [Payments](/features/payments#setup) documentation.
