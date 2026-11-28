@@ -5,12 +5,19 @@ sidebar:
   order: 2
 ---
 
-import { Aside, Steps, Badge, Tabs, TabItem } from "@astrojs/starlight/components"
+import { Aside, Steps } from "@astrojs/starlight/components"
 
 PageZERO is built specifically for Cloudflare's infrastructure, leveraging Cloudflare Workers for compute and Cloudflare D1 for database storage.
 
 The deployment process involves setting up D1 databases and deploying your application as Cloudflare Workers.
 You can deploy manually or set up automated deployments through a GitHub Actions CI/CD pipeline.
+
+Worker name, D1, and text vars live in `packages/config/cloudflare/` (`getCloudflareConfig(mode)`). `cloudflare.config.ts` maps that into the Worker. App values (core, email, payments) stay in `packages/config/` (`getConfig(mode)` / `detectMode()`). Select a mode with `--mode` (`production`, `preview`, `development`, `e2e`). Vite `--mode test` is reserved.
+
+<Aside type="caution">
+  `cloudflare.config.ts` must import `packages/config/cloudflare` only — not `packages/config`. The
+  Cloudflare Vite plugin would otherwise 403 Worker `@/config` during `vite dev`.
+</Aside>
 
 ## First deployment
 
@@ -18,16 +25,16 @@ You can deploy manually or set up automated deployments through a GitHub Actions
 
 1. **Create a Cloudflare account** - sign up at [dash.cloudflare.com](https://dash.cloudflare.com/sign-up/) if you don't have one yet.
 
-1. **Login to Cloudflare** - in your project root directory, authenticate via the `wrangler` CLI:
+1. **Login to Cloudflare** - in your project root directory, authenticate via the `cf` CLI:
 
    ```sh
-   bunx wrangler login
+   bunx cf auth login
    ```
 
-1. **Reset your `wrangler.json` config** - initialise the config for your project:
+1. **Reset Cloudflare identity** - set the Worker name from your project directory and clear starter D1 ids, Turnstile, and newsletter values:
 
    ```sh
-   bun setup:wrangler
+   bun run setup:cloudflare
    ```
 
    <Aside type="note">
@@ -35,32 +42,49 @@ You can deploy manually or set up automated deployments through a GitHub Actions
      already ran this for you.
    </Aside>
 
-1. **Deploy your app** - deploy for _preview_ and _production_ environments:
+1. **Create D1 databases** - create production and preview databases, then put each returned UUID on the matching `d1[].id` in `packages/config/cloudflare/production.ts` and `packages/config/cloudflare/preview.ts`:
 
    ```sh
-   bun run deploy:preview
+   bunx cf d1 create --name <project-name>-production
    ```
 
    ```sh
-   bun run deploy:production
+   bunx cf d1 create --name <project-name>-preview
+   ```
+
+   Use the `d1[].name` values from those config files (typically `<project-name>-production` and `<project-name>-preview` after `setup:cloudflare`). Local development already uses persist id `00000000-0000-4000-8000-000000000000`.
+
+1. **Deploy your app** - Vite-build, then deploy for _production_ and _preview_:
+
+   ```sh
+   bun run build --mode production
+   bun run deploy --mode production
+   ```
+
+   ```sh
+   bun run build --mode preview
+   bunx cf previews deploy --prebuilt --mode preview
    ```
 
    <Aside type="note">
-     Wrangler automatically provisions resources defined in `wrangler.json` (such as D1 databases)
-     on first deploy. No separate database creation step is needed. See [Automatic
-     Provisioning](https://developers.cloudflare.com/workers/wrangler/configuration/#automatic-provisioning)
-     for details.
+     Always Vite-build first, then deploy with `--prebuilt`. TanStack Start on `cf` 1.0.0-rc.2
+     rejects `cf build --mode` / `cf deploy --mode` without `--prebuilt`.
    </Aside>
 
-1. **Migrate your database** - run migrations for _preview_ and _production_ environments:
+1. **Migrate your database** - apply migrations to the remote preview and production databases:
 
    ```sh
-   bun run db:migrate --env preview --remote
+   bun run db:migrate --mode preview
    ```
 
    ```sh
-   bun run db:migrate --env production --remote
+   bun run db:migrate --mode production
    ```
+
+   <Aside type="caution">
+     `bun run db:migrate` without `--local` applies to the remote database. Use `bun run db:migrate
+     --local` only for the local D1.
+   </Aside>
 
 1. **Your app is now ready! 🎉** - with its core functionality.
 
@@ -103,7 +127,7 @@ specific version of your app for each PR.
     ```
 
     <Aside type="note">
-      `CLOUDFLARE_ACCOUNT_ID` value can be obtained through `bunx wrangler whoami` command.
+      `CLOUDFLARE_ACCOUNT_ID` value can be obtained through `bunx cf auth whoami`.
     </Aside>
 
 1.  **Add repository secret** - set your Cloudflare API token:
@@ -121,7 +145,7 @@ specific version of your app for each PR.
       account / Account API Tokens". You will need to create a new token there. The token will
       require the following permissions: `D1:Edit`, `Workers Scripts:Edit`. The secret for
       Dependabot needs to be set separately; otherwise, Dependabot PRs will not perform preview
-      deployments.
+      deployments. CI authenticates with `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID`.
     </Aside>
 
 1.  **Done! 🎉**

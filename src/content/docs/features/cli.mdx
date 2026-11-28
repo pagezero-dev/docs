@@ -28,7 +28,7 @@ bunx pagezero@latest init
 2. Clones the PageZERO repository
 3. Installs dependencies (`bun install`)
 4. Runs the setup script (`bun run setup`)
-5. Updates `wrangler.json` with your project name
+5. Runs `setup:cloudflare` (Worker name from the project directory). Falls back to `setup:wrangler` on older clones
 6. Initializes a fresh git repository with an initial commit
 
 After completion, you'll have a ready-to-run project:
@@ -60,7 +60,7 @@ bunx pagezero@latest upgrade
 
 **Requirements:**
 
-- Must be run from within a PageZERO project directory (requires `wrangler.json`)
+- Must be run from within a PageZERO project directory (requires `cloudflare.config.ts` or `wrangler.json`)
 - Requires `rsync` to be installed on your system
 
 **How it works:**
@@ -68,3 +68,5 @@ bunx pagezero@latest upgrade
 1. Downloads the latest PageZERO stack
 2. Copies new files to your project (excluding `.git`)
 3. Cleans up temporary files
+
+Upgrade does not run `setup:cloudflare`.

@@ -9,10 +9,10 @@ PageZERO includes a pre-configured pipeline using **GitHub Actions** and **Cloud
 **How it works**
 
 1. You push code to GitHub
-2. Pipeline runs quality checks (format, lint, types) and unit tests in parallel
-3. E2E tests verify the app works end-to-end
-4. Database migrations run automatically
-5. Code deploys to Cloudflare Workers
+2. Check generates Worker types (`bun run generate:types`) then runs `bun run check`; unit tests run in parallel after `bun run db:migrate --local`
+3. E2E tests build with `bun run build --mode e2e`, migrate locally, and run Playwright
+4. Remote D1 migrations run with `bun run db:migrate --mode production` or `--mode preview` (API token)
+5. Code builds with `--mode`, then production deploys with `bun run deploy --mode production` and PRs with `bunx cf previews deploy --prebuilt --mode preview`
 6. Smoke tests verify the deployment succeeded (optional)
 
 **Pipeline Overview**
@@ -42,7 +42,7 @@ Draft PRs only run quality checks and tests. Database migrations and deployments
 
 ## Setup
 
-For setup instructions, see the [Automatic deployment](/getting-started/deployment#automatic) section in the deployment guide.
+For setup instructions, see the [Automatic deployment](/getting-started/deployment#automatic-deployment) section in the deployment guide. CI authenticates with `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID`.
 
 ## Protecting Preview URLs (optional)
 
@@ -57,7 +57,7 @@ Once configured, users must authenticate before accessing preview URLs.
 
 ## Smoke Tests (optional)
 
-Smoke tests run against the deployed URL to verify the deployment succeeded. They only run when `CLOUDFLARE_ACCESS_CLIENT_ID` is configured in GitHub Actions.
+Smoke tests run against the deployed URL to verify the deployment succeeded. They only run when `CLOUDFLARE_ACCESS_CLIENT_ID` is configured in GitHub Actions. Production smoke uses `getConfig("production").core.websiteUrl`. Preview smoke uses the first URL from `cf previews deploy` JSON (`preview_urls[0]` or `deployment_urls[0]`).
 
 If your preview environment is protected by Cloudflare Zero Trust (see above), configure service authentication:
 

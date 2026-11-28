@@ -17,11 +17,15 @@ Database integration with **[Cloudflare D1](https://developers.cloudflare.com/d1
 ## Database Commands
 
 ```bash
-bun run db:studio           # Open visual database browser
-bun run db:generate         # Generate migrations from schema changes
-bun run db:migrate          # Apply migrations locally
-bun run db:reset            # Delete all migrations and regenerate from scratch
+bun run db:studio                  # Open visual database browser
+bun run db:generate                # Generate migrations from schema changes
+bun run db:migrate --local         # Apply migrations to the local D1
+bun run db:migrate --mode preview  # Apply migrations to remote preview D1
+bun run db:migrate --mode production
+bun run db:reset                   # Delete all migrations and regenerate from scratch
 ```
+
+`bun run db:migrate` runs `packages/db/d1-migrate.ts`, which calls `cf d1 migrations apply` with the database UUID from `packages/config/cloudflare` plus `--dir` / `--table`. Without `--local`, that hits the remote database. Local development uses persist id `00000000-0000-4000-8000-000000000000`.
 
 ## Accessing the Database
 
@@ -102,12 +106,12 @@ export const user = sqliteTable("user", {
 1. Apply the migration locally:
 
    ```bash
-   bun run db:migrate
+   bun run db:migrate --local
    ```
 
 </Steps>
 
-The migration is automatically applied in CI/CD via Wrangler when you push your changes.
+CI applies remote migrations with `bun run db:migrate --mode preview` or `--mode production` in the deploy workflow database job.
 
 ## Multiple Databases
 
@@ -118,21 +122,39 @@ The database package is structured to support multiple D1 databases. Each databa
 1. Create the new database in Cloudflare:
 
    ```sh
-   bunx wrangler d1 create <project-name>-secondary-development
+   bunx cf d1 create --name <project-name>-secondary-production
    ```
 
-1. Register the new binding in `wrangler.json` for every environment:
+   ```sh
+   bunx cf d1 create --name <project-name>-secondary-preview
+   ```
 
-   ```json
-   "d1_databases": [
-     { "binding": "DB_MAIN", ... },
+1. Add it to the `d1` array in `packages/config/cloudflare` for each mode (`binding`, `name`, `id`, `migrationsDir`):
+
+   ```ts
+   // packages/config/cloudflare/production.ts
+   d1: [
      {
-       "binding": "DB_SECONDARY",
-       "database_name": "<project-name>-secondary-development",
-       "database_id": "<DATABASE_ID>",
-       "migrations_dir": "./packages/db/secondary/migrations"
-     }
+       binding: "DB_MAIN",
+       name: `${workerName}-production`,
+       id: "your-production-db-main-uuid",
+       migrationsDir: "./packages/db/main/migrations",
+     },
+     {
+       binding: "DB_SECONDARY",
+       name: `${workerName}-secondary-production`,
+       id: "your-production-db-secondary-uuid",
+       migrationsDir: "./packages/db/secondary/migrations",
+     },
    ]
+   ```
+
+   Preview, development, and e2e spread and override the same array. Local development needs a UUID v4 persist id (`cf` rejects Wrangler's `<DATABASE_ID>` placeholder). Keep `DB_MAIN` as a static binding in `cloudflare.config.ts` (spread-only D1s are missing from `Env`); add a static `bindings.d1()` entry there for `DB_SECONDARY` as well:
+
+   ```ts
+   // cloudflare.config.ts worker.env
+   DB_SECONDARY: bindings.d1({ name: dbSecondary.name, id: dbSecondary.id }),
+   DB_MAIN: bindings.d1({ name: dbMain.name, id: dbMain.id }),
    ```
 
 1. Create the schema and db server files:
@@ -162,7 +184,7 @@ The database package is structured to support multiple D1 databases. Each databa
 
    ```sh
    DB_BINDING=DB_SECONDARY bun run db:generate
-   DB_BINDING=DB_SECONDARY bun run db:migrate
+   DB_BINDING=DB_SECONDARY bun run db:migrate --local
    ```
 
 </Steps>

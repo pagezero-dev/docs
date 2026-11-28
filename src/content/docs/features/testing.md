@@ -36,7 +36,7 @@ Tests are co-located with their source files. Component tests use [React Testing
 
 ## End-to-End Tests
 
-End-to-end tests verify complete user flows by automating a real browser. They test the full application stack-frontend, backend, and database-ensuring everything works together correctly. E2E tests are located in the `e2e/` directory and use Playwright. Playwright starts the app with `--mode e2e` and `CLOUDFLARE_ENV=e2e`.
+End-to-end tests verify complete user flows by automating a real browser. They test the full application stack-frontend, backend, and database-ensuring everything works together correctly. E2E tests are located in the `e2e/` directory and use Playwright. Playwright starts the app with `--mode e2e`.
 
 ## Smoke Tests
 
