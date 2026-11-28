@@ -42,7 +42,7 @@ Draft PRs only run quality checks and tests. Database migrations and deployments
 
 ## Setup
 
-For setup instructions, see the [Automatic deployment](/getting-started/deployment#automatic) section in the deployment guide.
+For setup instructions, see the [Automatic deployment](/getting-started/deployment#automatic-deployment) section in the deployment guide. CI authenticates with `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID`.
 
 ## Protecting Preview URLs (optional)
 

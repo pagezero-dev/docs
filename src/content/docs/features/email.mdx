@@ -30,11 +30,11 @@ For production and preview environments:
 4. **Add the secret** - add `RESEND_API_KEY` as a secret in Cloudflare for _preview_ and _production_ environments:
 
    ```sh
-   bunx wrangler secret put RESEND_API_KEY --env=preview
+   bunx cf workers secrets update RESEND_API_KEY --mode preview --text "<your-resend-api-key>"
    ```
 
    ```sh
-   bunx wrangler secret put RESEND_API_KEY --env=production
+   bunx cf workers secrets update RESEND_API_KEY --mode production --text "<your-resend-api-key>"
    ```
 
 5. **Configure the sender address** - set `email.from` in `packages/config/production.ts`:

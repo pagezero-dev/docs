@@ -5,12 +5,14 @@ sidebar:
   order: 2
 ---
 
-import { Aside, Steps, Badge, Tabs, TabItem } from "@astrojs/starlight/components"
+import { Aside, Steps } from "@astrojs/starlight/components"
 
 PageZERO is built specifically for Cloudflare's infrastructure, leveraging Cloudflare Workers for compute and Cloudflare D1 for database storage.
 
 The deployment process involves setting up D1 databases and deploying your application as Cloudflare Workers.
 You can deploy manually or set up automated deployments through a GitHub Actions CI/CD pipeline.
+
+Worker name, D1, and text vars live in `packages/config/cloudflare/`. App values (core, email, payments) stay in `packages/config/`. Select a mode with `--mode` (`production`, `preview`, `development`, `e2e`).
 
 ## First deployment
 
@@ -18,48 +20,53 @@ You can deploy manually or set up automated deployments through a GitHub Actions
 
 1. **Create a Cloudflare account** - sign up at [dash.cloudflare.com](https://dash.cloudflare.com/sign-up/) if you don't have one yet.
 
-1. **Login to Cloudflare** - in your project root directory, authenticate via the `wrangler` CLI:
+1. **Login to Cloudflare** - in your project root directory, authenticate via the `cf` CLI:
 
    ```sh
-   bunx wrangler login
+   bunx cf auth login
    ```
 
-1. **Reset your `wrangler.json` config** - initialise the config for your project:
+1. **Set Worker name and text vars** - edit `packages/config/cloudflare/production.ts` and `packages/config/cloudflare/preview.ts`. Set `workerName` and, when you have them, `CLOUDFLARE_TURNSTILE_PUBLIC_KEY` and `NEWSLETTER_SEGMENT_ID` on `vars` (preview spreads production and can override).
+
+1. **Create D1 databases** - create production and preview databases, then put each returned UUID on the matching `d1[].id` in those files:
 
    ```sh
-   bun setup:wrangler
+   bunx cf d1 create --name <project-name>-production
    ```
+
+   ```sh
+   bunx cf d1 create --name <project-name>-preview
+   ```
+
+   Use the `d1[].name` values from the config files (typically `<workerName>-production` and `<workerName>-preview`).
 
    <Aside type="note">
-     Skip this step if you initialised your project via `bunx pagezero@latest init` - the CLI
-     already ran this for you.
+     `cf deploy` can provision D1 databases when `id` is omitted (`--provision` defaults to true).
+     It does not write UUIDs back to `packages/config/cloudflare`, and `bun run db:migrate` needs
+     those IDs. Create the databases and add them here. See [Develop, build, and
+     deploy](https://developers.cloudflare.com/cf/projects/).
    </Aside>
 
-1. **Deploy your app** - deploy for _preview_ and _production_ environments:
+1. **Deploy your app** - Vite-build, then deploy for _production_ and _preview_:
 
    ```sh
-   bun run deploy:preview
+   bun run build --mode production
+   bun run deploy --mode production
    ```
 
    ```sh
-   bun run deploy:production
+   bun run build --mode preview
+   bun run deploy --mode preview
    ```
 
-   <Aside type="note">
-     Wrangler automatically provisions resources defined in `wrangler.json` (such as D1 databases)
-     on first deploy. No separate database creation step is needed. See [Automatic
-     Provisioning](https://developers.cloudflare.com/workers/wrangler/configuration/#automatic-provisioning)
-     for details.
-   </Aside>
-
-1. **Migrate your database** - run migrations for _preview_ and _production_ environments:
+1. **Migrate your database** - apply migrations to the remote preview and production databases:
 
    ```sh
-   bun run db:migrate --env preview --remote
+   bun run db:migrate --mode preview
    ```
 
    ```sh
-   bun run db:migrate --env production --remote
+   bun run db:migrate --mode production
    ```
 
 1. **Your app is now ready! 🎉** - with its core functionality.
@@ -103,7 +110,7 @@ specific version of your app for each PR.
     ```
 
     <Aside type="note">
-      `CLOUDFLARE_ACCOUNT_ID` value can be obtained through `bunx wrangler whoami` command.
+      `CLOUDFLARE_ACCOUNT_ID` value can be obtained through `bunx cf auth whoami`.
     </Aside>
 
 1.  **Add repository secret** - set your Cloudflare API token:
@@ -121,7 +128,7 @@ specific version of your app for each PR.
       account / Account API Tokens". You will need to create a new token there. The token will
       require the following permissions: `D1:Edit`, `Workers Scripts:Edit`. The secret for
       Dependabot needs to be set separately; otherwise, Dependabot PRs will not perform preview
-      deployments.
+      deployments. CI authenticates with `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID`.
     </Aside>
 
 1.  **Done! 🎉**

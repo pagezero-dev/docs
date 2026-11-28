@@ -22,25 +22,13 @@ Newsletter subscription powered by **[Resend](https://resend.com/)**. Collect em
 
 2. **Resend audience segment** - in the Resend dashboard, create an **Audience** and inside it create a **Segment**, then copy the segment ID.
 
-3. **Add the segment ID** - add `NEWSLETTER_SEGMENT_ID` to the `vars` section in `wrangler.json`. Leave it empty at the top level for local development, and override it per environment for production and preview:
+3. **Add the segment ID** - set `NEWSLETTER_SEGMENT_ID` on `vars` in `packages/config/cloudflare/production.ts`. Preview, development, and e2e spread and override:
 
-   ```json
-   {
-     "vars": {
-       "NEWSLETTER_SEGMENT_ID": ""
-     },
-     "env": {
-       "production": {
-         "vars": {
-           "NEWSLETTER_SEGMENT_ID": "your-production-segment-id"
-         }
-       },
-       "preview": {
-         "vars": {
-           "NEWSLETTER_SEGMENT_ID": "your-preview-segment-id"
-         }
-       }
-     }
+   ```ts
+   // packages/config/cloudflare/production.ts
+   vars: {
+     CLOUDFLARE_TURNSTILE_PUBLIC_KEY: "your-production-site-key",
+     NEWSLETTER_SEGMENT_ID: "your-production-segment-id",
    }
    ```
 

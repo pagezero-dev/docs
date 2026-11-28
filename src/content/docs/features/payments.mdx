@@ -27,11 +27,11 @@ Payment integration powered by **[Polar.sh](https://polar.sh/)** via the **Bette
    <Aside type="note">The token requires the `checkouts:read` and `checkouts:write` scopes.</Aside>
 
    ```sh
-   bunx wrangler secret put POLAR_ACCESS_TOKEN --env=preview
+   bunx cf workers secrets update POLAR_ACCESS_TOKEN --mode preview --text "<your-polar-access-token>"
    ```
 
    ```sh
-   bunx wrangler secret put POLAR_ACCESS_TOKEN --env=production
+   bunx cf workers secrets update POLAR_ACCESS_TOKEN --mode production --text "<your-polar-access-token>"
    ```
 
 4. **Configure webhooks** - create a webhook endpoint pointing to `/api/auth/polar/webhooks` and enable these events: `order.paid`, `order.refunded`, `subscription.active`, `subscription.revoked`
@@ -39,11 +39,11 @@ Payment integration powered by **[Polar.sh](https://polar.sh/)** via the **Bette
 5. **Add the webhook secret** - add `POLAR_WEBHOOK_SECRET` as a secret in Cloudflare for _preview_ and _production_ environments:
 
    ```sh
-   bunx wrangler secret put POLAR_WEBHOOK_SECRET --env=preview
+   bunx cf workers secrets update POLAR_WEBHOOK_SECRET --mode preview --text "<your-polar-webhook-secret>"
    ```
 
    ```sh
-   bunx wrangler secret put POLAR_WEBHOOK_SECRET --env=production
+   bunx cf workers secrets update POLAR_WEBHOOK_SECRET --mode production --text "<your-polar-webhook-secret>"
    ```
 
 6. **Configure your products** - add them to `packages/config/production.ts` and `packages/config/preview.ts`:
