@@ -12,12 +12,7 @@ PageZERO is built specifically for Cloudflare's infrastructure, leveraging Cloud
 The deployment process involves setting up D1 databases and deploying your application as Cloudflare Workers.
 You can deploy manually or set up automated deployments through a GitHub Actions CI/CD pipeline.
 
-Worker name, D1, and text vars live in `packages/config/cloudflare/` (`getCloudflareConfig(mode)`). `cloudflare.config.ts` maps that into the Worker. App values (core, email, payments) stay in `packages/config/` (`getConfig(mode)` / `detectMode()`). Select a mode with `--mode` (`production`, `preview`, `development`, `e2e`). Vite `--mode test` is reserved.
-
-<Aside type="caution">
-  `cloudflare.config.ts` must import `packages/config/cloudflare` only — not `packages/config`. The
-  Cloudflare Vite plugin would otherwise 403 Worker `@/config` during `vite dev`.
-</Aside>
+Worker name, D1, and text vars live in `packages/config/cloudflare/`. App values (core, email, payments) stay in `packages/config/`. Select a mode with `--mode` (`production`, `preview`, `development`, `e2e`).
 
 ## First deployment
 
@@ -52,7 +47,7 @@ Worker name, D1, and text vars live in `packages/config/cloudflare/` (`getCloudf
    bunx cf d1 create --name <project-name>-preview
    ```
 
-   Use the `d1[].name` values from those config files (typically `<project-name>-production` and `<project-name>-preview` after `setup:cloudflare`). Local development already uses persist id `00000000-0000-4000-8000-000000000000`.
+   Use the `d1[].name` values from those config files (typically `<project-name>-production` and `<project-name>-preview` after `setup:cloudflare`).
 
 1. **Deploy your app** - Vite-build, then deploy for _production_ and _preview_:
 
@@ -65,11 +60,6 @@ Worker name, D1, and text vars live in `packages/config/cloudflare/` (`getCloudf
    bun run build --mode preview
    bunx cf previews deploy --prebuilt --mode preview
    ```
-
-   <Aside type="note">
-     Always Vite-build first, then deploy with `--prebuilt`. TanStack Start on `cf` 1.0.0-rc.2
-     rejects `cf build --mode` / `cf deploy --mode` without `--prebuilt`.
-   </Aside>
 
 1. **Migrate your database** - apply migrations to the remote preview and production databases:
 

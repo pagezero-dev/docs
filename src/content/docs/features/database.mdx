@@ -17,15 +17,11 @@ Database integration with **[Cloudflare D1](https://developers.cloudflare.com/d1
 ## Database Commands
 
 ```bash
-bun run db:studio                  # Open visual database browser
-bun run db:generate                # Generate migrations from schema changes
-bun run db:migrate --local         # Apply migrations to the local D1
-bun run db:migrate --mode preview  # Apply migrations to remote preview D1
-bun run db:migrate --mode production
-bun run db:reset                   # Delete all migrations and regenerate from scratch
+bun run db:studio           # Open visual database browser
+bun run db:generate         # Generate migrations from schema changes
+bun run db:migrate --local  # Apply migrations locally
+bun run db:reset            # Delete all migrations and regenerate from scratch
 ```
-
-`bun run db:migrate` runs `packages/db/d1-migrate.ts`, which calls `cf d1 migrations apply` with the database UUID from `packages/config/cloudflare` plus `--dir` / `--table`. Without `--local`, that hits the remote database. Local development uses persist id `00000000-0000-4000-8000-000000000000`.
 
 ## Accessing the Database
 
@@ -111,7 +107,7 @@ export const user = sqliteTable("user", {
 
 </Steps>
 
-CI applies remote migrations with `bun run db:migrate --mode preview` or `--mode production` in the deploy workflow database job.
+The migration is automatically applied in CI/CD when you push your changes.
 
 ## Multiple Databases
 
